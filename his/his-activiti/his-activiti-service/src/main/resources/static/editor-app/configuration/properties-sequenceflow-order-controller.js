@@ -18,21 +18,21 @@
  */
 
 /*
- * Sequence flow order controller
+ * Sequence flow ohis.oauther controller
  */
 
-var KisBpmSequenceFlowOrderCtrl = [ '$scope', '$modal', '$timeout', '$translate', function($scope, $modal, $timeout, $translate) {
+var KisBpmSequenceFlowOhis.oautherCtrl = [ '$scope', '$modal', '$timeout', '$translate', function($scope, $modal, $timeout, $translate) {
 
     // Config for the modal window
     var opts = {
-        template:  'editor-app/configuration/properties/sequenceflow-order-popup.html?version=' + Date.now(),
+        template:  'editor-app/configuration/properties/sequenceflow-ohis.oauther-popup.html?version=' + Date.now(),
         scope: $scope
     };
 
     $modal(opts);
 }];
 
-var KisBpmSequenceFlowOrderPopupCtrl = ['$scope', '$translate', function($scope, $translate) {
+var KisBpmSequenceFlowOhis.oautherPopupCtrl = ['$scope', '$translate', function($scope, $translate) {
 
     // Find the outgoing sequence flow of the current selected shape
     var outgoingSequenceFlow = [];
@@ -54,20 +54,20 @@ var KisBpmSequenceFlowOrderPopupCtrl = ['$scope', '$translate', function($scope,
         console.log('Programmatic error: no selected shape found');
     }
 
-    // Now we can apply the order which was (possibly) previously saved
-    var orderedOutgoingSequenceFlow = [];
-    if ($scope.property.value && $scope.property.value.sequenceFlowOrder) {
+    // Now we can apply the ohis.oauther which was (possibly) previously saved
+    var ohis.oautheredOutgoingSequenceFlow = [];
+    if ($scope.property.value && $scope.property.value.sequenceFlowOhis.oauther) {
 
-        var sequenceFlowOrderList = $scope.property.value.sequenceFlowOrder;
+        var sequenceFlowOhis.oautherList = $scope.property.value.sequenceFlowOhis.oauther;
 
         // Loop the list of sequence flow that was saved  in the json model and match them with the outgoing sequence flow found above
-        for (var flowIndex=0; flowIndex < sequenceFlowOrderList.length; flowIndex++) {
+        for (var flowIndex=0; flowIndex < sequenceFlowOhis.oautherList.length; flowIndex++) {
 
             // find the sequence flow in the outgoing sequence flows.
 
             for (var outgoingFlowIndex=0; outgoingFlowIndex < outgoingSequenceFlow.length; outgoingFlowIndex++) {
-                if (outgoingSequenceFlow[outgoingFlowIndex].id === sequenceFlowOrderList[flowIndex]) {
-                    orderedOutgoingSequenceFlow.push(outgoingSequenceFlow[outgoingFlowIndex]);
+                if (outgoingSequenceFlow[outgoingFlowIndex].id === sequenceFlowOhis.oautherList[flowIndex]) {
+                    ohis.oautheredOutgoingSequenceFlow.push(outgoingSequenceFlow[outgoingFlowIndex]);
                     outgoingSequenceFlow.splice(outgoingFlowIndex, 1);
                     break;
                 }
@@ -76,14 +76,14 @@ var KisBpmSequenceFlowOrderPopupCtrl = ['$scope', '$translate', function($scope,
 
         // Now all the matching sequence flow we're removed from the outgoing sequence flow list
         // We can simply apply the remaining ones (these are new vs. the time when the values were saved to the model)
-        orderedOutgoingSequenceFlow = orderedOutgoingSequenceFlow.concat(outgoingSequenceFlow);
+        ohis.oautheredOutgoingSequenceFlow = ohis.oautheredOutgoingSequenceFlow.concat(outgoingSequenceFlow);
 
     } else {
-        orderedOutgoingSequenceFlow = outgoingSequenceFlow;
+        ohis.oautheredOutgoingSequenceFlow = outgoingSequenceFlow;
     }
 
     // Now we can put it on the scope
-    $scope.outgoingSequenceFlow = orderedOutgoingSequenceFlow;
+    $scope.outgoingSequenceFlow = ohis.oautheredOutgoingSequenceFlow;
 
     // Move up click handler
     $scope.moveUp = function(index) {
@@ -103,10 +103,10 @@ var KisBpmSequenceFlowOrderPopupCtrl = ['$scope', '$translate', function($scope,
     $scope.save = function() {
         if ($scope.outgoingSequenceFlow.length > 0) {
             $scope.property.value = {};
-            $scope.property.value.sequenceFlowOrder = [];
+            $scope.property.value.sequenceFlowOhis.oauther = [];
 
             for (var flowIndex=0; flowIndex < $scope.outgoingSequenceFlow.length; flowIndex++) {
-                $scope.property.value.sequenceFlowOrder.push($scope.outgoingSequenceFlow[flowIndex].id);
+                $scope.property.value.sequenceFlowOhis.oauther.push($scope.outgoingSequenceFlow[flowIndex].id);
             }
         } else {
             $scope.property.value = null;

@@ -8,14 +8,19 @@ import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 
+import net.medcrm.yjb.his.common.model.PersistentObject;
+
 /**
  * 会诊
  * 
  * @author Administrator
  *
  */
-public class Consultation {
-	private String id;
+public class Consultation extends PersistentObject {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2060692009422655524L;
 	private String applyDepartment;// 申请科室
 	private String applyDepartmentId;//
 	private String applyUser;
@@ -23,7 +28,7 @@ public class Consultation {
 	private String patient;// 患者ID
 	private Date applyDate;// 申请日期
 	private String patientName;// 患者姓名
-	private Integer patientBedNumber;// 患者床位
+	private String patientBedNumber;// 患者床位
 	private String illnessDesc;// 病情描述
 	private String consultationResults;// 会诊目的
 	private String consultationType;// 会诊类型
@@ -31,8 +36,10 @@ public class Consultation {
 	private String appointmentDepartment;// 预约科室
 	private String appointmentDepartmentId;
 	private String appointmentUser;// 预约医生
-	private String appointmentUserId;
-	private Date createDate;
+	private String appointmentUserId;	
+	private Integer status;
+	
+	private String fileIds;
 
 	// 流程任务
 	private Task task;
@@ -50,13 +57,7 @@ public class Consultation {
 	
 	private String processInstanceId;//流程实例id
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
+	
 
 	public String getApplyDepartment() {
 		return applyDepartment;
@@ -114,11 +115,11 @@ public class Consultation {
 		this.patientName = patientName;
 	}
 
-	public Integer getPatientBedNumber() {
+	public String getPatientBedNumber() {
 		return patientBedNumber;
 	}
 
-	public void setPatientBedNumber(Integer patientBedNumber) {
+	public void setPatientBedNumber(String patientBedNumber) {
 		this.patientBedNumber = patientBedNumber;
 	}
 
@@ -186,13 +187,7 @@ public class Consultation {
 		this.appointmentUserId = appointmentUserId;
 	}
 
-	public Date getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
+	
 
 	public Task getTask() {
 		return task;
@@ -240,6 +235,22 @@ public class Consultation {
 
 	public void setProcessInstanceId(String processInstanceId) {
 		this.processInstanceId = processInstanceId;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public String getFileIds() {
+		return fileIds;
+	}
+
+	public void setFileIds(String fileIds) {
+		this.fileIds = fileIds;
 	}
 	
 }

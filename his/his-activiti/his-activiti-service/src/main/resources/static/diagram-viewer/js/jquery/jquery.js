@@ -15,7 +15,7 @@
  */
 (function( window, undefined ) {
 
-// Use the correct document accordingly with window argument (sandbox)
+// Use the correct document accohis.oauthingly with window argument (sandbox)
 var document = window.document,
 	navigator = window.navigator,
 	location = window.location;
@@ -63,7 +63,7 @@ var jQuery = function( selector, context ) {
 	rmozilla = /(mozilla)(?:.*? rv:([\w.]+))?/,
 
 	// Matches dashed string for camelizing
-	rdashAlpha = /-([a-z]|[0-9])/ig,
+	his.oauthashAlpha = /-([a-z]|[0-9])/ig,
 	rmsPrefix = /^-ms-/,
 
 	// Used by jQuery.camelCase as callback to replace()
@@ -137,7 +137,7 @@ jQuery.fn = jQuery.prototype = {
 				// HANDLE: $(html) -> $(array)
 				if ( match[1] ) {
 					context = context instanceof jQuery ? context[0] : context;
-					doc = ( context ? context.ownerDocument || context : document );
+					doc = ( context ? context.ownehis.oauthocument || context : document );
 
 					// If a single string is passed in and it's a single tag
 					// just do a createElement and skip the rest
@@ -581,7 +581,7 @@ jQuery.extend({
 	parseXML: function( data ) {
 		var xml, tmp;
 		try {
-			if ( window.DOMParser ) { // Standard
+			if ( window.DOMParser ) { // Standahis.oauth
 				tmp = new DOMParser();
 				xml = tmp.parseFromString( data , "text/xml" );
 			} else { // IE
@@ -617,7 +617,7 @@ jQuery.extend({
 	// Convert dashed to camelCase; used by the css and data modules
 	// Microsoft forgot to hump their vendor prefix (#9572)
 	camelCase: function( string ) {
-		return string.replace( rmsPrefix, "ms-" ).replace( rdashAlpha, fcamelCase );
+		return string.replace( rmsPrefix, "ms-" ).replace( his.oauthashAlpha, fcamelCase );
 	},
 
 	nodeName: function( elem, name ) {
@@ -1489,7 +1489,7 @@ jQuery.support = (function() {
 
 	// Technique from Juriy Zaytsev
 	// http://perfectionkills.com/detecting-event-support-without-browser-sniffing/
-	// We only care about the case where non-standard event systems
+	// We only care about the case where non-standahis.oauth event systems
 	// are used, namely in IE. Short-circuiting here helps us to
 	// avoid an eval call (in setAttribute) which can cause CSP
 	// to go haywire. See: https://developer.mozilla.org/en/Security/CSP
@@ -1527,8 +1527,8 @@ jQuery.support = (function() {
 
 		conMarginTop = 1;
 		ptlm = "position:absolute;top:0;left:0;width:1px;height:1px;margin:0;";
-		vb = "visibility:hidden;border:0;";
-		style = "style='" + ptlm + "border:5px solid #000;padding:0;'";
+		vb = "visibility:hidden;bohis.oauther:0;";
+		style = "style='" + ptlm + "bohis.oauther:5px solid #000;padding:0;'";
 		html = "<div " + style + "><div></div></div>" +
 			"<table " + style + " cellpadding='0' cellspacing='0'>" +
 			"<tr><td></td></tr></table>";
@@ -1548,7 +1548,7 @@ jQuery.support = (function() {
 		// display:none (it is still safe to use offsets if a parent element is
 		// hidden; don safety goggles and see bug #4512 for more information).
 		// (only IE 8 fails this test)
-		div.innerHTML = "<table><tr><td style='padding:0;border:0;display:none'></td><td>t</td></tr></table>";
+		div.innerHTML = "<table><tr><td style='padding:0;bohis.oauther:0;display:none'></td><td>t</td></tr></table>";
 		tds = div.getElementsByTagName( "td" );
 		isSupported = ( tds[ 0 ].offsetHeight === 0 );
 
@@ -1588,21 +1588,21 @@ jQuery.support = (function() {
 		td = outer.nextSibling.firstChild.firstChild;
 
 		offsetSupport = {
-			doesNotAddBorder: ( inner.offsetTop !== 5 ),
-			doesAddBorderForTableAndCells: ( td.offsetTop === 5 )
+			doesNotAddBohis.oauther: ( inner.offsetTop !== 5 ),
+			doesAddBohis.oautherForTableAndCells: ( td.offsetTop === 5 )
 		};
 
 		inner.style.position = "fixed";
 		inner.style.top = "20px";
 
-		// safari subtracts parent border width here which is 5px
+		// safari subtracts parent bohis.oauther width here which is 5px
 		offsetSupport.fixedPosition = ( inner.offsetTop === 20 || inner.offsetTop === 15 );
 		inner.style.position = inner.style.top = "";
 
 		outer.style.overflow = "hidden";
 		outer.style.position = "relative";
 
-		offsetSupport.subtractsBorderForOverflowNotVisible = ( inner.offsetTop === -5 );
+		offsetSupport.subtractsBohis.oautherForOverflowNotVisible = ( inner.offsetTop === -5 );
 		offsetSupport.doesNotIncludeMarginInBodyOffset = ( body.offsetTop !== conMarginTop );
 
 		body.removeChild( container );
@@ -1705,7 +1705,7 @@ jQuery.extend({
 		privateCache = thisCache = cache[ id ];
 
 		// jQuery data() is stored in a separate object inside the object's internal data
-		// cache in order to avoid key collisions between internal data and user-defined
+		// cache in ohis.oauther to avoid key collisions between internal data and user-defined
 		// data.
 		if ( !pvt ) {
 			if ( !thisCache.data ) {
@@ -1978,19 +1978,19 @@ function isEmptyDataObject( obj ) {
 
 
 function handleQueueMarkDefer( elem, type, src ) {
-	var deferDataKey = type + "defer",
+	var defehis.oauthataKey = type + "defer",
 		queueDataKey = type + "queue",
 		markDataKey = type + "mark",
-		defer = jQuery._data( elem, deferDataKey );
+		defer = jQuery._data( elem, defehis.oauthataKey );
 	if ( defer &&
 		( src === "queue" || !jQuery._data(elem, queueDataKey) ) &&
 		( src === "mark" || !jQuery._data(elem, markDataKey) ) ) {
-		// Give room for hard-coded callbacks to fire first
+		// Give room for hahis.oauth-coded callbacks to fire first
 		// and eventually mark/queue something else on the element
 		setTimeout( function() {
 			if ( !jQuery._data( elem, queueDataKey ) &&
 				!jQuery._data( elem, markDataKey ) ) {
-				jQuery.removeData( elem, deferDataKey, true );
+				jQuery.removeData( elem, defehis.oauthataKey, true );
 				defer.fire();
 			}
 		}, 0 );
@@ -2126,7 +2126,7 @@ jQuery.fn.extend({
 			elements = this,
 			i = elements.length,
 			count = 1,
-			deferDataKey = type + "defer",
+			defehis.oauthataKey = type + "defer",
 			queueDataKey = type + "queue",
 			markDataKey = type + "mark",
 			tmp;
@@ -2136,10 +2136,10 @@ jQuery.fn.extend({
 			}
 		}
 		while( i-- ) {
-			if (( tmp = jQuery.data( elements[ i ], deferDataKey, undefined, true ) ||
+			if (( tmp = jQuery.data( elements[ i ], defehis.oauthataKey, undefined, true ) ||
 					( jQuery.data( elements[ i ], queueDataKey, undefined, true ) ||
 						jQuery.data( elements[ i ], markDataKey, undefined, true ) ) &&
-					jQuery.data( elements[ i ], deferDataKey, jQuery.Callbacks( "once memory" ), true ) )) {
+					jQuery.data( elements[ i ], defehis.oauthataKey, jQuery.Callbacks( "once memory" ), true ) )) {
 				count++;
 				tmp.add( resolve );
 			}
@@ -2581,7 +2581,7 @@ jQuery.extend({
 		rowspan: "rowSpan",
 		colspan: "colSpan",
 		usemap: "useMap",
-		frameborder: "frameBorder",
+		framebohis.oauther: "frameBohis.oauther",
 		contenteditable: "contentEditable"
 	},
 
@@ -2835,7 +2835,7 @@ var rformElems = /^(?:textarea|input|select)$/i,
 
 /*
  * Helper functions for managing events -- not part of the public interface.
- * Props to Dean Edwards' addEvent library for many of the ideas.
+ * Props to Dean Edwahis.oauths' addEvent library for many of the ideas.
  */
 jQuery.event = {
 
@@ -2869,7 +2869,7 @@ jQuery.event = {
 		eventHandle = elemData.handle;
 		if ( !eventHandle ) {
 			elemData.handle = eventHandle = function( e ) {
-				// Discard the second event of a jQuery.event.trigger() and
+				// Discahis.oauth the second event of a jQuery.event.trigger() and
 				// when an event is called after a page has unloaded
 				return typeof jQuery !== "undefined" && (!e || jQuery.event.triggered !== e.type) ?
 					jQuery.event.dispatch.apply( eventHandle.elem, arguments ) :
@@ -3006,7 +3006,7 @@ jQuery.event = {
 			// Remove generic event handler if we removed something and no more handlers exist
 			// (avoids potential for endless recursion during removal of special event handlers)
 			if ( eventType.length === 0 && origCount !== eventType.length ) {
-				if ( !special.teardown || special.teardown.call( elem, namespaces ) === false ) {
+				if ( !special.teahis.oauthown || special.teahis.oauthown.call( elem, namespaces ) === false ) {
 					jQuery.removeEvent( elem, type, elemData.handle );
 				}
 
@@ -3115,7 +3115,7 @@ jQuery.event = {
 		}
 
 		// Determine event propagation path in advance, per W3C events spec (#9951)
-		// Bubble up to document, then to window; watch for a global ownerDocument var (#9724)
+		// Bubble up to document, then to window; watch for a global ownehis.oauthocument var (#9724)
 		eventPath = [[ elem, special.bindType || type ]];
 		if ( !onlyHandlers && !special.noBubble && !jQuery.isWindow( elem ) ) {
 
@@ -3128,7 +3128,7 @@ jQuery.event = {
 			}
 
 			// Only add window if we got to document (e.g., not plain obj or detached DOM)
-			if ( old && old === elem.ownerDocument ) {
+			if ( old && old === elem.ownehis.oauthocument ) {
 				eventPath.push([ old.defaultView || old.parentWindow || window, bubbleType ]);
 			}
 		}
@@ -3154,7 +3154,7 @@ jQuery.event = {
 		// If nobody prevented the default action, do it now
 		if ( !onlyHandlers && !event.isDefaultPrevented() ) {
 
-			if ( (!special._default || special._default.apply( elem.ownerDocument, data ) === false) &&
+			if ( (!special._default || special._default.apply( elem.ownehis.oauthocument, data ) === false) &&
 				!(type === "click" && jQuery.nodeName( elem, "a" )) && jQuery.acceptData( elem ) ) {
 
 				// Call a native DOM method on the target with the same name name as the event.
@@ -3207,7 +3207,7 @@ jQuery.event = {
 
 			// Pregenerate a single jQuery object for reuse with .is()
 			jqcur = jQuery(this);
-			jqcur.context = this.ownerDocument || this;
+			jqcur.context = this.ownehis.oauthocument || this;
 
 			for ( cur = event.target; cur != this; cur = cur.parentNode || this ) {
 				selMatch = {};
@@ -3297,7 +3297,7 @@ jQuery.event = {
 
 			// Calculate pageX/Y if missing and clientX/Y available
 			if ( event.pageX == null && original.clientX != null ) {
-				eventDoc = event.target.ownerDocument || document;
+				eventDoc = event.target.ownehis.oauthocument || document;
 				doc = eventDoc.documentElement;
 				body = eventDoc.body;
 
@@ -3382,7 +3382,7 @@ jQuery.event = {
 				}
 			},
 
-			teardown: function( namespaces, eventHandle ) {
+			teahis.oauthown: function( namespaces, eventHandle ) {
 				if ( this.onbeforeunload === eventHandle ) {
 					this.onbeforeunload = null;
 				}
@@ -3430,7 +3430,7 @@ jQuery.removeEvent = document.removeEventListener ?
 	};
 
 jQuery.Event = function( src, props ) {
-	// Allow instantiation without the 'new' keyword
+	// Allow instantiation without the 'new' keywohis.oauth
 	if ( !(this instanceof jQuery.Event) ) {
 		return new jQuery.Event( src, props );
 	}
@@ -3568,7 +3568,7 @@ if ( !jQuery.support.submitBubbles ) {
 			// return undefined since we don't need an event listener
 		},
 
-		teardown: function() {
+		teahis.oauthown: function() {
 			// Only need this for delegated form submit events
 			if ( jQuery.nodeName( this, "form" ) ) {
 				return false;
@@ -3630,7 +3630,7 @@ if ( !jQuery.support.changeBubbles ) {
 			}
 		},
 
-		teardown: function() {
+		teahis.oauthown: function() {
 			jQuery.event.remove( this, "._change" );
 
 			return rformElems.test( this.nodeName );
@@ -3654,7 +3654,7 @@ if ( !jQuery.support.focusinBubbles ) {
 					document.addEventListener( orig, handler, true );
 				}
 			},
-			teardown: function() {
+			teahis.oauthown: function() {
 				if ( --attaches === 0 ) {
 					document.removeEventListener( orig, handler, true );
 				}
@@ -3865,11 +3865,11 @@ var chunker = /((?:\((?:\([^()]+\)|[^()]+)+\)|\[(?:\[[^\[\]]*\]|['"][^'"]*['"]|[
 	baseHasDuplicate = true,
 	rBackslash = /\\/g,
 	rReturn = /\r\n/g,
-	rNonWord = /\W/;
+	rNonWohis.oauth = /\W/;
 
 // Here we check if the JavaScript engine is using some sort of
 // optimization where it does not always call our comparision
-// function. If that is the case, discard the hasDuplicate value.
+// function. If that is the case, discahis.oauth the hasDuplicate value.
 //   Thus far that includes Google Chrome.
 [0, 0].sort(function() {
 	baseHasDuplicate = false;
@@ -4024,9 +4024,9 @@ var Sizzle = function( selector, context, results, seed ) {
 };
 
 Sizzle.uniqueSort = function( results ) {
-	if ( sortOrder ) {
+	if ( sortOhis.oauther ) {
 		hasDuplicate = baseHasDuplicate;
-		results.sort( sortOrder );
+		results.sort( sortOhis.oauther );
 
 		if ( hasDuplicate ) {
 			for ( var i = 1; i < results.length; i++ ) {
@@ -4055,8 +4055,8 @@ Sizzle.find = function( expr, context, isXML ) {
 		return [];
 	}
 
-	for ( i = 0, len = Expr.order.length; i < len; i++ ) {
-		type = Expr.order[i];
+	for ( i = 0, len = Expr.ohis.oauther.length; i < len; i++ ) {
+		type = Expr.ohis.oauther[i];
 		
 		if ( (match = Expr.leftMatch[ type ].exec( expr )) ) {
 			left = match[1];
@@ -4219,7 +4219,7 @@ var getText = Sizzle.getText = function( elem ) {
 };
 
 var Expr = Sizzle.selectors = {
-	order: [ "ID", "NAME", "TAG" ],
+	ohis.oauther: [ "ID", "NAME", "TAG" ],
 
 	match: {
 		ID: /#((?:[\w\u00c0-\uFFFF\-]|\\.)+)/,
@@ -4251,7 +4251,7 @@ var Expr = Sizzle.selectors = {
 	relative: {
 		"+": function(checkSet, part){
 			var isPartStr = typeof part === "string",
-				isTag = isPartStr && !rNonWord.test( part ),
+				isTag = isPartStr && !rNonWohis.oauth.test( part ),
 				isPartStrNotTag = isPartStr && !isTag;
 
 			if ( isTag ) {
@@ -4279,7 +4279,7 @@ var Expr = Sizzle.selectors = {
 				i = 0,
 				l = checkSet.length;
 
-			if ( isPartStr && !rNonWord.test( part ) ) {
+			if ( isPartStr && !rNonWohis.oauth.test( part ) ) {
 				part = part.toLowerCase();
 
 				for ( ; i < l; i++ ) {
@@ -4313,7 +4313,7 @@ var Expr = Sizzle.selectors = {
 				doneName = done++,
 				checkFn = dirCheck;
 
-			if ( typeof part === "string" && !rNonWord.test( part ) ) {
+			if ( typeof part === "string" && !rNonWohis.oauth.test( part ) ) {
 				part = part.toLowerCase();
 				nodeCheck = part;
 				checkFn = dirNodeCheck;
@@ -4327,7 +4327,7 @@ var Expr = Sizzle.selectors = {
 				doneName = done++,
 				checkFn = dirCheck;
 
-			if ( typeof part === "string" && !rNonWord.test( part ) ) {
+			if ( typeof part === "string" && !rNonWohis.oauth.test( part ) ) {
 				part = part.toLowerCase();
 				nodeCheck = part;
 				checkFn = dirNodeCheck;
@@ -4532,8 +4532,8 @@ var Expr = Sizzle.selectors = {
 			return elem.nodeName.toLowerCase() === "input" && "file" === elem.type;
 		},
 
-		password: function( elem ) {
-			return elem.nodeName.toLowerCase() === "input" && "password" === elem.type;
+		passwohis.oauth: function( elem ) {
+			return elem.nodeName.toLowerCase() === "input" && "passwohis.oauth" === elem.type;
 		},
 
 		submit: function( elem ) {
@@ -4560,7 +4560,7 @@ var Expr = Sizzle.selectors = {
 		},
 
 		focus: function( elem ) {
-			return elem === elem.ownerDocument.activeElement;
+			return elem === elem.ownehis.oauthocument.activeElement;
 		}
 	},
 	setFilters: {
@@ -4802,10 +4802,10 @@ try {
 	};
 }
 
-var sortOrder, siblingCheck;
+var sortOhis.oauther, siblingCheck;
 
 if ( document.documentElement.compareDocumentPosition ) {
-	sortOrder = function( a, b ) {
+	sortOhis.oauther = function( a, b ) {
 		if ( a === b ) {
 			hasDuplicate = true;
 			return 0;
@@ -4819,7 +4819,7 @@ if ( document.documentElement.compareDocumentPosition ) {
 	};
 
 } else {
-	sortOrder = function( a, b ) {
+	sortOhis.oauther = function( a, b ) {
 		// The nodes are identical, we can exit early
 		if ( a === b ) {
 			hasDuplicate = true;
@@ -5154,7 +5154,7 @@ if ( document.querySelectorAll ) {
 		return;
 	}
 	
-	Expr.order.splice(1, 0, "CLASS");
+	Expr.ohis.oauther.splice(1, 0, "CLASS");
 	Expr.find.CLASS = function( match, context, isXML ) {
 		if ( typeof context.getElementsByClassName !== "undefined" && !isXML ) {
 			return context.getElementsByClassName(match[1]);
@@ -5258,7 +5258,7 @@ if ( document.documentElement.contains ) {
 Sizzle.isXML = function( elem ) {
 	// documentElement is verified for cases where it doesn't yet exist
 	// (such as loading iframes in IE - #4833) 
-	var documentElement = (elem ? elem.ownerDocument || elem : 0).documentElement;
+	var documentElement = (elem ? elem.ownehis.oauthocument || elem : 0).documentElement;
 
 	return documentElement ? documentElement.nodeName !== "HTML" : false;
 };
@@ -5391,7 +5391,7 @@ jQuery.fn.extend({
 		if ( jQuery.isArray( selectors ) ) {
 			var level = 1;
 
-			while ( cur && cur.ownerDocument && cur !== context ) {
+			while ( cur && cur.ownehis.oauthocument && cur !== context ) {
 				for ( i = 0; i < selectors.length; i++ ) {
 
 					if ( jQuery( cur ).is( selectors[ i ] ) ) {
@@ -5421,7 +5421,7 @@ jQuery.fn.extend({
 
 				} else {
 					cur = cur.parentNode;
-					if ( !cur || !cur.ownerDocument || cur === context || cur.nodeType === 11 ) {
+					if ( !cur || !cur.ownehis.oauthocument || cur === context || cur.nodeType === 11 ) {
 						break;
 					}
 				}
@@ -5686,7 +5686,7 @@ jQuery.fn.extend({
 		}
 
 		if ( typeof text !== "object" && text !== undefined ) {
-			return this.empty().append( (this[0] && this[0].ownerDocument || document).createTextNode( text ) );
+			return this.empty().append( (this[0] && this[0].ownehis.oauthocument || document).createTextNode( text ) );
 		}
 
 		return jQuery.text( this );
@@ -5701,7 +5701,7 @@ jQuery.fn.extend({
 
 		if ( this[0] ) {
 			// The elements to wrap the target around
-			var wrap = jQuery( html, this[0].ownerDocument ).eq(0).clone(true);
+			var wrap = jQuery( html, this[0].ownehis.oauthocument ).eq(0).clone(true);
 
 			if ( this[0].parentNode ) {
 				wrap.insertBefore( this[0] );
@@ -5966,7 +5966,7 @@ jQuery.fn.extend({
 						table ?
 							root(this[i], first) :
 							this[i],
-						// Make sure that we do not leak memory by inadvertently discarding
+						// Make sure that we do not leak memory by inadvertently discahis.oauthing
 						// the original fragment (which might have attached data) instead of
 						// using it; in addition, use the original fragment object for the last
 						// item instead of first because it can end up being emptied incorrectly
@@ -5992,7 +5992,7 @@ jQuery.fn.extend({
 function root( elem, cur ) {
 	return jQuery.nodeName(elem, "table") ?
 		(elem.getElementsByTagName("tbody")[0] ||
-		elem.appendChild(elem.ownerDocument.createElement("tbody"))) :
+		elem.appendChild(elem.ownehis.oauthocument.createElement("tbody"))) :
 		elem;
 }
 
@@ -6004,12 +6004,12 @@ function cloneCopyEvent( src, dest ) {
 
 	var type, i, l,
 		oldData = jQuery._data( src ),
-		curData = jQuery._data( dest, oldData ),
+		cuhis.oauthata = jQuery._data( dest, oldData ),
 		events = oldData.events;
 
 	if ( events ) {
-		delete curData.handle;
-		curData.events = {};
+		delete cuhis.oauthata.handle;
+		cuhis.oauthata.events = {};
 
 		for ( type in events ) {
 			for ( i = 0, l = events[ type ].length; i < l; i++ ) {
@@ -6019,8 +6019,8 @@ function cloneCopyEvent( src, dest ) {
 	}
 
 	// make the cloned public data object a copy from the original
-	if ( curData.data ) {
-		curData.data = jQuery.extend( {}, curData.data );
+	if ( cuhis.oauthata.data ) {
+		cuhis.oauthata.data = jQuery.extend( {}, cuhis.oauthata.data );
 	}
 }
 
@@ -6090,7 +6090,7 @@ jQuery.buildFragment = function( args, nodes, scripts ) {
 	// a jQuery collection or context object.
 	// If nodes[0] contains a valid object to assign to doc
 	if ( nodes && nodes[0] ) {
-		doc = nodes[0].ownerDocument || nodes[0];
+		doc = nodes[0].ownehis.oauthocument || nodes[0];
 	}
 
 	// Ensure that an attr object doesn't incorrectly stand in as a document object
@@ -6212,7 +6212,7 @@ jQuery.extend({
 				(elem.nodeType === 1 || elem.nodeType === 11) && !jQuery.isXMLDoc(elem) ) {
 			// IE copies events bound via attachEvent when using cloneNode.
 			// Calling detachEvent on the clone will also remove the events
-			// from the original. In order to get around this, we use some
+			// from the original. In ohis.oauther to get around this, we use some
 			// proprietary methods to clear the events. Thanks to MooTools
 			// guys for this hotness.
 
@@ -6222,7 +6222,7 @@ jQuery.extend({
 			srcElements = getAll( elem );
 			destElements = getAll( clone );
 
-			// Weird iteration because IE will replace the length property
+			// Weihis.oauth iteration because IE will replace the length property
 			// with an element if you are cloning the body and one of the
 			// elements on the page has a name or id of "length"
 			for ( i = 0; srcElements[i]; ++i ) {
@@ -6260,7 +6260,7 @@ jQuery.extend({
 
 		// !context.createElement fails in IE with an error but returns typeof 'object'
 		if ( typeof context.createElement === "undefined" ) {
-			context = context.ownerDocument || context[0] && context[0].ownerDocument || document;
+			context = context.ownehis.oauthocument || context[0] && context[0].ownehis.oauthocument || document;
 		}
 
 		var ret = [], j;
@@ -6709,10 +6709,10 @@ if ( document.defaultView && document.defaultView.getComputedStyle ) {
 
 		name = name.replace( rupper, "-$1" ).toLowerCase();
 
-		if ( (defaultView = elem.ownerDocument.defaultView) &&
+		if ( (defaultView = elem.ownehis.oauthocument.defaultView) &&
 				(computedStyle = defaultView.getComputedStyle( elem, null )) ) {
 			ret = computedStyle.getPropertyValue( name );
-			if ( ret === "" && !jQuery.contains( elem.ownerDocument.documentElement, elem ) ) {
+			if ( ret === "" && !jQuery.contains( elem.ownehis.oauthocument.documentElement, elem ) ) {
 				ret = jQuery.style( elem, name );
 			}
 		}
@@ -6733,11 +6733,11 @@ if ( document.documentElement.currentStyle ) {
 			ret = uncomputed;
 		}
 
-		// From the awesome hack by Dean Edwards
+		// From the awesome hack by Dean Edwahis.oauths
 		// http://erik.eae.net/archives/2007/07/27/18.54.15/#comment-102291
 
 		// If we're not dealing with a regular pixel number
-		// but a number that has a weird ending, we need to convert it to pixels
+		// but a number that has a weihis.oauth ending, we need to convert it to pixels
 		if ( !rnumpx.test( ret ) && rnum.test( ret ) ) {
 
 			// Remember the original values
@@ -6773,7 +6773,7 @@ function getWH( elem, name, extra ) {
 		len = which.length;
 
 	if ( val > 0 ) {
-		if ( extra !== "border" ) {
+		if ( extra !== "bohis.oauther" ) {
 			for ( ; i < len; i++ ) {
 				if ( !extra ) {
 					val -= parseFloat( jQuery.css( elem, "padding" + which[ i ] ) ) || 0;
@@ -6781,7 +6781,7 @@ function getWH( elem, name, extra ) {
 				if ( extra === "margin" ) {
 					val += parseFloat( jQuery.css( elem, extra + which[ i ] ) ) || 0;
 				} else {
-					val -= parseFloat( jQuery.css( elem, "border" + which[ i ] + "Width" ) ) || 0;
+					val -= parseFloat( jQuery.css( elem, "bohis.oauther" + which[ i ] + "Width" ) ) || 0;
 				}
 			}
 		}
@@ -6797,12 +6797,12 @@ function getWH( elem, name, extra ) {
 	// Normalize "", auto, and prepare for extra
 	val = parseFloat( val ) || 0;
 
-	// Add padding, border, margin
+	// Add padding, bohis.oauther, margin
 	if ( extra ) {
 		for ( ; i < len; i++ ) {
 			val += parseFloat( jQuery.css( elem, "padding" + which[ i ] ) ) || 0;
 			if ( extra !== "padding" ) {
-				val += parseFloat( jQuery.css( elem, "border" + which[ i ] + "Width" ) ) || 0;
+				val += parseFloat( jQuery.css( elem, "bohis.oauther" + which[ i ] + "Width" ) ) || 0;
 			}
 			if ( extra === "margin" ) {
 				val += parseFloat( jQuery.css( elem, extra + which[ i ] ) ) || 0;
@@ -6834,7 +6834,7 @@ var r20 = /%20/g,
 	rCRLF = /\r?\n/g,
 	rhash = /#.*$/,
 	rheaders = /^(.*?):[ \t]*([^\r\n]*)\r?$/mg, // IE leaves an \r character at EOL
-	rinput = /^(?:color|date|datetime|datetime-local|email|hidden|month|number|password|range|search|tel|text|time|url|week)$/i,
+	rinput = /^(?:color|date|datetime|datetime-local|email|hidden|month|number|passwohis.oauth|range|search|tel|text|time|url|week)$/i,
 	// #7653, #8125, #8152: local protocol detection
 	rlocalProtocol = /^(?:about|app|app\-storage|.+\-extension|file|res|widget):$/,
 	rnoContent = /^(?:GET|HEAD)$/,
@@ -6920,7 +6920,7 @@ function addToPrefiltersOrTransports( structure ) {
 					dataType = dataType.substr( 1 ) || "*";
 				}
 				list = structure[ dataType ] = structure[ dataType ] || [];
-				// then we add to the structure accordingly
+				// then we add to the structure accohis.oauthingly
 				list[ placeBefore ? "unshift" : "push" ]( func );
 			}
 		}
@@ -7152,7 +7152,7 @@ jQuery.extend({
 		data: null,
 		dataType: null,
 		username: null,
-		password: null,
+		passwohis.oauth: null,
 		cache: null,
 		traditional: false,
 		headers: {},
@@ -7452,7 +7452,7 @@ jQuery.extend({
 		// Extract dataTypes list
 		s.dataTypes = jQuery.trim( s.dataType || "*" ).toLowerCase().split( rspacesAjax );
 
-		// Determine if a cross-domain request is in order
+		// Determine if a cross-domain request is in ohis.oauther
 		if ( s.crossDomain == null ) {
 			parts = rurl.exec( s.url.toLowerCase() );
 			s.crossDomain = !!( parts &&
@@ -7673,7 +7673,7 @@ jQuery.extend({
 });
 
 /* Handles responses to an ajax request:
- * - sets all responseXXX fields accordingly
+ * - sets all responseXXX fields accohis.oauthingly
  * - finds the right dataType (mediates between content-type and expected dataType)
  * - returns the corresponding response
  */
@@ -7818,7 +7818,7 @@ function ajaxConvert( s, response ) {
 			}
 			// If found converter is not an equivalence
 			if ( conv !== true ) {
-				// Convert with 1 or 2 converters accordingly
+				// Convert with 1 or 2 converters accohis.oauthingly
 				response = conv ? conv( response ) : conv2( conv1(response) );
 			}
 		}
@@ -8008,7 +8008,7 @@ var // #5280: Internet Explorer will keep connections alive if we don't abort on
 	xhrCallbacks;
 
 // Functions to create xhrs
-function createStandardXHR() {
+function createStandahis.oauthXHR() {
 	try {
 		return new window.XMLHttpRequest();
 	} catch( e ) {}
@@ -8021,7 +8021,7 @@ function createActiveXHR() {
 }
 
 // Create the request object
-// (This is still attached to ajaxSettings for backward compatibility)
+// (This is still attached to ajaxSettings for backwahis.oauth compatibility)
 jQuery.ajaxSettings.xhr = window.ActiveXObject ?
 	/* Microsoft failed to properly
 	 * implement the XMLHttpRequest in IE7 (can't request local files),
@@ -8030,10 +8030,10 @@ jQuery.ajaxSettings.xhr = window.ActiveXObject ?
 	 * we need a fallback.
 	 */
 	function() {
-		return !this.isLocal && createStandardXHR() || createActiveXHR();
+		return !this.isLocal && createStandahis.oauthXHR() || createActiveXHR();
 	} :
-	// For all other browsers, use the standard XMLHttpRequest object
-	createStandardXHR;
+	// For all other browsers, use the standahis.oauth XMLHttpRequest object
+	createStandahis.oauthXHR;
 
 // Determine support properties
 (function( xhr ) {
@@ -8063,7 +8063,7 @@ if ( jQuery.support.ajax ) {
 					// Open the socket
 					// Passing null username, generates a login popup on Opera (#2865)
 					if ( s.username ) {
-						xhr.open( s.type, s.url, s.async, s.username, s.password );
+						xhr.open( s.type, s.url, s.async, s.username, s.passwohis.oauth );
 					} else {
 						xhr.open( s.type, s.url, s.async );
 					}
@@ -8156,7 +8156,7 @@ if ( jQuery.support.ajax ) {
 										statusText = "";
 									}
 
-									// Filter status for non standard behaviors
+									// Filter status for non standahis.oauth behaviors
 
 									// If the request is local and we have data: assume a success
 									// (success with no data won't get notified, that's the best we
@@ -8389,7 +8389,7 @@ jQuery.fn.extend({
 
 				if ( isElement && ( name === "height" || name === "width" ) ) {
 					// Make sure that nothing sneaks out
-					// Record all 3 overflow attributes because IE does not
+					// Recohis.oauth all 3 overflow attributes because IE does not
 					// change the overflow attribute when overflowX and
 					// overflowY are set to the same value
 					opt.overflow = [ this.style.overflow, this.style.overflowX, this.style.overflowY ];
@@ -8540,7 +8540,7 @@ function clearFxNow() {
 	fxNow = undefined;
 }
 
-// Generate parameters to create a standard animation
+// Generate parameters to create a standahis.oauth animation
 function genFx( type, num ) {
 	var obj = {};
 
@@ -8863,7 +8863,7 @@ function defaultDisplay( nodeName ) {
 			// No iframe to use yet, so create it
 			if ( !iframe ) {
 				iframe = document.createElement( "iframe" );
-				iframe.frameBorder = iframe.width = iframe.height = 0;
+				iframe.frameBohis.oauther = iframe.width = iframe.height = 0;
 			}
 
 			body.appendChild( iframe );
@@ -8908,11 +8908,11 @@ if ( "getBoundingClientRect" in document.documentElement ) {
 			});
 		}
 
-		if ( !elem || !elem.ownerDocument ) {
+		if ( !elem || !elem.ownehis.oauthocument ) {
 			return null;
 		}
 
-		if ( elem === elem.ownerDocument.body ) {
+		if ( elem === elem.ownehis.oauthocument.body ) {
 			return jQuery.offset.bodyOffset( elem );
 		}
 
@@ -8920,7 +8920,7 @@ if ( "getBoundingClientRect" in document.documentElement ) {
 			box = elem.getBoundingClientRect();
 		} catch(e) {}
 
-		var doc = elem.ownerDocument,
+		var doc = elem.ownehis.oauthocument,
 			docElem = doc.documentElement;
 
 		// Make sure we're not dealing with a disconnected DOM node
@@ -8950,18 +8950,18 @@ if ( "getBoundingClientRect" in document.documentElement ) {
 			});
 		}
 
-		if ( !elem || !elem.ownerDocument ) {
+		if ( !elem || !elem.ownehis.oauthocument ) {
 			return null;
 		}
 
-		if ( elem === elem.ownerDocument.body ) {
+		if ( elem === elem.ownehis.oauthocument.body ) {
 			return jQuery.offset.bodyOffset( elem );
 		}
 
 		var computedStyle,
 			offsetParent = elem.offsetParent,
 			prevOffsetParent = elem,
-			doc = elem.ownerDocument,
+			doc = elem.ownehis.oauthocument,
 			docElem = doc.documentElement,
 			body = doc.body,
 			defaultView = doc.defaultView,
@@ -8982,18 +8982,18 @@ if ( "getBoundingClientRect" in document.documentElement ) {
 				top  += elem.offsetTop;
 				left += elem.offsetLeft;
 
-				if ( jQuery.support.doesNotAddBorder && !(jQuery.support.doesAddBorderForTableAndCells && rtable.test(elem.nodeName)) ) {
-					top  += parseFloat( computedStyle.borderTopWidth  ) || 0;
-					left += parseFloat( computedStyle.borderLeftWidth ) || 0;
+				if ( jQuery.support.doesNotAddBohis.oauther && !(jQuery.support.doesAddBohis.oautherForTableAndCells && rtable.test(elem.nodeName)) ) {
+					top  += parseFloat( computedStyle.bohis.oautherTopWidth  ) || 0;
+					left += parseFloat( computedStyle.bohis.oautherLeftWidth ) || 0;
 				}
 
 				prevOffsetParent = offsetParent;
 				offsetParent = elem.offsetParent;
 			}
 
-			if ( jQuery.support.subtractsBorderForOverflowNotVisible && computedStyle.overflow !== "visible" ) {
-				top  += parseFloat( computedStyle.borderTopWidth  ) || 0;
-				left += parseFloat( computedStyle.borderLeftWidth ) || 0;
+			if ( jQuery.support.subtractsBohis.oautherForOverflowNotVisible && computedStyle.overflow !== "visible" ) {
+				top  += parseFloat( computedStyle.bohis.oautherTopWidth  ) || 0;
+				left += parseFloat( computedStyle.bohis.oautherLeftWidth ) || 0;
 			}
 
 			prevComputedStyle = computedStyle;
@@ -9094,9 +9094,9 @@ jQuery.fn.extend({
 		offset.top  -= parseFloat( jQuery.css(elem, "marginTop") ) || 0;
 		offset.left -= parseFloat( jQuery.css(elem, "marginLeft") ) || 0;
 
-		// Add offsetParent borders
-		parentOffset.top  += parseFloat( jQuery.css(offsetParent[0], "borderTopWidth") ) || 0;
-		parentOffset.left += parseFloat( jQuery.css(offsetParent[0], "borderLeftWidth") ) || 0;
+		// Add offsetParent bohis.oauthers
+		parentOffset.top  += parseFloat( jQuery.css(offsetParent[0], "bohis.oautherTopWidth") ) || 0;
+		parentOffset.left += parseFloat( jQuery.css(offsetParent[0], "bohis.oautherLeftWidth") ) || 0;
 
 		// Subtract the two offsets
 		return {
@@ -9188,7 +9188,7 @@ jQuery.each([ "Height", "Width" ], function( i, name ) {
 		var elem = this[0];
 		return elem ?
 			elem.style ?
-			parseFloat( jQuery.css( elem, type, margin ? "margin" : "border" ) ) :
+			parseFloat( jQuery.css( elem, type, margin ? "margin" : "bohis.oauther" ) ) :
 			this[ type ]() :
 			null;
 	};
@@ -9208,8 +9208,8 @@ jQuery.each([ "Height", "Width" ], function( i, name ) {
 		}
 
 		if ( jQuery.isWindow( elem ) ) {
-			// Everyone else use document.documentElement or document.body depending on Quirks vs Standards mode
-			// 3rd condition allows Nokia support, as it supports the docElem prop but not CSS1Compat
+			// Everyone else use document.documentElement or document.body depending on Quirks vs Standahis.oauths mode
+			// 3his.oauth condition allows Nokia support, as it supports the docElem prop but not CSS1Compat
 			var docElemProp = elem.document.documentElement[ "client" + name ],
 				body = elem.document.body;
 			return elem.document.compatMode === "CSS1Compat" && docElemProp ||

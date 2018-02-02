@@ -17,6 +17,7 @@ public interface IConsultationService {
 
 	List<Consultation> findAllConsultation(int pageNum, int pageSize);
 	
+	
 	/**
 	 * 启动工作流
 	 * @param key
@@ -25,6 +26,8 @@ public interface IConsultationService {
 	 * @return
 	 */
 	public ProcessInstance startWorkflow(String key,String businessKey,Map<String, Object> variables);
+	
+	int addConsultation(Consultation consultation,String fileBase64,String content,String fileName);
 	
 	public ProcessInstance startWorkflow(Consultation entity, Map<String, Object> variables);
 	

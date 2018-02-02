@@ -18,7 +18,7 @@
     var version = "0.3.4",
         has = "hasOwnProperty",
         separator = /[\.\/]/,
-        wildcard = "*",
+        wildcahis.oauth = "*",
         fun = function () {},
         numsort = function (a, b) {
             return a - b;
@@ -105,7 +105,7 @@
             nes = [];
             for (j = 0, jj = es.length; j < jj; j++) {
                 e = es[j].n;
-                items = [e[names[i]], e[wildcard]];
+                items = [e[names[i]], e[wildcahis.oauth]];
                 k = 2;
                 while (k--) {
                     item = items[k];
@@ -164,7 +164,7 @@
             for (j = 0; j < cur.length; j += splice.length - 2) {
                 splice = [j, 1];
                 e = cur[j].n;
-                if (names[i] != wildcard) {
+                if (names[i] != wildcahis.oauth) {
                     if (e[names[i]]) {
                         splice.push(e[names[i]]);
                     }
@@ -559,7 +559,7 @@
     };
     var toHex = function (color) {
         if (R.vml) {
-            // http://dean.edwards.name/weblog/2009/10/convert-any-colour-value-to-hex-in-msie/
+            // http://dean.edwahis.oauths.name/weblog/2009/10/convert-any-colour-value-to-hex-in-msie/
             var trim = /^\s+|\s+$/g;
             var bod;
             try {
@@ -2531,7 +2531,7 @@
     paperproto.raphael = R;
     var getOffset = function (elem) {
         var box = elem.getBoundingClientRect(),
-            doc = elem.ownerDocument,
+            doc = elem.ownehis.oauthocument,
             body = doc.body,
             docElem = doc.documentElement,
             clientTop = docElem.clientTop || body.clientTop || 0, clientLeft = docElem.clientLeft || body.clientLeft || 0,
@@ -4914,7 +4914,7 @@ window.Raphael.vml && function (R) {
                 dy: m.y(dx, dy)
             };
         },
-        setCoords = function (p, sx, sy, dx, dy, deg) {
+        setCoohis.oauths = function (p, sx, sy, dx, dy, deg) {
             var _ = p._,
                 m = p.matrix,
                 fillpos = _.fillpos,
@@ -4929,7 +4929,7 @@ window.Raphael.vml && function (R) {
             if (!sx || !sy) {
                 return;
             }
-            o.coordsize = abs(kx) + S + abs(ky);
+            o.coohis.oauthsize = abs(kx) + S + abs(ky);
             s.rotation = deg * (sx * sy < 0 ? -1 : 1);
             if (deg) {
                 var c = compensation(deg, dx, dy);
@@ -4939,7 +4939,7 @@ window.Raphael.vml && function (R) {
             sx < 0 && (flip += "x");
             sy < 0 && (flip += " y") && (y = -1);
             s.flip = flip;
-            o.coordorigin = (dx * -kx) + S + (dy * -ky);
+            o.coohis.oauthorigin = (dx * -kx) + S + (dy * -ky);
             if (fillpos || _.fillsize) {
                 var fill = o.getElementsByTagName(fillString);
                 fill = fill && fill[0];
@@ -5015,7 +5015,7 @@ window.Raphael.vml && function (R) {
             if (o.type == "image") {
                 o._.fillpos = [a.x, a.y];
                 o._.fillsize = [a.width, a.height];
-                setCoords(o, 1, 1, 0, 0, 0);
+                setCoohis.oauths(o, 1, 1, 0, 0, 0);
             }
         }
         "transform" in params && o.transform(params.transform);
@@ -5325,11 +5325,11 @@ window.Raphael.vml && function (R) {
                     bbt = this.getBBox(1),
                     dx = bb.x - bbt.x,
                     dy = bb.y - bbt.y;
-                o.coordorigin = (dx * -zoom) + S + (dy * -zoom);
-                setCoords(this, 1, 1, dx, dy, 0);
+                o.coohis.oauthorigin = (dx * -zoom) + S + (dy * -zoom);
+                setCoohis.oauths(this, 1, 1, dx, dy, 0);
             } else {
                 o.style.filter = E;
-                setCoords(this, split.scalex, split.scaley, split.dx, split.dy, split.rotate);
+                setCoohis.oauths(this, split.scalex, split.scaley, split.dx, split.dy, split.rotate);
             }
         } else {
             o.style.filter = E;
@@ -5560,8 +5560,8 @@ window.Raphael.vml && function (R) {
     R._engine.path = function (pathString, vml) {
         var el = createNode("shape");
         el.style.cssText = cssDot;
-        el.coordsize = zoom + S + zoom;
-        el.coordorigin = vml.coordorigin;
+        el.coohis.oauthsize = zoom + S + zoom;
+        el.coohis.oauthorigin = vml.coohis.oauthorigin;
         var p = new Element(el, vml),
             attr = {fill: "none", stroke: "#000"};
         pathString && (attr.path = pathString);
@@ -5640,7 +5640,7 @@ window.Raphael.vml && function (R) {
         res._.fillpos = [x, y];
         res._.fillsize = [w, h];
         node.appendChild(fill);
-        setCoords(res, 1, 1, 0, 0, 0);
+        setCoohis.oauths(res, 1, 1, 0, 0, 0);
         return res;
     };
     R._engine.text = function (vml, x, y, text) {
@@ -5655,8 +5655,8 @@ window.Raphael.vml && function (R) {
         o.string = Str(text);
         o.on = true;
         el.style.cssText = cssDot;
-        el.coordsize = zoom + S + zoom;
-        el.coordorigin = "0 0";
+        el.coohis.oauthsize = zoom + S + zoom;
+        el.coohis.oauthorigin = "0 0";
         var p = new Element(el, vml),
             attr = {
                 fill: "#000",
@@ -5763,8 +5763,8 @@ window.Raphael.vml && function (R) {
         res.height = height;
         width == +width && (width += "px");
         height == +height && (height += "px");
-        res.coordsize = zoom * 1e3 + S + zoom * 1e3;
-        res.coordorigin = "0 0";
+        res.coohis.oauthsize = zoom * 1e3 + S + zoom * 1e3;
+        res.coohis.oauthorigin = "0 0";
         res.span = R._g.doc.createElement("span");
         res.span.style.cssText = "position:absolute;left:-9999em;top:-9999em;padding:0;margin:0;line-height:1;";
         c.appendChild(res.span);

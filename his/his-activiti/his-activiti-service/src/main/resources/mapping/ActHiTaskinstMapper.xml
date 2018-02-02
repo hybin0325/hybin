@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.medcrm.yjb.workflow.mapper.ActHiTaskinstMapper">
+	<!-- 查询上一步审批人 -->
+	<select id="selectActHiTaskinst" resultType="String">
+		select res.ASSIGNEE_ assignee  from
+		ACT_HI_TASKINST res where res.PROC_DEF_ID_=#{actKey} and
+		res.PROC_INST_ID_=#{procInstId} and res.DELETE_REASON_='completed' ORDER BY
+		res.END_TIME_ DESC limit 0,1
+	</select>
+</mapper>

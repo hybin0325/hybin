@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.medcrm.yjb.workflow.mapper.ShenpiMapper">
+	<!-- 数据库中的字段和实体类中的字段不符，使用此方式映射 -->
+	<resultMap id="BaseResultMap" type="net.medcrm.yjb.workflow.domain.Shenpi">
+		<id column="ID" property="id" jdbcType="VARCHAR" />
+		<result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+		<result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+		<result column="title_name" property="titleName" jdbcType="VARCHAR" />
+		<result column="marke" property="marke" jdbcType="VARCHAR" />
+		<result column="create_date" property="createDate" />
+		<result column="update_date" property="updateDate" />
+	</resultMap>
+	<!-- 查询单条记录 -->
+	<select id="selectByPrimaryKey" parameterType="String"
+		resultMap="BaseResultMap">
+		select * from hflow_jiandanshenpi where ID = #{id}
+	</select>
+	<!-- 新增 -->
+	<!-- keyProperty="id" useGeneratedKeys="true" 设置主键自生长orcale除外 -->
+	<insert id="insert" parameterType="net.medcrm.yjb.workflow.domain.Shenpi" keyProperty="id" useGeneratedKeys="true">
+		insert into hflow_jiandanshenpi
+		(ID,USER_ID,USER_NAME,title_name,marke,create_date,update_date)
+		values
+		(#{id},#{userId},#{userName},#{titleName},#{marke},#{createDate},#{updateDate})
+	</insert>
+
+</mapper>

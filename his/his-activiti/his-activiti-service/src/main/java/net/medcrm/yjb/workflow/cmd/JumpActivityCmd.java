@@ -1,7 +1,6 @@
 package net.medcrm.yjb.workflow.cmd;
-
 /**
- * @author: Henry Yan
+ * @author: hybin
  */
 
 import org.activiti.engine.impl.interceptor.Command;

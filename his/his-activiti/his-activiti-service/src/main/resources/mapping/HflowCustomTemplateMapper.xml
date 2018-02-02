@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.medcrm.yjb.workflow.mapper.HflowCustomTemplateMapper">
+	<!-- 数据库中的字段和实体类中的字段不符，使用此方式映射 -->
+	<resultMap id="BaseResultMap" type="net.medcrm.yjb.workflow.domain.HflowCustomTemplate">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="tpl" property="tpl" jdbcType="VARCHAR" />
+		<result column="createDate" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="updateDate" property="updateDate" jdbcType="TIMESTAMP" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="sort" property="sort" jdbcType="INTEGER" />
+		<result column="type" property="type" jdbcType="VARCHAR" />
+		<result column="version" property="version" jdbcType="VARCHAR" />
+		<result column="pid" property="pid" jdbcType="VARCHAR" />
+		<result column="createUser" property="createUser" jdbcType="VARCHAR" />
+		<result column="createUserId" property="createUserId" jdbcType="VARCHAR" />
+		<result column="publicDate" property="publicDate" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<!-- 查询单条记录 -->
+	<select id="selectByPrimaryKey" parameterType="String" resultMap="BaseResultMap">
+		select id,name,description,tpl,create_date createDate,update_date updateDate,status,type,version,pid,create_user createUser,create_user_id createUserId,public_date publicDate,sort  from hflow_custom_tpl where id = #{id}
+	</select>
+	<select id="selectByKeys" resultMap="BaseResultMap">
+		select id,name,description,tpl  from hflow_custom_tpl
+		where id in
+		<foreach collection="ids" item="id"
+				 index="index" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</select>
+
+	<select id="select" parameterType="java.lang.String" resultMap="BaseResultMap">
+
+		select a.id,a.name,a.description,a.tpl,a.create_date createDate,a.update_date updateDate,a.status,a.type,a.version,a.pid,a.create_user createUser,a.create_user_id createUserId,a.public_date publicDate,a.sort
+		from hflow_custom_tpl a inner join (select pid,max(version) version from hflow_custom_tpl group by pid)b on a.pid=b.pid and a.version=b.version
+
+		<where>
+			<if test="name != null and name !=''">
+				and a.name like  CONCAT('%',#{name},'%')
+			</if>
+			<if test="type != null and type !=''">
+				and a.type = #{type}
+			</if>
+			<if test="createUserId != null and createUserId !=''">
+				and a.create_user_id = #{createUserId}
+			</if>
+			<if test="status != null and status !=''">
+				and a.status = #{status}
+			</if>
+		</where>
+		order by a.sort
+	</select>
+	<select id="selectByStatus" parameterType="java.lang.String" resultMap="BaseResultMap">
+
+		select a.id,a.name,a.description,a.tpl,a.create_date createDate,a.update_date updateDate,a.status,a.type,a.version,a.pid,a.create_user createUser,a.create_user_id createUserId,a.public_date publicDate,a.sort
+		from hflow_custom_tpl a inner join (select tpl.pid,max(tpl.version) version from (select * from hflow_custom_tpl where status =1 ) tpl group by tpl.pid)b on a.pid=b.pid and a.version=b.version
+		<where>
+			<if test="name != null and name !=''">
+				and a.name like  CONCAT('%',#{name},'%')
+			</if>
+			<if test="type != null and type !=''">
+				and a.type = #{type}
+			</if>
+			<if test="createUserId != null and createUserId !=''">
+				and a.create_user_id = #{createUserId}
+			</if>
+			<if test="status != null and status !=''">
+				and a.status = #{status}
+			</if>
+		</where>
+		order by a.sort
+	</select>
+	<select id="selectByPid" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select id,name,description,tpl,create_date createDate,update_date updateDate,status,type,version,pid,create_user createUser,create_user_id createUserId,public_date publicDate,sort from hflow_custom_tpl
+		<if test="pid != null and pid !=''">
+			where pid = #{pid}
+		</if>
+		order by sort desc
+	</select>
+	<select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select id,name,description,tpl,create_date createDate,update_date updateDate,status,type,version,pid,create_user createUser,create_user_id createUserId,public_date publicDate,sort from hflow_custom_tpl
+		<if test="name != null and name !=''">
+			where name = #{name}
+		</if>
+
+	</select>
+	<!-- 新增 -->
+	<!-- keyProperty="id" useGeneratedKeys="true" 设置主键自生长orcale除外 -->
+	<insert id="insert" parameterType="net.medcrm.yjb.workflow.domain.HflowCustomTemplate"
+		keyProperty="id" useGeneratedKeys="true">
+		insert into hflow_custom_tpl (id,name,description,tpl,create_date,update_date,status,type,version,pid,create_user,create_user_id,public_date,sort)
+		values (
+		#{id},
+		#{name},
+		#{description},
+		#{tpl},
+		#{createDate},
+		#{updateDate},
+		#{status},
+		#{type},
+		#{version},
+		#{pid},
+		#{createUser},
+		#{createUserId},
+		#{publicDate},
+		#{sort}
+		)
+	</insert>
+
+	<update id="update" parameterType="net.medcrm.yjb.workflow.domain.HflowCustomTemplate">
+		update hflow_custom_tpl
+		<set>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="description != null">
+				description = #{description},
+			</if>
+			<if test="tpl != null">
+				tpl = #{tpl},
+			</if>
+			<if test="updateDate != null">
+				update_date = #{updateDate},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="type != null">
+				type = #{type},
+			</if>
+			<if test="version != null">
+				version = #{version},
+			</if>
+			<if test="pid != null">
+				pid = #{pid},
+			</if>
+			<if test="createUser != null">
+				create_user = #{createUser},
+			</if>
+			<if test="createUserId != null">
+				create_user_id = #{createUserId},
+			</if>
+			<if test="publicDate != null">
+				public_date = #{publicDate},
+			</if>
+			<if test="sort != null">
+				sort = #{sort},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	<update id="updateSort" parameterType="net.medcrm.yjb.workflow.domain.HflowCustomTemplate">
+		update hflow_custom_tpl set sort = #{sort} where id = #{id}
+
+	</update>
+	<delete id="delete" parameterType="java.lang.String">
+		delete from hflow_custom_tpl where id = #{id}
+	</delete>
+
+	<select id="selectMaxSort" resultType="java.lang.Integer">
+		select (CASE WHEN max(sort) IS NULL THEN 0 ELSE max(sort) END ) + 1 from hflow_custom_tpl
+	</select>
+</mapper>

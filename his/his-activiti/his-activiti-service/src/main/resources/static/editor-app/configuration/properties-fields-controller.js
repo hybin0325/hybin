@@ -80,7 +80,7 @@ var KisBpmFieldsPopupCtrl = [ '$scope', '$q', '$translate', function($scope, $q,
         // Config for grid
         $scope.gridOptions = {
             data: 'fields',
-            enableRowReordering: true,
+            enableRowReohis.oauthering: true,
             headerRowHeight: 28,
             multiSelect: false,
             keepLastSelected: false,

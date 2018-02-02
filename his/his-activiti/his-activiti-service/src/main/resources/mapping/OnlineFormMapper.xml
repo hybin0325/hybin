@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.medcrm.yjb.workflow.mapper.OnlineFormMapper">
+    <resultMap id="onlineform" type="net.medcrm.yjb.workflow.domain.OnlineForm">
+      <id column="id" jdbcType="VARCHAR" property="id"/>
+      <id column="key" property="key"/>
+      <id column="descr" property="descr"/>
+      <id column="html" jdbcType="CLOB" property="html"/>
+      <id column="status" property="status"/>
+      <id column="create_user" property="createUser"/>
+      <id column="create_date" property="createDate"/>
+      <id column="update_user" property="updateUser"/>
+      <id column="update_date" property="updateDate"/>
+    </resultMap> 
+    <select  id="selectAll" resultMap="onlineform"   parameterType="OnlineForm">	
+	   select f.id,f.key,f.descr,f.status,f.create_user,f.create_date,f.update_user,f.update_date
+	   from hlow_online_form f
+	   where 1=1
+	</select>
+	
+	<select  id="selectByPrimaryKey" resultMap="onlineform"   parameterType="String">	
+	   select f.*
+	   from hlow_online_form f
+	   where f.id=#{id}
+	</select>
+	
+    <insert id="insert"  parameterType="OnlineForm">	
+	    insert into hlow_online_form(id,key,descr,status,createUser,createDate) 
+	    values(#{id},#{key},#{descr},#{status},#{create_user},#{create_Date})
+	</insert>
+	
+	<update id="update"  parameterType="OnlineForm">	
+		update hlow_online_form set key=#{key},descr=#{descr},status=#{status}
+			,updateUser=#{update_user},updateDate=#{update_Date}
+	    where id=#{id}
+	</update>
+	
+	<update id="design"  parameterType="OnlineForm">	
+		update hlow_online_form set html=#{html,jdbcType=CLOB}
+			,updateUser=#{update_user},updateDate=#{updateDate}
+	    where id=#{id}
+	</update>
+	
+	<update id="delete"  parameterType="OnlineForm">	
+		delete from hlow_online_form where id=#{id}
+	</update>
+</mapper>

@@ -22,16 +22,16 @@ public class ProcessDefinitionTest {
 	public void deployementProcessDefinition() {
 		Deployment deployment = processEngine.getRepositoryService()// 获取流程定义和部署对象相关的Service
 				.createDeployment()// 创建部署对象
-				.name("consultation")// 声明流程的名称
-				.addClasspathResource("processes/consultation.bpmn")// 加载资源文件，一次只能加载一个文件
-				.addClasspathResource("processes/consultation.png")//
+				.name("test-email")// 声明流程的名称
+				.addClasspathResource("processes/mail/test-email.bpmn")// 加载资源文件，一次只能加载一个文件
+				.addClasspathResource("processes/mail/test-email.png")//
 				.deploy();// 完成部署
-		System.out.println("部署ID：" + deployment.getId());// 1
+		System.out.println("部署ID：" + deployment.getId());// 
 		System.out.println("部署时间：" + deployment.getDeploymentTime());
 	}
 
 	// 部署流程定义
-	@Test
+	//@Test
 	public void deployementProcessNotify() {
 		Deployment deployment = processEngine.getRepositoryService()// 获取流程定义和部署对象相关的Service
 				.createDeployment()// 创建部署对象

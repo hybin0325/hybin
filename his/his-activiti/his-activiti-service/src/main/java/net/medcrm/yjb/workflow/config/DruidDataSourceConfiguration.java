@@ -1,6 +1,9 @@
 package net.medcrm.yjb.workflow.config;
 
-import com.his.mybatis.dynamicDataSource.config.DynamicDataSource;
+import java.util.List;
+
+import javax.sql.DataSource;
+
 import org.apache.ibatis.mapping.DatabaseIdProvider;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -15,69 +18,68 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-
-import javax.sql.DataSource;
-import java.util.List;
+import com.his.mybatis.dynamicDataSource.config.DynamicDataSource;
+import com.his.mybatis.dynamicDataSource.manager.DynamicDataSourceTransactionManager;
 
 /**
+ *动态事物配置类
  */
 @Configuration
 @EnableTransactionManagement
 public class DruidDataSourceConfiguration extends MybatisAutoConfiguration {
 
-	@Value("${datasource.type}")
-	private Class<? extends DataSource> dataSourceType;
+    @Value("${datasource.type}")
+    private Class<? extends DataSource> dataSourceType;
 
-	public DruidDataSourceConfiguration(MybatisProperties properties,
-			ObjectProvider<Interceptor[]> interceptorsProvider, ResourceLoader resourceLoader,
-			ObjectProvider<DatabaseIdProvider> databaseIdProvider,
-			ObjectProvider<List<ConfigurationCustomizer>> configurationCustomizersProvider) {
-		super(properties, interceptorsProvider, resourceLoader, databaseIdProvider, configurationCustomizersProvider);
-	}
+    public DruidDataSourceConfiguration(MybatisProperties properties, ObjectProvider<Interceptor[]> interceptorsProvider, ResourceLoader resourceLoader, ObjectProvider<DatabaseIdProvider> databaseIdProvider, ObjectProvider<List<ConfigurationCustomizer>> configurationCustomizersProvider) {
+        super(properties, interceptorsProvider, resourceLoader, databaseIdProvider, configurationCustomizersProvider);
+    }
 
-	@Bean(name = "masterDataSource")
-	@Primary
-	@ConfigurationProperties(prefix = "spring.datasource")
-	public DataSource masterDataSource() {
-		System.out.println("-------------------- writeDataSource init ---------------------");
-		return DataSourceBuilder.create().type(dataSourceType).build();
-	}
+    @Bean(name = "masterDataSource")
+    @Primary
+    @ConfigurationProperties(prefix = "spring.datasource")
+    public DataSource masterDataSource() {
+        System.out.println("-------------------- writeDataSource init ---------------------");
+        return DataSourceBuilder.create().type(dataSourceType).build();
+    }
 
-	@Bean(name = "slaveDataSource")
-	@ConfigurationProperties(prefix = "slave.datasource")
-	public DataSource slaveDataSource() {
-		System.out.println("-------------------- readDataSourceOne init ---------------------");
-		return DataSourceBuilder.create().type(dataSourceType).build();
-	}
+    @Bean(name = "slaveDataSource")
+    @ConfigurationProperties(prefix = "slave.datasource")
+    public DataSource slaveDataSource() {
+        System.out.println("-------------------- readDataSourceOne init ---------------------");
+        return DataSourceBuilder.create().type(dataSourceType).build();
+    }
 
-	@Bean
-	public DynamicDataSource dynamicDataSource() {
-		DynamicDataSource dynamicDataSource = new DynamicDataSource();
-		dynamicDataSource.setMasterDataSource(masterDataSource());
-		dynamicDataSource.setReadDataSource(slaveDataSource());
-		return dynamicDataSource;
-	}
+    @Bean
+    public DynamicDataSource dynamicDataSource(){
+        DynamicDataSource dynamicDataSource = new DynamicDataSource();
+        dynamicDataSource.setMasterDataSource(masterDataSource());
+        dynamicDataSource.setReadDataSource(slaveDataSource());
+        return dynamicDataSource;
+    }
 
-	@Bean(name = "sqlSessionFactory")
-	public SqlSessionFactory sqlSessionFactoryBean() throws Exception {
-		return super.sqlSessionFactory(dynamicDataSource());
-	}
+    @Bean(name = "sqlSessionFactory")
+    public SqlSessionFactory sqlSessionFactoryBean() throws Exception {
+        return super.sqlSessionFactory(dynamicDataSource());
+    }
 
-	// 默认事务
-	// @Bean
-	// public PlatformTransactionManager txManager(DataSource dataSource) {
-	// return new DataSourceTransactionManager(dataSource);
-	// }
 
-	/**
-	 * 配置事务管理器
-	 */
-	// @Bean
-	// @Primary
-	// public DataSourceTransactionManager transactionManager() throws
-	// Exception{
-	// return new DynamicDataSourceTransactionManager(dynamicDataSource());
-	// }
+//    默认事务
+//    @Bean
+//    public PlatformTransactionManager txManager(DataSource dataSource) {
+//        return new DataSourceTransactionManager(dataSource);
+//    }
+
+
+    /**
+     * 配置事务管理器
+     */
+    @Bean
+    @Primary
+    public DataSourceTransactionManager transactionManager() throws Exception{
+        return new DynamicDataSourceTransactionManager(dynamicDataSource());
+    }
 }

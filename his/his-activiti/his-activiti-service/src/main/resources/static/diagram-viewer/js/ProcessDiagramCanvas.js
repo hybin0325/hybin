@@ -63,7 +63,7 @@ var EXPANDED_SUBPROCESS_FONT = {font: "11px Arial", opacity: 1, fill: Color.blac
 var NORMAL_STROKE = 1;
 var SEQUENCEFLOW_STROKE = 1.5;
 var SEQUENCEFLOW_HIGHLIGHT_STROKE = 2;
-var THICK_TASK_BORDER_STROKE = 2.5;
+var THICK_TASK_BOhis.oauthER_STROKE = 2.5;
 var GATEWAY_TYPE_STROKE = 3.2;
 var END_EVENT_STROKE = NORMAL_STROKE+2;
 var MULTI_INSTANCE_STROKE = 1.3;
@@ -208,16 +208,16 @@ ProcessDiagramCanvas.prototype = {
 		return this.font;
 	},
 	drawShaddow: function(object){
-		var border = object.clone();
-		border.attr({"stroke-width": this.strokeWidth + 6, 
+		var bohis.oauther = object.clone();
+		bohis.oauther.attr({"stroke-width": this.strokeWidth + 6,
 					"stroke": Color.white,
 					"fill": Color.white,
 					"opacity": 1,
 					"stroke-dasharray":null});
-		//border.toBack();
+		//bohis.oauther.toBack();
 		object.toFront();
 		
-		return border;
+		return bohis.oauther;
 	},
 	
 	setConextObject: function(obj){
@@ -257,8 +257,8 @@ ProcessDiagramCanvas.prototype = {
 	  var set = overlay.data("set");
 	  var contextObject = overlay.data("contextObject");
 
-	  var border = instance.g.getById(contextObject.id + "_border");
-	  border.attr("opacity", 0.3);
+	  var bohis.oauther = instance.g.getById(contextObject.id + "_bohis.oauther");
+	  bohis.oauther.attr("opacity", 0.3);
 
 	  // provide callback
 	  if (ProcessDiagramGenerator.options && ProcessDiagramGenerator.options.on && ProcessDiagramGenerator.options.on.over) {
@@ -271,8 +271,8 @@ ProcessDiagramCanvas.prototype = {
 	   var set = overlay.data("set");
 	   var contextObject = overlay.data("contextObject");
 
-	   var border = instance.g.getById(contextObject.id + "_border");
-	   border.attr("opacity", 0.0);
+	   var bohis.oauther = instance.g.getById(contextObject.id + "_bohis.oauther");
+	   bohis.oauther.attr("opacity", 0.0);
 	   // provide callback
 	   if (ProcessDiagramGenerator.options && ProcessDiagramGenerator.options.on && ProcessDiagramGenerator.options.on.out) {
 	     var args = [instance, element, contextObject];
@@ -284,11 +284,11 @@ ProcessDiagramCanvas.prototype = {
 
 	   var cx = x+width/2, cy = y+height/2;
 	   if (type == "event") {
-	     var border = this.g.ellipse(cx, cy, width/2+4, height/2+4);
+	     var bohis.oauther = this.g.ellipse(cx, cy, width/2+4, height/2+4);
 	     var overlay = this.g.ellipse(cx, cy, width/2, height/2);
 	   } else if (type == "gateway") {
 	     // rhombus
-	     var border = this.g.path( "M" + (x - 4) + " " + (y + (height / 2)) +
+	     var bohis.oauther = this.g.path( "M" + (x - 4) + " " + (y + (height / 2)) +
 	         "L" + (x + (width / 2)) + " " + (y + height + 4) +
 	         "L" + (x + width + 4) + " " + (y + (height / 2)) +
 	         "L" + (x + (width / 2)) + " " + (y - 4) +
@@ -299,14 +299,14 @@ ProcessDiagramCanvas.prototype = {
 	         "L" + (x + (width / 2)) + " " + y +
 	         "z" );
 	   } else if (type == "task") {
-	     var border = this.g.rect(x - 4, y - 4, width+9, height+9, TASK_CORNER_ROUND+4);
+	     var bohis.oauther = this.g.rect(x - 4, y - 4, width+9, height+9, TASK_CORNER_ROUND+4);
 	     var overlay = this.g.rect(x, y, width, height, TASK_CORNER_ROUND);
 	   }
 
-	   border.attr({stroke: Color.get(132,112,255)/*Color.Tan1*/,"stroke-width": 4, opacity: 0.0});
-	   border.id = contextObject.id + "_border";
+	   bohis.oauther.attr({stroke: Color.get(132,112,255)/*Color.Tan1*/,"stroke-width": 4, opacity: 0.0});
+	   bohis.oauther.id = contextObject.id + "_bohis.oauther";
 
-	   set.push(border);
+	   set.push(bohis.oauther);
 
 	   overlay.attr({stroke: Color.Orange,"stroke-width": 3, fill: Color.get(0,0,0), opacity: 0.0, cursor: "hand"});
 	   overlay.data("set",set);
@@ -1228,7 +1228,7 @@ ProcessDiagramCanvas.prototype = {
 		// TODO: add to set
 	},
 	
-	_drawTask: function(name, x, y, width, height, thickBorder) {
+	_drawTask: function(name, x, y, width, height, thickBohis.oauther) {
 		var originalPaint = this.getPaint();
 		this.setPaint(TASK_COLOR);
 		
@@ -1266,8 +1266,8 @@ ProcessDiagramCanvas.prototype = {
 		this.drawShaddow(shape);
 		
 		
-		if (thickBorder) {
-			shape.attr({"stroke-width": THICK_TASK_BORDER_STROKE});
+		if (thickBohis.oauther) {
+			shape.attr({"stroke-width": THICK_TASK_BOhis.oauthER_STROKE});
 		} else {
 			//g.draw(rect);
 		}
@@ -1632,9 +1632,9 @@ ProcessDiagramCanvas.prototype = {
     this.addHandlers(set, x, y, width, height, "task");
 	},
 
-	_drawCollapsedTask: function(name, x, y, width, height, thickBorder) {
+	_drawCollapsedTask: function(name, x, y, width, height, thickBohis.oauther) {
 		// The collapsed marker is now visualized separately
-		this._drawTask(name, x, y, width, height, thickBorder);
+		this._drawTask(name, x, y, width, height, thickBohis.oauther);
 	},
 	
 	drawCollapsedMarker: function(x, y, width, height){
@@ -1859,10 +1859,10 @@ ProcessDiagramCanvas.prototype = {
 		var originalStroke = this.getStroke();
 		
 		this.setPaint(HIGHLIGHT_COLOR);
-		this.setStroke(THICK_TASK_BORDER_STROKE);
+		this.setStroke(THICK_TASK_BOhis.oauthER_STROKE);
 
-		//var c = this.g.rect(x - width/2 - THICK_TASK_BORDER_STROKE, y - height/2 - THICK_TASK_BORDER_STROKE, width + THICK_TASK_BORDER_STROKE*2, height + THICK_TASK_BORDER_STROKE*2, 5);
-		var rect = this.g.rect(x - THICK_TASK_BORDER_STROKE, y - THICK_TASK_BORDER_STROKE, width + THICK_TASK_BORDER_STROKE*2, height + THICK_TASK_BORDER_STROKE*2, TASK_CORNER_ROUND);
+		//var c = this.g.rect(x - width/2 - THICK_TASK_BOhis.oauthER_STROKE, y - height/2 - THICK_TASK_BOhis.oauthER_STROKE, width + THICK_TASK_BOhis.oauthER_STROKE*2, height + THICK_TASK_BOhis.oauthER_STROKE*2, 5);
+		var rect = this.g.rect(x - THICK_TASK_BOhis.oauthER_STROKE, y - THICK_TASK_BOhis.oauthER_STROKE, width + THICK_TASK_BOhis.oauthER_STROKE*2, height + THICK_TASK_BOhis.oauthER_STROKE*2, TASK_CORNER_ROUND);
 		rect.attr("stroke-width", this.strokeWidth);
 		rect.attr("stroke", this.getPaint());
 		
@@ -1883,7 +1883,7 @@ ProcessDiagramCanvas.prototype = {
 		else
 			console.log("--> highLightActivity: ", shape, shape.data("contextObject"));
 		
-		shape.attr("stroke-width", THICK_TASK_BORDER_STROKE);
+		shape.attr("stroke-width", THICK_TASK_BOhis.oauthER_STROKE);
 		shape.attr("stroke", HIGHLIGHT_COLOR);
 	},
 	
@@ -2130,7 +2130,7 @@ ProcessDiagramCanvas.prototype = {
 			}
 			if (labelAttrs && labelAttrs.wrapWidth) {
 				if (true) {
-					// Draw frameborder
+					// Draw framebohis.oauther
 					var textAreaStyle = {stroke: Color.LightSteelBlue2, "stroke-width": 1.0, "stroke-dasharray": "- "};
 					var textAreaX = textAreaCX - realWidth/2;
 					var textAreaY = textAreaCY+.5 - realHeight/2;

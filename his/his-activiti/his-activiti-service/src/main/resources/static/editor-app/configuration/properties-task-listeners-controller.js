@@ -91,7 +91,7 @@ var KisBpmTaskListenersPopupCtrl = [ '$scope', '$q', '$translate', function($sco
         // Config for grid
         $scope.gridOptions = {
             data: 'taskListeners',
-            enableRowReordering: true,
+            enableRowReohis.oauthering: true,
             headerRowHeight: 28,
             multiSelect: false,
             keepLastSelected : false,
@@ -129,7 +129,7 @@ var KisBpmTaskListenersPopupCtrl = [ '$scope', '$q', '$translate', function($sco
         // Config for field grid
         $scope.gridFieldOptions = {
             data: 'selectedListeners[0].fields',
-            enableRowReordering: true,
+            enableRowReohis.oauthering: true,
             headerRowHeight: 28,
             multiSelect: false,
             keepLastSelected : false,
@@ -139,7 +139,7 @@ var KisBpmTaskListenersPopupCtrl = [ '$scope', '$q', '$translate', function($sco
         };
     });
     
-    $scope.listenerDetailsChanged = function() {
+    $scope.listenehis.oauthetailsChanged = function() {
         if ($scope.selectedListeners[0].className !== '')
         {
             $scope.selectedListeners[0].implementation = $scope.selectedListeners[0].className;
@@ -200,7 +200,7 @@ var KisBpmTaskListenersPopupCtrl = [ '$scope', '$q', '$translate', function($sco
     };
 
     // Click handler for down button
-    $scope.moveListenerDown = function() {
+    $scope.moveListenehis.oauthown = function() {
         if ($scope.selectedListeners.length > 0) {
             var index = $scope.taskListeners.indexOf($scope.selectedListeners[0]);
             if (index != $scope.taskListeners.length - 1) { // If it's the last element, no moving down of course

@@ -22,10 +22,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.his.mybatis.dynamicDataSource.page.PageInfo;
+
 import net.medcrm.yjb.workflow.domain.Leave;
 import net.medcrm.yjb.workflow.mapper.LeaveMapper;
 import net.medcrm.yjb.workflow.service.ILeaveWorkflowService;
-import net.medcrm.yjb.workflow.util.Page;
+import net.medcrm.yjb.workflow.util.WorkFlowType;
 
 /**
  * 请假流程Service
@@ -71,10 +73,10 @@ public class LeaveWorkflowServiceImpl implements ILeaveWorkflowService{
             // 用来设置启动流程的人员ID，引擎会自动把用户ID保存到activiti:initiator中
             identityService.setAuthenticatedUserId(entity.getUserId());
 
-            processInstance = runtimeService.startProcessInstanceByKey("leave", businessKey, variables);
+            processInstance = runtimeService.startProcessInstanceByKey(WorkFlowType.LEAVE.getIndex(), businessKey, variables);
             String processInstanceId = processInstance.getId();
             entity.setProcessInstanceId(processInstanceId);
-            logger.debug("start process of {key={}, bkey={}, pid={}, variables={}}", new Object[]{"leave", businessKey, processInstanceId, variables});
+            logger.debug("start process of {key={}, bkey={}, pid={}, variables={}}", new Object[]{WorkFlowType.LEAVE.getIndex(), businessKey, processInstanceId, variables});
         } finally {
             identityService.setAuthenticatedUserId(null);
         }
@@ -88,7 +90,7 @@ public class LeaveWorkflowServiceImpl implements ILeaveWorkflowService{
      * @return
      */
     @Transactional(readOnly = true)
-    public List<Leave> findTodoTasks(String userId, Page<Leave> page, int[] pageParams) {
+    public List<Leave> findTodoTasks(String userId, PageInfo<Leave> page, int[] pageParams) {
         List<Leave> results = new ArrayList<Leave>();
 
         // 根据当前人的ID查询
@@ -113,8 +115,8 @@ public class LeaveWorkflowServiceImpl implements ILeaveWorkflowService{
             results.add(leave);
         }
 
-        page.setTotalCount(taskQuery.count());
-        page.setResult(results);
+        page.setTotal(taskQuery.count());
+        page.setList(results);
         return results;
     }
 
@@ -124,9 +126,9 @@ public class LeaveWorkflowServiceImpl implements ILeaveWorkflowService{
      * @return
      */
     @Transactional(readOnly = true)
-    public List<Leave> findRunningProcessInstaces(Page<Leave> page, int[] pageParams) {
+    public List<Leave> findRunningProcessInstaces(PageInfo<Leave> page, int[] pageParams) {
         List<Leave> results = new ArrayList<Leave>();
-        ProcessInstanceQuery query = runtimeService.createProcessInstanceQuery().processDefinitionKey("leave").active().orderByProcessInstanceId().desc();
+        ProcessInstanceQuery query = runtimeService.createProcessInstanceQuery().processDefinitionKey(WorkFlowType.LEAVE.getIndex()).active().orderByProcessInstanceId().desc();
         List<ProcessInstance> list = query.listPage(pageParams[0], pageParams[1]);
 
         // 关联业务实体
@@ -145,8 +147,8 @@ public class LeaveWorkflowServiceImpl implements ILeaveWorkflowService{
             leave.setTask(tasks.get(0));
         }
 
-        page.setTotalCount(query.count());
-        page.setResult(results);
+        page.setTotal(query.count());
+        page.setList(results);
         return results;
     }
 
@@ -156,9 +158,9 @@ public class LeaveWorkflowServiceImpl implements ILeaveWorkflowService{
      * @return
      */
     @Transactional(readOnly = true)
-    public List<Leave> findFinishedProcessInstaces(Page<Leave> page, int[] pageParams) {
+    public List<Leave> findFinishedProcessInstaces(PageInfo<Leave> page, int[] pageParams) {
         List<Leave> results = new ArrayList<Leave>();
-        HistoricProcessInstanceQuery query = historyService.createHistoricProcessInstanceQuery().processDefinitionKey("leave").finished().orderByProcessInstanceEndTime().desc();
+        HistoricProcessInstanceQuery query = historyService.createHistoricProcessInstanceQuery().processDefinitionKey(WorkFlowType.LEAVE.getIndex()).finished().orderByProcessInstanceEndTime().desc();
         List<HistoricProcessInstance> list = query.listPage(pageParams[0], pageParams[1]);
 
         // 关联业务实体
@@ -169,8 +171,8 @@ public class LeaveWorkflowServiceImpl implements ILeaveWorkflowService{
             leave.setHistoricProcessInstance(historicProcessInstance);
             results.add(leave);
         }
-        page.setTotalCount(query.count());
-        page.setResult(results);
+        page.setTotal(query.count());
+        page.setList(results);
         return results;
     }
 

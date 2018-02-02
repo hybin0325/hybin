@@ -21,7 +21,7 @@ var KISBPM = KISBPM || {};
 KISBPM.URL = {
 
     getModel: function(modelId) {
-        return ACTIVITI.CONFIG.contextRoot + '/model/' + modelId + '/json';
+        return ACTIVITI.CONFIG.contextRoot + '/model/json?modelId='+modelId;
     },
 
     getStencilSet: function() {
@@ -29,6 +29,14 @@ KISBPM.URL = {
     },
 
     putModel: function(modelId) {
-        return ACTIVITI.CONFIG.contextRoot + '/model/' + modelId + '/save';
-    }
+       // return ACTIVITI.CONFIG.contextRoot + '/model/save?modelId='+modelId;
+    	return '/api/models/model/save?modelId='+modelId;
+
+    },
+    putModel: function(modelId,name,description) {
+         return ACTIVITI.CONFIG.contextRoot + '/model/save?modelId='+modelId;
+     	//return '/api/models/model/save?modelId='+modelId+"&name="+name+"&description="+description;
+
+     }
+  
 };

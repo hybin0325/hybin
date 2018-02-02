@@ -13,6 +13,7 @@ public class Variable {
 	private String values;
 	private String types;
 
+
 	public String getKeys() {
 		return keys;
 	}

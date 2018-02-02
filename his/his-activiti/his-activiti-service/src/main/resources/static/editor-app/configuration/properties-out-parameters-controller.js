@@ -65,7 +65,7 @@ var KisBpmOutParametersPopupCtrl = [ '$scope', '$q', '$translate', function($sco
         // Config for grid
         $scope.gridOptions = {
             data: 'parameters',
-            enableRowReordering: true,
+            enableRowReohis.oauthering: true,
             headerRowHeight: 28,
             multiSelect: false,
             keepLastSelected : false,
@@ -116,7 +116,7 @@ var KisBpmOutParametersPopupCtrl = [ '$scope', '$q', '$translate', function($sco
     };
 
     // Click handler for down button
-    $scope.moveParameterDown = function() {
+    $scope.moveParametehis.oauthown = function() {
         if ($scope.selectedParameters.length > 0) {
             var index = $scope.parameters.indexOf($scope.selectedParameters[0]);
             if (index != $scope.parameters.length - 1) { // If it's the last element, no moving down of course

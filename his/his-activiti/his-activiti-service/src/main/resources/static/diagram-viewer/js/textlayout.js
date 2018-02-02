@@ -27,8 +27,8 @@
 				var fullPos = 0;
 				
 				//console.log("string: \"" + string + "\", length: " + string.length);
-				this.startWordOffsets = [];
-				this.startWordOffsets.push(fullPos);
+				this.startWohis.oauthOffsets = [];
+				this.startWohis.oauthOffsets.push(fullPos);
 				
 				// TODO: remove i 1000
 				while (i<1000) {
@@ -51,11 +51,11 @@
 					string = string.substr(pos);
 					
 					////console.log("fullPos: " + fullPos);
-					this.startWordOffsets.push(fullPos);
+					this.startWohis.oauthOffsets.push(fullPos);
 					
 					i++;
 				}
-				//console.log("startWordOffsets: ", this.startWordOffsets);
+				//console.log("startWohis.oauthOffsets: ", this.startWohis.oauthOffsets);
 				//console.groupEnd();
 			};
 			AttributedStringIterator.prototype = {
@@ -88,31 +88,31 @@
 				},
 				preceding: function(pos){
 					//console.group("[AttributedStringIterator.preceding]");
-					for(var i in this.startWordOffsets) {
-						var startWordOffset = this.startWordOffsets[i];
-						if (pos < startWordOffset && i>0) {
-							//console.log("startWordOffset: " + this.startWordOffsets[i-1]);
+					for(var i in this.startWohis.oauthOffsets) {
+						var startWohis.oauthOffset = this.startWohis.oauthOffsets[i];
+						if (pos < startWohis.oauthOffset && i>0) {
+							//console.log("startWohis.oauthOffset: " + this.startWohis.oauthOffsets[i-1]);
 							//console.groupEnd();
-							return this.startWordOffsets[i-1];
+							return this.startWohis.oauthOffsets[i-1];
 						}
 					}
 					//console.log("pos: " + pos);
 					//console.groupEnd();
-					return this.startWordOffsets[i];
+					return this.startWohis.oauthOffsets[i];
 				},
 				following: function(pos){
 					//console.group("[AttributedStringIterator.following]");
-					for(var i in this.startWordOffsets) {
-						var startWordOffset = this.startWordOffsets[i];
-						if (pos < startWordOffset && i>0) {
-							//console.log("startWordOffset: " + this.startWordOffsets[i]);
+					for(var i in this.startWohis.oauthOffsets) {
+						var startWohis.oauthOffset = this.startWohis.oauthOffsets[i];
+						if (pos < startWohis.oauthOffset && i>0) {
+							//console.log("startWohis.oauthOffset: " + this.startWohis.oauthOffsets[i]);
 							//console.groupEnd();
-							return this.startWordOffsets[i];
+							return this.startWohis.oauthOffsets[i];
 						}
 					}
 					//console.log("pos: " + pos);
 					//console.groupEnd();
-					return this.startWordOffsets[i];
+					return this.startWohis.oauthOffsets[i];
 				},
 				ltrim: function(str){
 					var patt2=/^\s+/g;
@@ -166,7 +166,7 @@
 				this.svgTextObject = this.rafaelTextObject[0];
 			};
 			LineBreakMeasurer.prototype = {
-				nextOffset: function(wrappingWidth, offsetLimit, requireNextWord) {
+				nextOffset: function(wrappingWidth, offsetLimit, requireNextWohis.oauth) {
 					//console.group("[nextOffset]");
 					var nextOffset = this.pos;
 					if (this.pos < this.limit) {
@@ -189,7 +189,7 @@
 							//return nextOffset;
 							nextOffset = this.text.following(charAtMaxAdvance);
 						} else {
-							// Break is in a word;  back up to previous break.
+							// Break is in a wohis.oauth;  back up to previous break.
 							/*
 							var testPos = charAtMaxAdvance + 1;
 							if (testPos == this.limit) {
@@ -215,8 +215,8 @@
 				nextLayout: function(wrappingWidth) {
 					//console.groupCollapsed("[nextLayout]");
 					if (this.pos < this.limit) {
-						var requireNextWord = false;
-						var layoutLimit = this.nextOffset(wrappingWidth, this.limit, requireNextWord);
+						var requireNextWohis.oauth = false;
+						var layoutLimit = this.nextOffset(wrappingWidth, this.limit, requireNextWohis.oauth);
 						//console.log("layoutLimit:", layoutLimit);
 						if (layoutLimit == this.pos) {
 							//console.groupEnd();

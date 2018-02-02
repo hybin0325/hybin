@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.medcrm.yjb.workflow.mapper.HflowSignatureMapper">
+	<!-- 数据库中的字段和实体类中的字段不符，使用此方式映射 -->
+	<resultMap id="BaseResultMap" type="net.medcrm.yjb.workflow.domain.HflowSignature">
+		<id column="ID" property="id" jdbcType="VARCHAR" />
+		<result column="process_instance_id" property="processInstanceId" jdbcType="VARCHAR" />
+		<result column="task_def_key" property="taskDefKey" />
+		<result column="task_def_name" property="taskDefName" />
+		<result column="handler" property="handler" />
+		<result column="handler_id" property="handlerId" />
+		<result column="handler_dept_name" property="handlerDeptName" />
+		<result column="send_date" property="sendDate" />
+		<result column="sender" property="sender" jdbcType="VARCHAR" />
+		<result column="sender_dept_name" property="senderDeptName"
+			jdbcType="VARCHAR" />
+		<result column="use_date" property="useDate" />
+		<result column="create_date" property="createDate" />
+		<result column="opinion" property="opinion" jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- 查询单条记录 -->
+	<select id="selectByPrimaryKey" parameterType="String"
+		resultMap="BaseResultMap">
+		select * from hflow_signature where ID = #{id}
+	</select>
+	
+	<!-- 查询 -->
+	<select id="selectHflowSignatureInfo" resultMap="BaseResultMap">
+		select * from hflow_signature a where a.process_instance_id=#{processInstanceId}  ORDER BY a.p_sort DESC LIMIT 0,1
+	</select>
+	
+	<!-- 查询 -->
+	<select id="selectListInfo" resultMap="BaseResultMap">
+		select * from hflow_signature a where a.process_instance_id=#{processInstanceId}  ORDER BY a.p_sort ASC
+	</select>
+	
+	<!-- 新增 -->
+	<!-- keyProperty="id" useGeneratedKeys="true" 设置主键自生长orcale除外 -->
+	<insert id="insert" parameterType="net.medcrm.yjb.workflow.domain.HflowSignature"
+		keyProperty="id" useGeneratedKeys="true">
+		insert into hflow_signature
+		(ID,process_instance_id,task_def_key, task_def_name,handler,
+		handler_id,handler_dept_name,send_date,sender,
+		sender_dept_name,use_date,create_date,opinion)
+		values (
+		#{id},#{processInstanceId},#{taskDefKey},#{taskDefName},#{handler},#{handlerId},
+		#{handlerDeptName},#{sendDate},#{sender},#{senderDeptName},
+		#{useDate},#{createDate},#{opinion}
+		)
+	</insert>
+	
+	<!-- 查询流程记录 -->
+	<select id="selectListByProcessInstanceId" parameterType="String"
+		resultMap="BaseResultMap">
+		select * from hflow_signature where process_instance_id = #{processInstanceId}
+	</select>
+
+</mapper>

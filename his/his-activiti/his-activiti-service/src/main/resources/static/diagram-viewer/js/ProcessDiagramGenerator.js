@@ -259,7 +259,7 @@ var ProcessDiagramGenerator = {
 			//console.error("task is not implemented yet");
 			/*
 			var activityImpl = this;
-			processDiagramCanvas.drawTask(activityImpl.getProperty("name"), activityImpl.getX(), activityImpl.getY(), activityImpl.getWidth(), activityImpl.getHeight(), thickBorder);
+			processDiagramCanvas.drawTask(activityImpl.getProperty("name"), activityImpl.getX(), activityImpl.getY(), activityImpl.getWidth(), activityImpl.getHeight(), thickBohis.oauther);
 			*/
 		};
 		

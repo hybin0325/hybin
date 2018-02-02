@@ -41,7 +41,7 @@ var KisBpmStringPropertyCtrl = [ '$scope', function ($scope) {
     	}
     };
     
-    $scope.$on('$destroy', function controllerDestroyed() {
+    $scope.$on('$destroy', function controllehis.oauthestroyed() {
     	if(!$scope.valueFlushed) {
     		if ($scope.property.value) {
         		$scope.property.value = $scope.property.value.replace(/(<([^>]+)>)/ig,"");

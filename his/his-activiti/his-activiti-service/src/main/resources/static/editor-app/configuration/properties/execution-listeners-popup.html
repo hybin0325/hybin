@@ -14,7 +14,7 @@
                         <div class="pull-right">
                             <div class="btn-group">
                                 <a class="btn btn-icon btn-lg" rel="tooltip" data-title="{{ACTION.MOVE.UP | translate}}" data-placement="bottom" data-original-title="" title="" ng-click="moveListenerUp()"><i class="glyphicon glyphicon-arrow-up"></i></a>
-                                <a class="btn btn-icon btn-lg" rel="tooltip" data-title="{{ACTION.MOVE.DOWN | translate}}" data-placement="bottom" data-original-title="" title="" ng-click="moveListenerDown()"><i class="glyphicon glyphicon-arrow-down"></i></a>
+                                <a class="btn btn-icon btn-lg" rel="tooltip" data-title="{{ACTION.MOVE.DOWN | translate}}" data-placement="bottom" data-original-title="" title="" ng-click="moveListenehis.oauthown()"><i class="glyphicon glyphicon-arrow-down"></i></a>
                             </div>
                             <div class="btn-group">
                                 <a class="btn btn-icon btn-lg" rel="tooltip" data-title="{{ACTION.ADD | translate}}" data-placement="bottom" data-original-title="" title="" ng-click="addNewListener()"><i class="glyphicon glyphicon-plus"></i></a>
@@ -36,15 +36,15 @@
             				</div>
             				<div class="form-group">
             			   		<label for="classField">{{'PROPERTY.EXECUTIONLISTENERS.CLASS' | translate}}</label>
-            			   		<input type="text" id="classField" class="form-control" ng-model="selectedListeners[0].className" ng-change="listenerDetailsChanged()" placeholder="{{'PROPERTY.EXECUTIONLISTENERS.CLASS.PLACEHOLDER' | translate}}" />
+            			   		<input type="text" id="classField" class="form-control" ng-model="selectedListeners[0].className" ng-change="listenehis.oauthetailsChanged()" placeholder="{{'PROPERTY.EXECUTIONLISTENERS.CLASS.PLACEHOLDER' | translate}}" />
             				</div>
             				<div class="form-group">
             			   		<label for="expressionField">{{'PROPERTY.EXECUTIONLISTENERS.EXPRESSION' | translate}}</label>
-            			   		<input type="text" id="expressionField" class="form-control" ng-model="selectedListeners[0].expression" ng-change="listenerDetailsChanged()" placeholder="{{'PROPERTY.EXECUTIONLISTENERS.EXPRESSION.PLACEHOLDER' | translate}}" />
+            			   		<input type="text" id="expressionField" class="form-control" ng-model="selectedListeners[0].expression" ng-change="listenehis.oauthetailsChanged()" placeholder="{{'PROPERTY.EXECUTIONLISTENERS.EXPRESSION.PLACEHOLDER' | translate}}" />
             				</div>
             				<div class="form-group">
             			   		<label for="delegateExpressionField">{{'PROPERTY.EXECUTIONLISTENERS.DELEGATEEXPRESSION' | translate}}</label>
-            			   		<input type="text" id="delegateExpressionField" class="form-control" ng-model="selectedListeners[0].delegateExpression" ng-change="listenerDetailsChanged()" placeholder="{{'PROPERTY.EXECUTIONLISTENERS.DELEGATEEXPRESSION.PLACEHOLDER' | translate}}" />
+            			   		<input type="text" id="delegateExpressionField" class="form-control" ng-model="selectedListeners[0].delegateExpression" ng-change="listenehis.oauthetailsChanged()" placeholder="{{'PROPERTY.EXECUTIONLISTENERS.DELEGATEEXPRESSION.PLACEHOLDER' | translate}}" />
             				</div>
                         </div>
                         <div ng-show="selectedListeners.length == 0" class="muted no-property-selected" translate>PROPERTY.EXECUTIONLISTENERS.UNSELECTED</div>

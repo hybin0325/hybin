@@ -76,7 +76,7 @@ var KisBpmEventListenersPopupCtrl = [ '$scope', '$q', '$translate', function($sc
         // Config for grid
         $scope.gridOptions = {
             data: 'eventListeners',
-            enableRowReordering: true,
+            enableRowReohis.oauthering: true,
             headerRowHeight: 28,
             multiSelect: false,
             keepLastSelected : false,
@@ -125,10 +125,10 @@ var KisBpmEventListenersPopupCtrl = [ '$scope', '$q', '$translate', function($sc
     // Click handler for - button after enum value
     $scope.removeEventValue = function(index) {
         $scope.selectedListeners[0].events.splice(index, 1);
-        $scope.listenerDetailsChanged();
+        $scope.listenehis.oauthetailsChanged();
     };
     
-    $scope.listenerDetailsChanged = function() {
+    $scope.listenehis.oauthetailsChanged = function() {
     	var listener = $scope.selectedListeners[0];
     	if (listener.events)
     	{
@@ -223,7 +223,7 @@ var KisBpmEventListenersPopupCtrl = [ '$scope', '$q', '$translate', function($sc
     };
 
     // Click handler for down button
-    $scope.moveListenerDown = function() {
+    $scope.moveListenehis.oauthown = function() {
         if ($scope.selectedListeners.length > 0) {
             var index = $scope.eventListeners.indexOf($scope.selectedListeners[0]);
             if (index != $scope.eventListeners.length - 1) { // If it's the last element, no moving down of course

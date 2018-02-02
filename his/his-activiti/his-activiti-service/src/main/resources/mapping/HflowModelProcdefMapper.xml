@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.medcrm.yjb.workflow.mapper.HflowModelProcdefMapper">
+	<resultMap id="BaseResultMap" type="net.medcrm.yjb.workflow.domain.HflowModelProcdef">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="h_model" property="hModel" jdbcType="VARCHAR" />
+		<result column="h_procdef_id" property="hProcdefId" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!--返回结果 -->
+	<sql id="Base_Column_List">
+		id, h_model, h_procdef_id
+	</sql>
+
+	<!-- 添加 -->
+	<insert id="insert" parameterType="net.medcrm.yjb.workflow.domain.HflowModelProcdef"
+		keyProperty="id" useGeneratedKeys="true">
+		insert into hflow_model_procdef(id,h_model,h_procdef_id) values(#{id},#{hModel},#{hProcdefId})
+	</insert>
+	
+	<!-- id查询 -->
+	<select id="selectProcdefByModelId" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from hflow_model_procdef
+		where h_model = #{modelId} and h_procdef_id=#{proId}
+	</select>
+	
+</mapper>

@@ -72,9 +72,9 @@ KISBPM.PROPERTY_CONFIG =
         "readModeTemplateUrl": "editor-app/configuration/properties/subprocess-reference-display-template.html",
         "writeModeTemplateUrl": "editor-app/configuration/properties/subprocess-reference-write-template.html"
     },
-    "oryx-sequencefloworder-complex" : {
-        "readModeTemplateUrl": "editor-app/configuration/properties/sequenceflow-order-display-template.html",
-        "writeModeTemplateUrl": "editor-app/configuration/properties/sequenceflow-order-write-template.html"
+    "oryx-sequenceflowohis.oauther-complex" : {
+        "readModeTemplateUrl": "editor-app/configuration/properties/sequenceflow-ohis.oauther-display-template.html",
+        "writeModeTemplateUrl": "editor-app/configuration/properties/sequenceflow-ohis.oauther-write-template.html"
     },
     "oryx-conditionsequenceflow-complex" : {
         "readModeTemplateUrl": "editor-app/configuration/properties/condition-expression-display-template.html",

@@ -81,7 +81,7 @@ var KisBpmFormPropertiesPopupCtrl = ['$scope', '$q', '$translate', '$timeout', f
     	// Config for grid
         $scope.gridOptions = {
             data: 'formProperties',
-            enableRowReordering: true,
+            enableRowReohis.oauthering: true,
             headerRowHeight: 28,
             multiSelect: false,
             keepLastSelected : false,
@@ -93,7 +93,7 @@ var KisBpmFormPropertiesPopupCtrl = ['$scope', '$q', '$translate', '$timeout', f
         
         $scope.enumGridOptions = {
     		data: 'selectedProperties[0].enumValues',
-            enableRowReordering: true,
+            enableRowReohis.oauthering: true,
             headerRowHeight: 28,
             multiSelect: false,
             keepLastSelected : false,

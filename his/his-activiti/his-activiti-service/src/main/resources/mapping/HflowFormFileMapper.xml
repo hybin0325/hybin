@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.medcrm.yjb.workflow.mapper.HflowFormFileMapper">
+	<!-- 数据库中的字段和实体类中的字段不符，使用此方式映射 -->
+	<resultMap id="BaseResultMap" type="net.medcrm.yjb.workflow.domain.HflowFormFile">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="file_name" property="fileName" jdbcType="VARCHAR" />
+		<result column="content" property="content" jdbcType="VARCHAR" />
+		<result column="url" property="url" jdbcType="VARCHAR" />
+		<result column="marke" property="marke" jdbcType="VARCHAR" />
+		<result column="create_date" property="createDate" />
+		<result column="file_size" property="fileSize" jdbcType="VARCHAR" />
+		<result column="file_type" property="fileType" jdbcType="VARCHAR" />
+		<result column="create_user" property="createUser" jdbcType="VARCHAR" />
+		<result column="create_user_id" property="createUserId"
+			jdbcType="VARCHAR" />
+		<result column="dept_name" property="deptName" jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- 查询单条记录 -->
+	<select id="selectByPrimaryKey" parameterType="String"
+		resultMap="BaseResultMap">
+		select * from hflow_form_file where ID =#{id}
+	</select>
+
+	<select id="selectListByForm" resultMap="BaseResultMap">
+		select f.* from
+		hflowf_business_form_file b left join hflow_form_file f
+		on
+		b.file_id=f.id where b.form_id=#{formId}
+	</select>
+
+	<select id="selectListByPrimaryKeys" resultMap="BaseResultMap">
+		select * from hflow_form_file where ID in
+		<foreach collection="list" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<!--动态修改 -->
+	<update id="updateByPrimaryKeySelective" parameterType="net.medcrm.yjb.workflow.domain.HflowFormFile">
+		update hflow_form_file
+		<set>
+			<if test="url != null">
+				url = #{url,jdbcType=VARCHAR},
+			</if>
+			<if test="fileName != null">
+				file_name = #{fileName,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null">
+				content = #{content,jdbcType=VARCHAR},
+			</if>
+			<if test="fileSize != null">
+				file_size = #{fileSize,jdbcType=VARCHAR},
+			</if>
+			<if test="fileType != null">
+				file_type = #{fileType},
+			</if>
+			<if test="deptName != null">
+				dept_name = #{deptName},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+
+	<!-- 新增 -->
+	<!-- keyProperty="id" useGeneratedKeys="true" 设置主键自生长orcale除外 -->
+	<insert id="insert" parameterType="net.medcrm.yjb.workflow.domain.HflowFormFile"
+		keyProperty="id" useGeneratedKeys="true">
+		insert into hflow_form_file
+		(id,file_name,content,url,marke,create_date,file_size,file_type,create_user,create_user_id,dept_name)
+		values
+		(#{id},#{fileName},#{content},#{url},#{marke},#{createDate},#{fileSize},#{fileType},#{createUser},#{createUserId},#{deptName})
+	</insert>
+
+	<update id="delete">
+		delete from hflow_form_file where id=#{id}
+	</update>
+
+	<update id="deleteBatch">
+		delete from hflow_form_file where id in
+		<foreach collection="list" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+
+	<insert id="insertBusinessFormFile"
+		parameterType="net.medcrm.yjb.workflow.domain.HflowfBusinessFormFile"
+		keyProperty="id" useGeneratedKeys="true">
+		insert into
+		hflowf_business_form_file
+		(id,form_id,file_id,business_key)
+		values
+		(#{id},#{formId},#{fileId},#{businessKey})
+	</insert>
+
+	<select id="selectByBusinessFormFile" resultType="String">
+		select id fromId from hflowf_business_form_file where 1=1
+		<if test="fileId!='' and fileId!=null ">
+			and file_id=#{fileId}
+		</if>
+		<if test="fileList != null and fileList.size>0">
+			and file_id IN
+			<foreach item="item" index="index" collection="fileList"
+				open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		<if test="fromId!='' and fromId!=null ">
+			and form_id=#{fromId}
+		</if>
+	</select>
+
+	<update id="deleteBusinessFormFile">
+		delete from hflowf_business_form_file where id=#{id}
+	</update>
+
+	<update id="deleteBatchBusinessFormFile">
+		delete from hflowf_business_form_file where id in
+		<foreach collection="list" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+
+	<select id="selectByInfo" resultMap="BaseResultMap">
+		select * from hflow_form_file where ID in
+		<foreach collection="list" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<!-- 批量更新 -->
+	<update id="updateBatch" parameterType="Map">
+		update hflow_form_file set
+		process_instance_id=#{processInstanceId}
+		where id in
+		<foreach collection="list" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+
+	<select id="selectListByProcessInstanceId" resultMap="BaseResultMap">
+		select * from
+		hflow_form_file 
+		where process_instance_id=#{processInstanceId}
+	</select>
+
+</mapper>

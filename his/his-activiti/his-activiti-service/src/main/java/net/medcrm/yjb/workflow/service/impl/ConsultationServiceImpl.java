@@ -1,5 +1,6 @@
 package net.medcrm.yjb.workflow.service.impl;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,19 +27,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.RestTemplate;
 
 import net.medcrm.yjb.workflow.domain.Consultation;
-import net.medcrm.yjb.workflow.domain.User;
+import net.medcrm.yjb.workflow.domain.HflowFormFile;
+import net.medcrm.yjb.workflow.domain.HflowSignature;
 import net.medcrm.yjb.workflow.mapper.ConsultationMapper;
 import net.medcrm.yjb.workflow.service.IConsultationService;
+import net.medcrm.yjb.workflow.service.IHflowCommService;
+import net.medcrm.yjb.workflow.service.IHflowFormFileService;
+import net.medcrm.yjb.workflow.service.IHflowSignatureService;
+import net.medcrm.yjb.workflow.util.StatusType;
+import net.medcrm.yjb.workflow.util.WorkFlowType;
 
 @Service(value = "consultationService")
 public class ConsultationServiceImpl implements IConsultationService {
 	private static Logger logger = LoggerFactory.getLogger(ConsultationServiceImpl.class);
 
 	@Autowired
-	private ConsultationMapper dao;
+	private ConsultationMapper consultationMapper;
+
+	@Autowired
+	private IHflowFormFileService formFileService;
 
 	@Resource(name = "identityService")
 	private IdentityService identityService;
@@ -60,61 +69,92 @@ public class ConsultationServiceImpl implements IConsultationService {
 
 	@Resource(name = "repositoryService")
 	private RepositoryService repositoryService;
-	
-	@Autowired
-    private RestTemplate restTemplate;
 
-	
+	@Autowired
+	private IHflowFormFileService flowFormFileService;
+
+	@Autowired
+	private IHflowSignatureService flowSignatureService;
+
 	@Override
 	public int addConsultation(Consultation consultation) {
 		consultation.setId(UUID.randomUUID().toString());
-		return dao.insert(consultation);
+		return consultationMapper.insert(consultation);
 	}
 
 	@Override
 	public List<Consultation> findAllConsultation(int pageNum, int pageSize) {
-		return dao.selectAllUser();
+		return consultationMapper.selectAllUser();
 	}
 
 	@Override
 	public Consultation findById(String id) {
-
-		return dao.selectByPrimaryKey(id);
+		return consultationMapper.selectByPrimaryKey(id);
 	}
-	
+
 	/**
 	 * 启动工作流
 	 */
-	public ProcessInstance startWorkflow(String key,String businessKey,Map<String, Object> variables) {
-		//根据流程定义的key启动工作流
-		ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("consultation", businessKey, variables);
+	public ProcessInstance startWorkflow(String key, String businessKey, Map<String, Object> variables) {
+		// 根据流程定义的key启动工作流
+		ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("consultation", businessKey,
+				variables);
 		return processInstance;
 	}
-	
+
 	/**
-     * 启动流程
-     *
-     * @param entity
-     */
-    public ProcessInstance startWorkflow(Consultation entity, Map<String, Object> variables) {
-        dao.insert(entity);
-        logger.debug("save entity: {}", entity);
-        String businessKey = entity.getId().toString();
+	 * 启动流程
+	 *
+	 * @param entity
+	 */
+	@Transactional
+	public ProcessInstance startWorkflow(Consultation entity, Map<String, Object> variables) {
+		entity.createPersistentObject();
+		consultationMapper.insert(entity);
+		logger.debug("save entity: {}", entity);
 
-        ProcessInstance processInstance = null;
-        try {
-            // 用来设置启动流程的人员ID，引擎会自动把用户ID保存到activiti:initiator中
-            identityService.setAuthenticatedUserId(entity.getApplyUserId());
+		String businessKey = entity.getId().toString();
 
-            processInstance = runtimeService.startProcessInstanceByKey("leave", businessKey, variables);
-            String processInstanceId = processInstance.getId();
-            entity.setProcessInstanceId(processInstanceId);
-            logger.debug("start process of {key={}, bkey={}, pid={}, variables={}}", new Object[]{"leave", businessKey, processInstanceId, variables});
-        } finally {
-            identityService.setAuthenticatedUserId(null);
-        }
-        return processInstance;
-    }
+		ProcessInstance processInstance = null;
+		try {
+			// 用来设置启动流程的人员ID，引擎会自动把用户ID保存到activiti:initiator中
+			identityService.setAuthenticatedUserId(entity.getApplyUserId());
+			processInstance = runtimeService.startProcessInstanceByKey(WorkFlowType.CONSULTATION.getIndex(),
+					businessKey, variables);
+			String processInstanceId = processInstance.getId();
+
+			logger.debug("start process of {key={}, bkey={}, pid={}, variables={}}",
+					new Object[] { WorkFlowType.CONSULTATION.getIndex(), businessKey, processInstanceId, variables });
+
+			flowSignatureService.saveOpeion(entity.getApplyUserId(), entity.getApplyUser(), entity.getApplyDepartment(),
+					processInstanceId);
+
+			flowFormFileService.updateBatch(processInstanceId, entity.getFileIds());
+
+		} finally {
+			identityService.setAuthenticatedUserId(null);
+		}
+		return processInstance;
+	}
+
+	/**
+	 * 保存审批
+	 * 
+	 * @param entity
+	 * @param map
+	 * @param taskId
+	 * @param processDefinitionId
+	 */
+	protected void saveOpeion(Consultation entity, Map<String, Object> map, String processInstanceId) {
+		HflowSignature pojo = new HflowSignature();
+		pojo.setProcessInstanceId(processInstanceId);
+		pojo.setTaskDefKey(map.get("id").toString());
+		pojo.setTaskDefName(map.get("name").toString());
+		pojo.setHandler(entity.getApplyUser());
+		pojo.setHandlerId(entity.getApplyUserId());
+		pojo.setHandlerDeptName(entity.getApplyDepartment());
+		flowSignatureService.save(pojo);
+	}
 
 	@Override
 	public List<Consultation> findFinishedProcessInstaces(String processDefinitionKey) {
@@ -125,9 +165,8 @@ public class ConsultationServiceImpl implements IConsultationService {
 		// 关联业务实体
 		for (HistoricProcessInstance historicProcessInstance : list) {
 			String businessKey = historicProcessInstance.getBusinessKey();
-			Consultation consultation = dao.selectByPrimaryKey(businessKey);
-			consultation.setHistoricProcessInstance(historicProcessInstance);
-			consultation.setProcessDefinition(getProcessDefinition(historicProcessInstance.getProcessDefinitionId()));
+			Consultation consultation = consultationMapper.selectByPrimaryKey(businessKey);
+
 			consultations.add(consultation);
 		}
 		return consultations;
@@ -144,15 +183,12 @@ public class ConsultationServiceImpl implements IConsultationService {
 		// 关联业务实体
 		for (ProcessInstance processInstance : processInstances) {
 			String businessKey = processInstance.getBusinessKey();
-			Consultation consultation = dao.selectByPrimaryKey(businessKey);
-			consultation.setProcessInstance(processInstance);
-			consultation.setProcessInstanceId(processInstance.getId());
-			consultation.setProcessDefinition(getProcessDefinition(processInstance.getProcessDefinitionId()));
+			Consultation consultation = consultationMapper.selectByPrimaryKey(businessKey);
+
 			// 设置当前任务信息
 			// 根据流程实例id,按照任务创建时间降序排列,查询一条任务信息
 			List<Task> tasks = taskService.createTaskQuery().processInstanceId(processInstance.getId())
 					.orderByTaskCreateTime().desc().listPage(0, 1);
-			consultation.setTask(tasks.get(0));
 			consultations.add(consultation);
 		}
 		return consultations;
@@ -188,8 +224,7 @@ public class ConsultationServiceImpl implements IConsultationService {
 		/*
 		 * // 重新编写，某角色下的所有任务展示而非之前限定会诊流程 List<com.lin.domain.Group> gs =
 		 * mapper.getGroupList(Long.valueOf(userid)); tasks =
-		 * taskService.createTaskQuery().taskCandidateGroup("deptLeader").list()
-		 * ;
+		 * taskService.createTaskQuery().taskCandidateGroup("deptLeader").list() ;
 		 */
 
 		// 遍历所有的任务列表,关联实体
@@ -201,12 +236,9 @@ public class ConsultationServiceImpl implements IConsultationService {
 			// 获取业务id
 			String businessKey = processInstance.getBusinessKey();
 			// 查询请假实体
-			Consultation consultation = dao.selectByPrimaryKey(businessKey);
+			Consultation consultation = consultationMapper.selectByPrimaryKey(businessKey);
 			// 设置属性
-			consultation.setTask(task);
-			consultation.setProcessInstance(processInstance);
-			consultation.setProcessInstanceId(processInstance.getId());
-			consultation.setProcessDefinition(getProcessDefinition(processInstance.getProcessDefinitionId()));
+
 			consultations.add(consultation);
 		}
 		return consultations;
@@ -232,12 +264,9 @@ public class ConsultationServiceImpl implements IConsultationService {
 			// 获取业务id
 			String businessKey = processInstance.getBusinessKey();
 			// 查询请假实体
-			Consultation consultation = dao.selectByPrimaryKey(businessKey);
+			Consultation consultation = consultationMapper.selectByPrimaryKey(businessKey);
 			// 设置属性
-			consultation.setTask(task);
-			consultation.setProcessInstance(processInstance);
-			consultation.setProcessInstanceId(processInstance.getId());
-			consultation.setProcessDefinition(getProcessDefinition(processInstance.getProcessDefinitionId()));
+
 			consultations.add(consultation);
 		}
 		return consultations;
@@ -251,22 +280,43 @@ public class ConsultationServiceImpl implements IConsultationService {
 				.processDefinitionId(processDefinitionId).singleResult();
 		return processDefinition;
 	}
-	
+
 	/**
 	 * 根据任务Id查询任务
 	 * 
 	 */
 	public TaskEntity findTaskById(String taskId) throws Exception {
-		TaskEntity task = (TaskEntity) taskService.createTaskQuery().taskId(taskId).singleResult();  
-        if (task == null) {  
-            throw new Exception("任务实例未找到!");  
-        }  
-        return task; 
+		TaskEntity task = (TaskEntity) taskService.createTaskQuery().taskId(taskId).singleResult();
+		if (task == null) {
+			throw new Exception("任务实例未找到!");
+		}
+		return task;
 	}
-	
-	/*@SuppressWarnings("unchecked")
-	public List<User> findByAccount(String accountId) {
-        return (List<User>) restTemplate.getForObject("http://MICROSERVICE-PROVIDER-USER/findUser", User.class);
-    }*/
+
+	@Override
+	public int addConsultation(Consultation consultation, String fileBase64, String content, String fileName) {
+		/// StatusType
+		consultation.setStatus(StatusType.DRAFTS.getIndex());
+		consultationMapper.insert(consultation);
+		HflowFormFile formFile = new HflowFormFile();
+		formFile.setContent(content);
+		formFile.setCreateUser(consultation.getApplyUser());
+		formFile.setCreateUserId(consultation.getApplyUserId());
+		formFile.setFileName(fileName);
+		try {
+			formFileService.save(formFile);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	/*
+	 * @SuppressWarnings("unchecked") public List<User> findByAccount(String
+	 * accountId) { return (List<User>)
+	 * restTemplate.getForObject("http://MICROSERVICE-PROVIDER-USER/findUser",
+	 * User.class); }
+	 */
 
 }

@@ -242,7 +242,7 @@ activitiModeler
 	                    canvas.height(totalAvailable - propSectionHeight);
 	                    jQuery('#paletteSection').height(totalAvailable);
 
-	                    // Update positions of the resize-markers, according to the canvas
+	                    // Update positions of the resize-markers, accohis.oauthing to the canvas
 
 	                    var actualCanvas = null;
 	                    if (canvas && canvas[0].children[1]) {

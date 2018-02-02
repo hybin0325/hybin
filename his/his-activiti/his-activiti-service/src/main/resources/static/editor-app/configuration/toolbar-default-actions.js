@@ -261,7 +261,7 @@ KISBPM.TOOLBAR = {
         },
         
         closeEditor: function(services) {
-        	window.location.href = "/model-list.html";
+        	window.location.href = "http://192.168.0.185:30009/api/static/upload.html";
         },
         
         /**
@@ -326,7 +326,7 @@ var SaveModelCtrl = [ '$rootScope', '$scope', '$http', '$route', '$location',
 
     $scope.saveAndClose = function () {
     	$scope.save(function() {
-    		window.location.href = "/model-list.html";
+    		window.location.href = "http://192.168.0.185:30009/api/static/upload.html";
     	});
     };
     $scope.save = function (successCallback) {
@@ -388,7 +388,7 @@ var SaveModelCtrl = [ '$rootScope', '$scope', '$http', '$route', '$location',
                 }
                 return str.join("&");
             },
-            url: KISBPM.URL.putModel(modelMetaData.modelId)})
+            url: KISBPM.URL.putModel(modelMetaData.modelId,modelMetaData.name,modelMetaData.description)})
 
             .success(function (data, status, headers, config) {
                 $scope.editor.handleEvents({

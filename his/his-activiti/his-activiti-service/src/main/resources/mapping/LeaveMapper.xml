@@ -4,7 +4,7 @@
 <mapper namespace="net.medcrm.yjb.workflow.mapper.LeaveMapper">
 	<!-- 数据库中的字段和实体类中的字段不符，使用此方式映射 -->
 	<resultMap id="BaseResultMap" type="net.medcrm.yjb.workflow.domain.Leave">
-		<id column="ID" property="id" jdbcType="VARCHAR" />
+		<id column="ID" property="id" jdbcType="INTEGER" />
 		<result column="USER_ID" property="userId" jdbcType="VARCHAR" />
 		<result column="START_TIME" property="startTime" />
 		<result column="END_TIME" property="endTime" />
@@ -22,7 +22,7 @@
 	</select>
 	<!-- 新增 -->
 	<!-- keyProperty="id" useGeneratedKeys="true" 设置主键自生长orcale除外 -->
-	<insert id="save" parameterType="net.medcrm.yjb.workflow.domain.Leave"
+	<insert id="insert" parameterType="net.medcrm.yjb.workflow.domain.Leave"
 		keyProperty="id" useGeneratedKeys="true">
 		insert into hflow_leave (ID,USER_ID,PROCESS_INSTANCE_ID, START_TIME,END_TIME,
 		APPLY_TIME,REALITY_START_TIME,REALITY_END_TIME,REASON,LEAVE_TYPE)

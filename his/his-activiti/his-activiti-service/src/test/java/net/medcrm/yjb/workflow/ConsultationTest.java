@@ -40,7 +40,7 @@ public class ConsultationTest {
 		pojo.setIllnessDesc("腹部痛");
 		pojo.setPatient("2255555");
 		pojo.setPatientName("王小五");
-		pojo.setPatientBedNumber(25);
+		pojo.setPatientBedNumber("25");
 		consultationService.addConsultation(pojo);
 	}
 	

@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.medcrm.yjb.workflow.mapper.HflowProcdefMapper">
+	<resultMap id="BaseResultMap" type="net.medcrm.yjb.workflow.domain.HflowProcdef">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="title_name" property="titleName" jdbcType="VARCHAR" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="type" property="type" jdbcType="INTEGER" />
+		<result column="act_model_id" property="actModelId" jdbcType="VARCHAR" />
+		<result column="act_procodef_id" property="actProcodefId"
+			jdbcType="VARCHAR" />
+		<result column="p_version" property="pVersion" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="p_sort" property="pSort" jdbcType="INTEGER" />
+		<result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="create_user" property="createUser" jdbcType="VARCHAR" />
+		<result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+		<result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+		<result column="act_key" property="actKey" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!--返回结果 -->
+	<sql id="Base_Column_List">
+		id, title_name, description,
+		type,act_model_id,act_procodef_id,p_version,status,p_sort,
+		create_date,create_user,update_date,update_user,act_key
+	</sql>
+
+	<!-- 新增 -->
+	<insert id="insert" parameterType="net.medcrm.yjb.workflow.domain.HflowProcdef">
+		insert into hflow_procdef (id,
+		title_name,
+		description,type,act_model_id,act_procodef_id,
+		p_version,status,p_sort,create_date,create_user,act_key)
+		values
+		(#{id,jdbcType=VARCHAR},#{titleName,jdbcType=VARCHAR},
+		#{description,jdbcType=VARCHAR},
+		#{type,jdbcType=INTEGER},
+		#{actModelId,jdbcType=VARCHAR},#{actProcodefId,jdbcType=VARCHAR},
+		#{pVersion,jdbcType=VARCHAR},#{status,jdbcType=INTEGER},
+		#{pSort,jdbcType=INTEGER},#{createDate,jdbcType=TIMESTAMP},#{createUser,jdbcType=VARCHAR},
+		#{actKey,jdbcType=VARCHAR})
+	</insert>
+
+	<!-- id查询 -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="string">
+		select
+		<include refid="Base_Column_List" />
+		from hflow_procdef
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 查询所有 -->
+	<select id="selectAllProcdef" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from hflow_procdef f where 1=1
+		<if test="type != null and type!='' ">
+			and type=#{type}
+		</if>
+		<if test="status != null and status!='' ">
+			and status=#{status}
+		</if>
+		<if test="queryValue != null and queryValue!='' ">
+			and (f.title_name like concat('%', #{queryValue}, '%') or
+			f.description like concat('%',#{queryValue}, '%'))
+		</if>
+		order by f.p_sort desc
+	</select>
+
+	<select id="selectAllProcdefByModel" resultMap="BaseResultMap">
+		select
+		f.id, title_name, f.description,
+		type,act_model_id,act_procodef_id,p_version,f.status,p_sort,
+		f.create_date,f.create_user,f.update_date,f.update_user,act_key
+
+		from hflow_procdef f
+		LEFT JOIN hflow_model_procdef mp on
+		f.id=mp.h_procdef_id
+		LEFT JOIN hflow_model m on mp.h_model=m.id
+		where
+		1=1
+		<if test="modelId!=null and modelId!='' ">
+			and m.id=#{modelId}
+		</if>
+
+		<if test="type != null and type!=''  ">
+			and f.type=#{type}
+		</if>
+
+		<if test="queryValue != null and queryValue!='' ">
+			and (f.title_name like concat('%', #{queryValue}, '%') or
+			f.description like concat('%',#{queryValue}, '%'))
+		</if>
+		order by f.p_sort desc
+	</select>
+
+
+	<!-- 删除 -->
+	<delete id="deleteByPrimaryKey" parameterType="string">
+		delete from
+		hflow_procdef
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+
+	<!--动态修改 -->
+	<update id="updateByPrimaryKeySelective" parameterType="net.medcrm.yjb.workflow.domain.HflowProcdef">
+		update hflow_procdef
+		<set>
+			<if test="titleName != null">
+				title_name = #{titleName,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				description = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				type = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="actModelId != null">
+				act_model_id = #{actModelId,jdbcType=VARCHAR},
+			</if>
+			<if test="actProcodefId != null">
+				act_procodef_id = #{actProcodefId,jdbcType=VARCHAR},
+			</if>
+			<if test="pVersion != null">
+				p_version = #{pVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="pSort != null">
+				p_sort = #{pSort,jdbcType=INTEGER},
+			</if>
+			<if test="updateDate != null">
+				update_date = #{updateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateUser != null">
+				update_user = #{updateUser,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<!--查询排序 -->
+	<select id="selectMaxSort" resultType="java.lang.Integer">
+		select max(p_sort) from
+		hflow_procdef
+	</select>
+
+
+	<resultMap id="deployResultMap" type="net.medcrm.yjb.workflow.dto.FlowDeployDto">
+		<result column="procodefId" property="procodefId" jdbcType="VARCHAR" />
+		<result column="title_name" property="titleName" jdbcType="VARCHAR" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="act_procodef_id" property="actProcodefId"
+			jdbcType="VARCHAR" />
+		<result column="create_user" property="createUser" jdbcType="VARCHAR" />
+		<result column="resourceName" property="resourceName" jdbcType="VARCHAR" />
+		<result column="diagramResourceName" property="diagramResourceName"
+			jdbcType="VARCHAR" />
+		<result column="act_key" property="actKey" />
+	</resultMap>
+
+	<!-- 发起流程查询列表 -->
+	<select id="selectAllDeploy" resultMap="deployResultMap"
+		parameterType="Map">
+
+		SELECT a.act_procodef_id ,a.p_version
+		,a.title_name,a.description,a.create_user
+		FROM (SELECT title_name,
+		max(p_version) version
+		FROM hflow_procdef tb where and tb.type=#{type}
+		and status=0
+		tb.id IN
+		<foreach item="item" index="index" collection="ids" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+		GROUP BY title_name ) b
+		JOIN hflow_procdef a ON a.title_name =
+		b.title_name AND a.p_version =
+		b.version;
+	</select>
+
+	<!-- 根据菜单查询流程key -->
+	<select id="selectHFlowKeyByMenu" resultType="String"
+		parameterType="Map">
+		select f.key_ key from hflow_model
+		m LEFT JOIN
+		hflow_procdef h on m.id=h.hflow_model_id
+		LEFT JOIN act_re_procdef f on
+		h.act_procodef_id=f.id_ where
+		menu_id=#{menuId}
+		and h.type=#{type} and
+		status=0
+		GROUP BY
+		h.act_procodef_id
+	</select>
+
+	<!-- 根据菜单查询流程 act_procodef_id -->
+	<select id="selectHFlowByMenu" resultType="String"
+		parameterType="Map">
+		select h.act_procodef_id actProcodefId from hflow_model
+		m LEFT JOIN
+		hflow_procdef h on m.id=h.hflow_model_id where
+		menu_id=#{menuId} and status=0
+		and h.type=#{type}
+		GROUP BY
+		h.act_procodef_id
+	</select>
+
+	<!-- 根据菜单查询流程 act_procodef_id -->
+	<select id="selectHFlowByModel" resultType="Map" parameterType="Map">
+		select DISTINCT f.KEY_ key, f.ID_ procdefId from hflow_procdef p LEFT
+		JOIN hflow_model_procdef mp on p.id=mp.h_procdef_id
+		LEFT JOIN
+		act_re_procdef f on p.act_procodef_id=f.id_ where f.ID_ is not
+		NULL and
+		mp.h_model=#{modelId} and p.type =#{type};
+	</select>
+
+	<update id="updateBatch" parameterType="Map">
+		update hflow_model set
+		status=#{status},
+		update_date=#{updateDate}
+		where
+		id in
+		<foreach collection="ids" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+
+	<!-- 根据查询流程 act_procodef_id -->
+	<select id="selectKeyByModel" resultType="String">
+		select
+		DISTINCT f.KEY_
+		`KEY` from hflow_procdef p LEFT JOIN
+		hflow_model_procdef mp on
+		p.id=mp.h_procdef_id
+		LEFT JOIN act_re_procdef f on
+		p.act_procodef_id=f.id_ where f.ID_ is not
+		NULL and
+		mp.h_model=#{modelId} and p.type =#{type};
+	</select>
+
+	<!-- 根据菜单查询流程 act_procodef_id -->
+	<select id="selectProcdefIdByModel" resultType="String"
+		parameterType="Map">
+		select DISTINCT f.ID_ procdefId from hflow_procdef p
+		LEFT JOIN hflow_model_procdef mp on p.id=mp.h_procdef_id
+		LEFT JOIN
+		act_re_procdef f on p.act_procodef_id=f.id_ where f.ID_ is not
+		NULL and
+		mp.h_model=#{modelId} and p.type =#{type};
+	</select>
+
+	<!-- 查询相关业务表的信息 -->
+	<select id="selectObject" resultType="java.util.Map">
+		select *
+		from
+		hflow_${tableName} where id=#{id}
+	</select>
+
+	<!-- 查询流程布署表信息 -->
+	<select id="selectActReProcdefById" resultMap="deployResultMap"
+		parameterType="String">
+		select p.RESOURCE_NAME_
+		resourceName,p.DGRM_RESOURCE_NAME_ diagramResourceName from
+		ACT_RE_PROCDEF p where p.ID_=#{id}
+	</select>
+
+	<!-- 查询所有流程的 -->
+	<select id="selectAllkey" resultType="String">
+		select DISTINCT
+		f.KEY_ `KEY`
+		from hflow_procdef p LEFT JOIN act_re_procdef f on
+		p.act_procodef_id=f.id_ where f.ID_ is not NULL and p.`status` =1;
+	</select>
+
+	<!-- 根据查询流程中的key -->
+	<select id="selectAllKeyByParam" resultType="String">
+		select DISTINCT p.act_key `KEY` from hflow_procdef p LEFT JOIN
+		hflow_model_procdef mp on p.id=mp.h_procdef_id
+		where 1=1
+		<if test="modelId != null and modelId!='' ">
+			and mp.h_model=#{modelId}
+		</if>
+		<if test="type != null and type!='' ">
+			and p.type =#{type}
+		</if>
+		<if test="status != null and status!='' ">
+			and p.status=#{status}
+		</if>
+	</select>
+
+
+	<!-- 发起流程查询列表 -->
+	<select id="selectSendFlow" resultMap="deployResultMap">
+		select
+		h.id procodefId,h.act_procodef_id ,h.p_version
+		,h.title_name,h.description,h.create_user,
+		f.RESOURCE_NAME_
+		resourceName,f.DGRM_RESOURCE_NAME_ diagramResourceName,
+		h.act_key
+		act_key
+		from
+		hflow_procdef h
+		LEFT JOIN act_re_procdef f on
+		h.act_procodef_id=f.ID_
+		LEFT JOIN
+		hflow_model_procdef mp on
+		h.id=mp.h_procdef_id
+		where 1=1
+		and h.id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+		order by p_sort desc
+	</select>
+
+	<!-- 发起流程查询列表 -->
+	<select id="selectSendFlowId" resultType="String">
+		select
+		p.id procodefId
+		from
+		hflow_procdef p
+		LEFT JOIN act_re_procdef f on
+		p.act_procodef_id=f.ID_
+		LEFT JOIN
+		hflow_model_procdef mp on
+		p.id=mp.h_procdef_id
+		where 1=1
+		<if test="modelId != null and modelId!='' ">
+			and mp.h_model=#{modelId}
+		</if>
+		<if test="type != null and type!='' ">
+			and p.type =#{type}
+		</if>
+		<if test="status != null and status!='' ">
+			and p.status=#{status}
+		</if>
+	</select>
+
+	<!-- id查询 -->
+	<select id="selectByPrimaryKeyType" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from hflow_procdef
+		where act_key = #{key} and type=#{type}
+	</select>
+
+	<!-- id查询 -->
+	<select id="selectByPrimaryKeyPro" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from hflow_procdef
+		where act_procodef_id = #{proId} and type=#{type}
+	</select>
+
+	<!-- id查询 -->
+	<select id="selectActProcodefInfoByProId" resultType="net.medcrm.yjb.workflow.domain.HflowProcdef">
+		select
+		p.NAME_ titleName,p.ID_ actProcodefId,p.VERSION_
+		pVersion,pl.create_date createDate,pl.create_user createUser,
+		pl.update_date updateDate,pl.update_user updateUser,p.KEY_
+		actKey,p.SUSPENSION_STATE_ 'status'
+		from act_re_procdef p LEFT JOIN
+		hflow_procdef_logs pl
+		on p.ID_=pl.act_re_pro_id where p.ID_=#{ProId}
+	</select>
+
+
+</mapper>

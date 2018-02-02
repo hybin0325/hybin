@@ -5,8 +5,9 @@ import java.util.Map;
 
 import org.activiti.engine.runtime.ProcessInstance;
 
+import com.his.mybatis.dynamicDataSource.page.PageInfo;
+
 import net.medcrm.yjb.workflow.domain.Leave;
-import net.medcrm.yjb.workflow.util.Page;
 
 public interface ILeaveWorkflowService {
 	 /**
@@ -22,21 +23,21 @@ public interface ILeaveWorkflowService {
      * @param userId 用户ID
      * @return
      */
-    public List<Leave> findTodoTasks(String userId, Page<Leave> page, int[] pageParams);
+    public List<Leave> findTodoTasks(String userId, PageInfo<Leave> page, int[] pageParams);
 
     /**
      * 读取运行中的流程
      *
      * @return
      */
-    public List<Leave> findRunningProcessInstaces(Page<Leave> page, int[] pageParams);
+    public List<Leave> findRunningProcessInstaces(PageInfo<Leave> page, int[] pageParams);
 
     /**
      * 读取已结束中的流程
      *
      * @return
      */
-    List<Leave> findFinishedProcessInstaces(Page<Leave> page, int[] pageParams) ;
+    List<Leave> findFinishedProcessInstaces(PageInfo<Leave> page, int[] pageParams) ;
     
     public Leave findById(String id);
 

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.medcrm.yjb.workflow.mapper.DelegateHistoryMapper">
+	<!-- 数据库中的字段和实体类中的字段不符，使用此方式映射 -->
+	<resultMap id="BaseResultMap" type="net.medcrm.yjb.workflow.domain.DelegateHistory">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="assignee" property="assignee" jdbcType="VARCHAR" />
+		<result column="attorney" property="attorney" />
+		<result column="delegateTime" property="delegate_time" />
+		<result column="taskId" property="task_id" />
+		<result column="status" property="status" />
+	</resultMap>
+	<!-- 查询单条记录 -->
+	<select id="selectByPrimaryKey" parameterType="String" resultMap="BaseResultMap">
+		select * from act_hi_delegate where ID = #{id}
+	</select>
+	<!-- 新增 -->
+	<!-- keyProperty="id" useGeneratedKeys="true" 设置主键自生长orcale除外 -->
+	<insert id="insert" parameterType="net.medcrm.yjb.workflow.domain.DelegateHistory"
+		keyProperty="id" useGeneratedKeys="true">
+		insert into act_hi_delegate (ID,assignee,attorney, delegate_time,task_id,status)
+		values (#{id},#{assignee},#{attorney},#{delegateTime},#{taskId},#{status})
+	</insert>
+	
+	<update id="updateByPrimaryKeySelective" parameterType="net.medcrm.yjb.workflow.domain.DelegateHistory" >
+	    update act_hi_delegate
+	    <set >
+	      <if test="assignee != null" >
+	        assignee = #{assignee,jdbcType=VARCHAR},
+	      </if>
+	      <if test="attorney != null" >
+	        attorney = #{attorney,jdbcType=VARCHAR},
+	      </if>
+	      <if test="delegateTime != null" >
+	        delegate_time = #{delegateTime},
+	      </if>
+	      <if test="taskId != null" >
+	        task_id = #{taskId},
+	      </if>
+	      <if test="status != null" >
+	        status = #{status},
+	      </if>
+	    </set>
+	    where id = #{id}
+  </update>
+	
+</mapper>

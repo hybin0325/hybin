@@ -1,8 +1,6 @@
 package net.medcrm.yjb.workflow.util;
 
-import org.apache.commons.lang3.StringUtils;
-
-import javax.servlet.http.HttpServletRequest;
+import com.his.mybatis.dynamicDataSource.page.PageInfo;
 
 /**
  * 分页工具
@@ -13,12 +11,10 @@ public class PageUtil {
 
     public static int PAGE_SIZE = 15;
 
-    public static int[] init(Page<?> page, HttpServletRequest request) {
-        int pageNumber = Integer.parseInt(StringUtils.defaultIfBlank(request.getParameter("p"), "1"));
-        page.setPageNo(pageNumber);
-        int pageSize = Integer.parseInt(StringUtils.defaultIfBlank(request.getParameter("ps"), String.valueOf(PAGE_SIZE)));
+    public static int[] init(PageInfo<?> page, int pageNum,int pageSize) {
+        page.setPageNum(pageNum);
         page.setPageSize(pageSize);
-        int firstResult = page.getFirst() - 1;
+        int firstResult = (pageNum - 1) * pageSize;
         int maxResults = page.getPageSize();
         return new int[]{firstResult, maxResults};
     }

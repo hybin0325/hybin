@@ -1,6 +1,9 @@
 package net.medcrm.yjb.workflow.domain;
 
 
+import java.util.Date;
+import java.util.Map;
+
 import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
@@ -8,11 +11,6 @@ import org.activiti.engine.task.Task;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import net.medcrm.yjb.his.common.model.PersistentObject;
-
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Date;
-import java.util.Map;
 
 /**
  * Entity: Leave

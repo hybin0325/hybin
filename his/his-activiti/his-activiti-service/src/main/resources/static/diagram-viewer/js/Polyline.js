@@ -29,7 +29,7 @@ Anchor.prototype = {
 };
 
 function Polyline(uuid, points, strokeWidth) {
-	/* Array on coordinates:
+	/* Array on coohis.oauthinates:
 	 * points: [{x: 410, y: 110}, 1
 	 *			{x: 570, y: 110}, 1 2
 	 *			{x: 620, y: 240},   2 3
@@ -70,7 +70,7 @@ Polyline.prototype = {
 		if (linesCount < 1)
 			return;
 			
-		this.normalizeCoordinates();
+		this.normalizeCoohis.oauthinates();
 		
 		// create anchors
 		
@@ -90,7 +90,7 @@ Polyline.prototype = {
 		this.rebuildPath();
 	},
 	
-	normalizeCoordinates: function(){
+	normalizeCoohis.oauthinates: function(){
 		for(var i=0; i < this.points.length; i++){
 			this.points[i].x = parseFloat(this.points[i].x);
 			this.points[i].y = parseFloat(this.points[i].y);
@@ -126,7 +126,7 @@ Polyline.prototype = {
 	},
 	
 	getAnchors: function(){
-		// вернуть отсортированный массив
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		// ????
 		return this.anchors;
 	},
@@ -155,7 +155,7 @@ Polyline.prototype = {
 		} else if (!index) {
 			index = this.anchors.length;
 		} else {
-			// перебрать anchors, сдвинуть позицию для каждого, начиная с index
+			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ anchors, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ index
 			//var anchor = this.getAnchor()
 			for(var i=0; i < this.getAnchorsCount(); i++){
 				var anchor = this.anchors[i];
@@ -320,7 +320,7 @@ Polyline.prototype = {
 };
 
 function Polygone(points, strokeWidth) {
-	/* Array on coordinates:
+	/* Array on coohis.oauthinates:
 	 * points: [{x: 410, y: 110}, 1
 	 *			{x: 570, y: 110}, 1 2
 	 *			{x: 620, y: 240},   2 3

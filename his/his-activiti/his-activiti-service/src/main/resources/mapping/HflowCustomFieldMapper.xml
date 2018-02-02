@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.medcrm.yjb.workflow.mapper.HflowCustomFieldMapper">
+	<!-- 数据库中的字段和实体类中的字段不符，使用此方式映射 -->
+	<resultMap id="BaseResultMap" type="net.medcrm.yjb.workflow.domain.HflowCustomField">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="content" property="content" jdbcType="VARCHAR" />
+		<result column="componentKey" property="componentKey" jdbcType="VARCHAR" />
+		<result column="maxlen" property="maxlen" jdbcType="INTEGER" />
+		<result column="fieldId" property="fieldId" jdbcType="TIMESTAMP" />
+		<result column="tplId" property="tplId" jdbcType="VARCHAR" />
+		<result column="isDefault" property="isDefault" jdbcType="INTEGER" />
+	</resultMap>
+	<!-- 查询单条记录 -->
+	<select id="selectByPrimaryKey" parameterType="String" resultMap="BaseResultMap">
+		select id,title,content,component_key componentKey ,maxlen,field_id fieldId,tpl_id tplId,is_default isDefault from hflow_custom_field where ID = #{id}
+	</select>
+
+	<select id="select" parameterType="String" resultMap="BaseResultMap">
+		select id,title,content,component_key componentKey ,maxlen,field_id fieldId,tpl_id tplId,is_default isDefault from hflow_custom_field
+	</select>
+	<select id="selectByTplId" parameterType="String" resultMap="BaseResultMap">
+		select id,title,content,component_key componentKey ,maxlen,field_id fieldId,tpl_id tplId,is_default isDefault from hflow_custom_field
+		where tpl_id = #{tplId}
+	</select>
+
+	<!-- 新增 -->
+	<!-- keyProperty="id" useGeneratedKeys="true" 设置主键自生长orcale除外 -->
+	<insert id="insert" parameterType="net.medcrm.yjb.workflow.domain.HflowCustomField"
+		keyProperty="id" useGeneratedKeys="true">
+		insert into hflow_custom_field (id,title,content,component_key, maxlen,field_id,tpl_id,is_default )
+		values (
+		#{id},
+		#{title},
+		#{content},
+		#{componentKey},
+		#{maxlen},
+		#{fieldId},
+		#{tplId},
+		#{isDefault}
+		)
+	</insert>
+
+	<update id="update" parameterType="net.medcrm.yjb.workflow.domain.HflowCustomField">
+		update hflow_custom_field
+		<set>
+			<if test="title != null">
+				title = #{title},
+			</if>
+			<if test="content != null">
+				content = #{content},
+			</if>
+			<if test="componentKey != null">
+				component_key = #{componentKey},
+			</if>
+			<if test="maxlen != null">
+				maxlen = #{maxlen},
+			</if>
+			<if test="fieldId != null">
+				field_id = #{fieldId}
+			</if>
+			<if test="tplId != null">
+				tpl_id = #{tplId}
+			</if>
+			<if test="isDefault != null">
+				is_default = #{isDefault}
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	<delete id="delete" parameterType="java.lang.String">
+		delete from hflow_custom_field where id = #{id}
+	</delete>
+	<delete id="deleteByTplId" parameterType="java.lang.String">
+		delete from hflow_custom_field where tpl_id = #{tplId}
+	</delete>
+</mapper>

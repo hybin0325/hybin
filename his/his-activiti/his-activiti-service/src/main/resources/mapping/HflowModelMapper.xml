@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.medcrm.yjb.workflow.mapper.HflowModelMapper">
+	<resultMap id="BaseResultMap" type="net.medcrm.yjb.workflow.domain.HflowModel">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="m_name" property="mName" jdbcType="VARCHAR" />
+		<result column="m_ico" property="mIco" jdbcType="VARCHAR" />
+		<result column="m_code" property="mCode" jdbcType="VARCHAR" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="m_sort" property="mSort" jdbcType="INTEGER" />
+		<result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="create_user" property="createUser" jdbcType="VARCHAR" />
+		<result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+		<result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+		<result column="menu_id" property="menuId" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!--返回结果 -->
+	<sql id="Base_Column_List">
+		id, m_name, m_ico, m_code,description,status,m_sort,
+		create_date,create_user,update_date,update_user
+	</sql>
+
+	<!-- 新增 -->
+	<insert id="insert" parameterType="net.medcrm.yjb.workflow.domain.HflowModel"
+		keyProperty="id" useGeneratedKeys="true">
+		insert into hflow_model (
+		id,m_name,m_ico,m_code,description,status,m_sort,create_date,create_user,
+		update_date,update_user,menu_id)
+		values
+		(#{id,jdbcType=VARCHAR},#{mName,jdbcType=VARCHAR},
+		#{mIco,jdbcType=VARCHAR},
+		#{mCode,jdbcType=VARCHAR},
+		#{description,jdbcType=VARCHAR},#{status,jdbcType=INTEGER},
+		#{mSort,jdbcType=INTEGER},#{createDate,jdbcType=TIMESTAMP},#{createUser,jdbcType=VARCHAR},
+		#{updateDate,jdbcType=TIMESTAMP},#{updateUser,jdbcType=VARCHAR},#{menuId})
+	</insert>
+
+	<!-- id查询 -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="string">
+		select
+		<include refid="Base_Column_List" />
+		from hflow_model
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	
+	<!-- code查询 -->
+	<select id="selectByPrimaryCode" resultMap="BaseResultMap"
+		parameterType="string">
+		select
+		<include refid="Base_Column_List" />
+		from hflow_model
+		where m_code = #{code,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 查询所有 -->
+	<select id="selectAllModel" resultMap="BaseResultMap"
+		parameterType="Map">
+		select
+		<include refid="Base_Column_List" />
+		from hflow_model where 1=1
+		<if test="queryValue != null and queryValue!='' ">
+			and( m_code like concat('%', #{queryValue}, '%') or m_name like
+			concat('%',#{queryValue}, '%') )
+		</if>
+		order by m_sort desc
+	</select>
+
+	<!-- 删除 -->
+	<delete id="deleteByPrimaryKey" parameterType="string">
+		delete from
+		hflow_model
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+
+	<!--动态修改 -->
+	<update id="updateByPrimaryKeySelective" parameterType="net.medcrm.yjb.workflow.domain.HflowModel">
+		update hflow_model
+		<set>
+			<if test="mName != null">
+				m_name = #{mName,jdbcType=VARCHAR},
+			</if>
+			<if test="mCode != null">
+				m_code = #{mCode,jdbcType=VARCHAR},
+			</if>
+			<if test="mIco != null">
+				m_ico = #{mIco,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				description = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="mSort != null">
+				m_sort = #{mSort,jdbcType=INTEGER},
+			</if>
+			<if test="updateDate != null">
+				update_date = #{updateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateUser != null">
+				update_user = #{updateUser,jdbcType=VARCHAR},
+			</if>
+			<if test="menuId !=null and menuId!=''">
+				menu_id=#{menuId}
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<!--查询排序 -->
+	<select id="selectMaxSort" resultType="java.lang.Integer">
+		select max(m_sort) from
+		hflow_model
+	</select>
+
+	<!-- 查询菜单下所有项 -->
+	<select id="selectByMenu" resultMap="BaseResultMap" resultType="String">
+		select
+		<include refid="Base_Column_List" />
+		from hflow_model where menu_id like concat('%', #{menuId}, '%')
+	</select>
+
+	<update id="updateBatch" parameterType="Map">
+		update hflow_model set
+		status=#{status},
+		update_date=#{updateDate}
+		where id in
+		<foreach collection="ids" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+	
+	
+	<!-- 根据菜单查询相关内容 -->
+	<select id="selectProcdefIdByMenu" resultType="String">
+		select mp.h_procdef_id procdefId 
+		from hflow_model_procdef mp 
+		LEFT JOIN hflow_model m on mp.h_model =m.id 
+		where status=0 and  m.menu_id like concat('%', #{menuId},'%')
+	</select>
+	
+	
+	<!-- 根据modelID查询相关内容 -->
+	<select id="selectProcdefIdByModelId" resultType="String">
+		select mp.h_procdef_id procdefId 
+		from hflow_model_procdef mp 
+		LEFT JOIN hflow_model m on mp.h_model =m.id 
+		where m.id =#{modelId}
+		<if test="status !=null">
+			and m.status=#{status}
+		</if>
+	</select>
+	
+</mapper>

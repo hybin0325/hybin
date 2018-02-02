@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.medcrm.yjb.workflow.mapper.ActReProcdefMapper">
+	<resultMap id="BaseResultMap" type="net.medcrm.yjb.workflow.vo.ActReProcdefVO">
+		<id column="actProcodefId" property="actProcodefId" />
+		<result column="titleName" property="titleName" />
+		<result column="key" property="key" />
+		<result column="pVersion" property="pVersion" />
+		<result column="description" property="description" />
+		<result column="status" property="status" />
+		<result column="pSort" property="pSort" />
+		<result column="createDate" property="createDate" />
+		<result column="createUser" property="createUser" />
+		<result column="updateDate" property="updateDate" />
+		<result column="updateUser" property="updateUser" />
+	</resultMap>
+
+	<select id="findByKeysMap" resultMap="BaseResultMap">
+		select
+		f.id_ actProcodefId,f.name_ titleName,f.KEY_ `key`,f.version_
+		pVersion,f.description_ description,f.suspension_state_ status,
+		pl.p_sort pSort,pl.create_date createDate,pl.create_user
+		createUser,pl.update_date updateDate,pl.update_user updateUser
+		from
+		act_re_procdef f
+		LEFT JOIN hflow_procdef_logs pl
+		on
+		f.ID_=pl.act_re_pro_id
+		where 1=1
+		<if test="list != null and list.size>0">
+			and f.KEY_ IN
+			<foreach item="item" index="index" collection="list" open="("
+				separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		order by pl.p_sort desc
+	</select>
+
+	<!-- 查找流程实例是否启用 -->
+	<select id="findTasByProc" resultType="Integer">
+		select count(t.id_)n from
+		act_ru_task t where t.PROC_DEF_ID_=#{procId}
+	</select>
+
+
+	<select id="findHandleFlowsList" resultType="net.medcrm.yjb.workflow.vo.HandleInfoVO"
+		parameterType="java.util.Map">
+		SELECT DISTINCT RES.ID_ taskId,RES.EXECUTION_ID_
+		executionId,RES.PROC_INST_ID_ processInstanceId,
+		RES.PROC_DEF_ID_
+		processDefinitionId,RES.NAME_ taskName,RES.TASK_DEF_KEY_
+		taskDefinitionKey,RES.OWNER_ `owner`,
+		RES.ASSIGNEE_
+		assignee,RES.PRIORITY_ priority,RES.CREATE_TIME_ createTime,
+		RES.SUSPENSION_STATE_ suspensionState, D.DESCRIPTION_ description,
+		D.NAME_ proName,D.KEY_ actKey
+		FROM
+		ACT_RU_TASK RES
+		LEFT JOIN
+		ACT_RU_IDENTITYLINK I
+		ON I.TASK_ID_ = RES.ID_
+		INNER JOIN ACT_RE_PROCDEF
+		D
+		ON RES.PROC_DEF_ID_ = D.ID_
+		WHERE 1=1
+		<if test="keyList != null and keyList.size>0">
+			and D.KEY_ IN
+			<foreach item="item" index="index" collection="keyList" open="("
+				separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		AND ( RES.ASSIGNEE_ = #{userId} OR (
+		RES.ASSIGNEE_ IS NULL AND I.TYPE_
+		= #{type}
+		AND (I.USER_ID_ = #{userId}
+		<if test="groupList != null and groupList.size>0">
+			OR I.GROUP_ID_ IN
+			<foreach item="item" index="index" collection="groupList"
+				open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		)))
+		<if test="queryValue != null and queryValue!='' ">
+			and (D.NAME_ like concat('%', #{queryValue}, '%')
+			or
+			D.DESCRIPTION_ like concat('%', #{queryValue}, '%'))
+		</if>
+		<if test="start != null and end != null ">
+			and RES.CREATE_TIME_ &gt;= #{start} and RES.CREATE_TIME_
+			&lt;=#{end}
+		</if>
+		ORDER BY RES.CREATE_TIME_ DESC
+	</select>
+
+
+	<select id="findHistoricFlowsList" resultType="net.medcrm.yjb.workflow.vo.HandleInfoVO"
+		parameterType="java.util.Map">
+		SELECT DISTINCT RES.ID_ taskId,RES.EXECUTION_ID_
+		executionId,RES.PROC_INST_ID_ processInstanceId,
+		RES.PROC_DEF_ID_
+		processDefinitionId,
+		RES.NAME_ taskName,RES.TASK_DEF_KEY_
+		taskDefinitionKey,RES.OWNER_ `owner`,
+		RES.ASSIGNEE_
+		assignee,RES.PRIORITY_ priority,
+		RES.START_TIME_ createTime,
+		D.DESCRIPTION_ description,
+		D.NAME_ proName,D.KEY_ actKey,
+		TO_DAYS(NOW()) - TO_DAYS(RES.START_TIME_) toDate
+		FROM
+		ACT_HI_TASKINST
+		RES
+		INNER JOIN ACT_HI_IDENTITYLINK HI ON HI.TASK_ID_ =RES.ID_
+		INNER JOIN
+		ACT_RE_PROCDEF D ON RES.PROC_DEF_ID_= D.ID_
+		WHERE 1=1
+		<if test="keyList != null and keyList.size>0">
+			and D.KEY_ IN
+			<foreach item="item" index="index" collection="keyList" open="("
+				separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		AND ( RES.ASSIGNEE_ = #{userId} OR (
+		RES.ASSIGNEE_ IS NULL AND
+		HI.TYPE_= #{type}
+		AND (HI.USER_ID_ = #{userId}
+		<if test="groupList != null and groupList.size>0">
+			OR HI.GROUP_ID_ IN
+			<foreach item="item" index="index" collection="groupList"
+				open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		)))
+		ORDER BY
+		RES.START_TIME_ DESC
+	</select>
+
+	<!-- 经手流程 -->
+	<select id="selectRunningFlowsList" resultType="net.medcrm.yjb.workflow.vo.HandleInfoVO"
+		parameterType="java.util.Map">
+		select distinct t.PROC_INST_ID_ processInstanceId,rp.NAME_
+		proName,p.START_TIME_ createTime,
+		rp.KEY_ actKey,p.PROC_DEF_ID_
+		processDefinitionId
+		from act_hi_taskinst t
+		LEFT JOIN act_hi_procinst p on t.PROC_INST_ID_=p.PROC_INST_ID_
+		LEFT JOIN act_re_procdef rp on p.PROC_DEF_ID_=rp.ID_
+		where p.END_TIME_ is
+		NULL
+		<if test="keyList != null and keyList.size>0">
+			and p.KEY_ IN
+			<foreach item="item" index="index" collection="keyList" open="("
+				separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		<if test="handlerList != null and handlerList.size>0">
+			and t.ASSIGNEE_ IN
+			<foreach item="item" index="index" collection="handlerList"
+				open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		
+		<if test="start != null and end != null ">
+			and t.END_TIME_ &gt;= #{start} and t.END_TIME_ &lt;=#{end}
+		</if>
+		<if test="queryValue != null and queryValue!='' ">
+			and (rp.NAME_ like concat('%', #{queryValue}, '%')
+			or
+			rp.DESCRIPTION_ like concat('%', #{queryValue}, '%')
+			<if test="applyUserList != null and applyUserList.size>0">
+				or p.START_USER_ID_ IN
+				<foreach item="item" index="index" collection="applyUserList"
+					open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			)
+		</if>
+		ORDER BY p.START_TIME_ DESC
+	</select>
+
+	<!-- 完成流程 -->
+	<select id="selectEndFlowsList" resultType="net.medcrm.yjb.workflow.vo.FinishedFlowVO"
+		parameterType="java.util.Map">
+		select distinct RES.ID_ id , RES.PROC_INST_ID_ processInstanceId,
+		RES.PROC_DEF_ID_ processDefinitionId, RES.START_TIME_ startDate,
+		RES.END_TIME_ endDate,RES.START_USER_ID_ startUserId,
+		DEF.KEY_ as
+		processDefinitionKey, DEF.NAME_ as
+		processInstanceName, DEF.VERSION_ as processDefinitionVersion, DEF.DEPLOYMENT_ID_
+		as
+		deploymentId,DEF.DESCRIPTION_ description
+		from ACT_HI_PROCINST RES left outer join ACT_RE_PROCDEF DEF on
+		RES.PROC_DEF_ID_ = DEF.ID_ WHERE RES.END_TIME_ is not NULL
+		<if test="queryValue != null and queryValue!='' ">
+			and (DEF.NAME_ like concat('%', #{queryValue}, '%')
+			or
+			DEF.DESCRIPTION_ like concat('%', #{queryValue}, '%')
+			<if test="applyUserList != null and applyUserList.size>0">
+				or RES.START_USER_ID_ IN
+				<foreach item="item" index="index" collection="applyUserList"
+					open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			)
+		</if>
+		<if test="proInstList != null and proInstList.size>0">
+			and RES.PROC_INST_ID_ IN
+			<foreach item="item" index="index" collection="proInstList"
+				open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		<if test="start != null and end != null ">
+			and RES.END_TIME_ &gt;= #{start} and RES.END_TIME_
+			&lt;=#{end}
+		</if>
+		<if test="keyList != null and keyList.size>0">
+			and DEF.KEY_ IN
+			<foreach item="item" index="index" collection="keyList" open="("
+				separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		order by RES.END_TIME_
+	</select>
+
+	<!-- 流程监控 -->
+	<select id="findMonitorFlowsList" resultType="net.medcrm.yjb.workflow.vo.MonitorVO"
+		parameterType="java.util.Map">
+		select distinct p.PROC_INST_ID_ processInstanceId,p.START_USER_ID_
+		startUserId,
+		p.START_TIME_ startDate,rp.NAME_
+		processInstanceName,rp.VERSION_ processDefinitionVersion,
+		p.PROC_DEF_ID_ processDefinitionId,rp.KEY_ processDefinitionKey
+		from
+		act_hi_procinst p
+		LEFT JOIN act_re_procdef rp on p.PROC_DEF_ID_=rp.ID_
+		<where>
+			<if test="keyList != null and keyList.size>0">
+				and rp.KEY_ IN
+				<foreach item="item" index="index" collection="keyList"
+					open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			<if test="queryValue != null and queryValue!='' ">
+				and rp.NAME_ like concat('%', #{queryValue}, '%')
+			</if>
+			<if test="applyUser != null and applyUser!='' ">
+				and p.START_USER_ID_=#{applyUser}
+			</if>
+		</where>
+	</select>
+
+	<!-- 查询关联到的业务id -->
+	<select id="selectBusinessByTaskId" resultType="string">
+		SELECT
+		e.BUSINESS_KEY_ businessId from act_ru_task res LEFT JOIN
+		act_ru_execution e
+		on res.EXECUTION_ID_=e.ID_ where res.ID_=#{taskId}
+	</select>
+
+	<!-- 根据taskId查询 -->
+	<select id="selectActRuIdentitylinkList" resultType="net.medcrm.yjb.workflow.vo.IdentitylinkVO">
+		select i.ID_
+		id, i.USER_ID_ userId,i.GROUP_ID_ groupId,i.TYPE_ `type`,TASK_ID_
+		taskId from ACT_RU_IDENTITYLINK i where TASK_ID_ = #{taskId}
+	</select>
+
+	<select id="selectActHiIdentitylinkList" resultType="net.medcrm.yjb.workflow.vo.IdentitylinkVO">
+		select i.ID_
+		id, i.USER_ID_ userId,i.GROUP_ID_ groupId,i.TYPE_ `type`,TASK_ID_
+		taskId from ACT_HI_IDENTITYLINK i where TASK_ID_ = #{taskId}
+	</select>
+
+	<insert id="insertActRuIdentitylink" parameterType="net.medcrm.yjb.workflow.vo.IdentitylinkVO">
+		insert
+		into
+		ACT_RU_IDENTITYLINK (ID_, REV_, TYPE_, USER_ID_, GROUP_ID_,
+		TASK_ID_)
+		values (#{id}, 1, #{type}, #{userId}, #{groupId}, #{taskId})
+	</insert>
+
+	<insert id="insertActHiIdentitylink" parameterType="net.medcrm.yjb.workflow.vo.IdentitylinkVO">
+		insert into
+		ACT_HI_IDENTITYLINK (ID_, TYPE_, USER_ID_, GROUP_ID_, TASK_ID_)
+		values
+		(#{id}, #{type}, #{userId}, #{groupId},#{taskId})
+	</insert>
+
+	<update id="deleteBatchActRuIdentitylink">
+		delete from ACT_RU_IDENTITYLINK where ID_ in
+		<foreach collection="list" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+
+	<update id="deleteBatchActHiIdentitylink">
+		delete from ACT_HI_IDENTITYLINK where ID_ in
+		<foreach collection="list" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+
+
+	<!-- 根据taskId查询 -->
+	<select id="selectNewActHiTaskinst" resultType="String">
+		select t.ID_ id
+		from act_hi_taskinst t where t.PROC_INST_ID_=#{processInstanceId}
+		ORDER BY t.START_TIME_ DESC LIMIT 0,1
+	</select>
+
+	<!-- 开始申请人 -->
+	<select id="selectStartActRuTaskInfo" resultType="map">
+		select DISTINCT
+		i.PROC_INST_ID_ processInstanceId,t.PROC_DEF_ID_
+		processDefinitionId
+		from act_ru_identitylink i LEFT JOIN act_ru_task t on
+		i.PROC_INST_ID_=t.PROC_INST_ID_
+		where i.TYPE_='starter' and
+		i.USER_ID_=#{userId};
+	</select>
+
+	<!-- 办理人 -->
+	<select id="selectHandlerInfo" resultType="String">
+		select DISTINCT
+		t.PROC_INST_ID_ from act_hi_taskinst t
+		where t.ASSIGNEE_=#{handler} and t.DELETE_REASON_='completed'
+	</select>
+
+	<!-- 办理人 -->
+	<select id="selectHandlerInfoByList" resultType="String">
+		select DISTINCT t.PROC_INST_ID_ from act_hi_taskinst t
+		where t.DELETE_REASON_='completed'
+		and t.ASSIGNEE_ IN
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+
+</mapper>

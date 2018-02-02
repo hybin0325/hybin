@@ -14,7 +14,6 @@ import java.util.List;
 
 
 @RestController
-@CrossOrigin
 @RequestMapping("deployments")
 public class DeploymentController implements RestServiceController<Deployment, String>{
     @Autowired

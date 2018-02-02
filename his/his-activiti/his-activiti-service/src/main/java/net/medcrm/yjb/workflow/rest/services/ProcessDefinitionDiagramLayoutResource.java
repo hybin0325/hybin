@@ -26,4 +26,9 @@ public class ProcessDefinitionDiagramLayoutResource extends BaseProcessDefinitio
   public ObjectNode getDiagram(@PathVariable String processDefinitionId) {
     return getDiagramNode(null, processDefinitionId);
   }
+  
+  @RequestMapping(value="/process-definition/diagram-layout", method = RequestMethod.GET, produces = "application/json")
+  public ObjectNode getDiagram2( String processDefinitionId) {
+    return getDiagramNode(null, processDefinitionId);
+  }
 }
