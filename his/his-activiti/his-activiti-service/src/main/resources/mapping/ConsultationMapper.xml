@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.medcrm.yjb.workflow.mapper.ConsultationMapper" >
+  <resultMap id="BaseResultMap" type="net.medcrm.yjb.workflow.domain.Consultation" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="apply_department" property="applyDepartment" jdbcType="VARCHAR" />
+    <result column="apply_department_id" property="applyDepartmentId" jdbcType="VARCHAR" />
+    <result column="apply_user" property="applyUser" jdbcType="VARCHAR" />
+    <result column="apply_user" property="applyUserId" jdbcType="VARCHAR" />
+    <result column="patient" property="patient" jdbcType="VARCHAR" />
+	<result column="apply_date" property="applyDate" jdbcType="DATE" />
+	<result column="patient_name" property="patientName" jdbcType="VARCHAR" />
+	<result column="patient_bed_number" property="patientBedNumber" jdbcType="INTEGER" />
+	<result column="illness_desc" property="illnessDesc" jdbcType="VARCHAR" />
+	<result column="consultation_results" property="consultationResults" jdbcType="VARCHAR" />
+	<result column="consultation_type" property="consultationType" jdbcType="VARCHAR" />
+	<result column="consultation_date" property="consultationDate" jdbcType="DATE" />
+	<result column="appointment_department" property="appointmentDepartment" jdbcType="VARCHAR" />
+	<result column="appointment_department_id" property="appointmentDepartmentId" jdbcType="VARCHAR" />
+	<result column="appointment_user" property="appointmentUser" jdbcType="VARCHAR" />
+	<result column="appointment_user_id" property="appointmentUserId" jdbcType="VARCHAR" />
+	<result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, apply_department, apply_department_id, apply_user,apply_user,patient,apply_date,
+    patient_name,patient_bed_number,illness_desc,consultation_results,consultation_type,
+    consultation_date,appointment_department,appointment_department_id,appointment_user,
+    appointment_user_id,create_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from hflow_consultation
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAllUser" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hflow_consultation
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from hflow_consultation
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="net.medcrm.yjb.workflow.domain.Consultation" >
+    insert into hflow_consultation (id, apply_department, apply_department_id,apply_user, 
+      apply_user_id,patient,apply_date,patient_name,patient_bed_number,illness_desc,
+      consultation_results,consultation_type,consultation_date,
+      appointment_department,appointment_department_id,appointment_user,
+      appointment_user_id,create_date)
+    values (#{id,jdbcType=VARCHAR}, #{applyDepartment,jdbcType=VARCHAR}, #{applyDepartmentId,jdbcType=VARCHAR}, 
+      #{applyUser,jdbcType=VARCHAR},#{applyUserId,jdbcType=VARCHAR},#{patient,jdbcType=VARCHAR},#{applyDate,jdbcType=DATE},
+      #{patientName,jdbcType=VARCHAR},#{patientBedNumber,jdbcType=INTEGER},#{illnessDesc,jdbcType=VARCHAR},
+      #{consultationResults,jdbcType=VARCHAR},#{consultationType,jdbcType=VARCHAR},#{consultationDate,jdbcType=DATE},
+      #{appointmentDepartment,jdbcType=VARCHAR},#{appointmentDepartmentId,jdbcType=VARCHAR},#{appointmentUser,jdbcType=VARCHAR},
+      #{appointmentUserId,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="net.medcrm.yjb.workflow.domain.Consultation" >
+   
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="net.medcrm.yjb.workflow.domain.Consultation" >
+    update hflow_consultation
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.medcrm.yjb.workflow.domain.Consultation" >
+    update hflow_consultation
+     set user_name = #{userName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

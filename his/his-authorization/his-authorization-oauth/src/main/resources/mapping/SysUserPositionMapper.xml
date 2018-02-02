@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.his.oauth.mapper.SysUserPositionMapper" >
+  <resultMap id="BaseResultMap" type="com.his.oauth.domain.SysUserPosition" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userId" property="userId" jdbcType="INTEGER" />
+    <result column="positionId" property="positionId" jdbcType="INTEGER" />
+    <result column="positionType" property="positionType" jdbcType="INTEGER" />
+    <result column="orgId" property="orgId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id,user_id as userId, position_id as positionId, position_type as positionType,org_id as orgId
+  </sql>
+
+  <select id="selectSysUserPositionByUserId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_user_position
+  </select>
+
+</mapper>

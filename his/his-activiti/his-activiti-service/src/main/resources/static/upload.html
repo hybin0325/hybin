@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="/lib/js/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+<form onsubmit="return false;">
+  <input type="hidden" name="file_base64" id="file_base64">
+  <input type="file" id="fileup">
+  <input type="submit" value="submit" onclick="aa()">
+</form>
+<span></span>
+ 
+
+<script>
+$(document).ready(function(){
+  $("#fileup").change(function(){
+    var v = $(this).val();
+    var reader = new FileReader();
+    reader.readAsDataURL(this.files[0]);
+    reader.onload = function(e){
+      console.log(e.target.result);
+      $('#file_base64').val(e.target.result);
+    };
+  });
+});
+  function aa(){
+	  var base64=$("#file_base64").val();
+	  var fileName=$("#fileup").val();
+	  $.post("/models/uploadPoster",{base64:base64,fileName:fileName},function(result){
+		  var str = JSON.stringify(result); //转换成string
+		  alert(str);
+		  $("span").html(result);
+	  });
+  }
+  
+</script>
+</body>
+</html>

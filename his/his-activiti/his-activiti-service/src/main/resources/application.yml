@@ -1,0 +1,11 @@
+server:
+  port: 8081
+security:
+  basic:
+    enabled: false
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: net.medcrm.yjb.workflow.domain
+  
+

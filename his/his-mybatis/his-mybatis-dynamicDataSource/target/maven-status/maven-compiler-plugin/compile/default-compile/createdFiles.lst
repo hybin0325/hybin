@@ -1,0 +1,11 @@
+com\his\mybatis\dynamicDataSource\strategy\Strategy.class
+com\his\mybatis\dynamicDataSource\config\DynamicDataSourceHolder.class
+com\his\mybatis\dynamicDataSource\enums\DynamicDataSourceGlobal.class
+com\his\mybatis\dynamicDataSource\manager\DynamicDataSourceTransactionManager.class
+com\his\mybatis\dynamicDataSource\strategy\AbstractStrategy.class
+com\his\mybatis\dynamicDataSource\config\DynamicDataSource.class
+com\his\mybatis\dynamicDataSource\base\BaseMapper.class
+com\his\mybatis\dynamicDataSource\plugin\DynamicPlugin.class
+com\his\mybatis\dynamicDataSource\strategy\RoundRobinStrategy.class
+com\his\mybatis\dynamicDataSource\utils\ConfigUtils.class
+com\his\mybatis\dynamicDataSource\App.class

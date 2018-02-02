@@ -1,0 +1,85 @@
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="Access-Control-Allow-Origin" content="*"> 
+<meta http-equiv="Access-Control-Allow-Headers" content="Origin, X-Requested-With, Content-Type, Accept"> 
+<meta http-equiv="Access-Control-Allow-Methods" content="GET, POST, PUT,DELETE"> 
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+	<script type="text/javascript">	
+
+	var params = new URLSearchParams();
+                 params.append('grant_type', 'password');
+                 params.append('username', 'admin');
+                 params.append('password', 'admin');
+axios({
+                    method: 'post',
+                    baseURL: 'http://localhost:7777',
+                    url: '/uaa/api/oauth/token',
+
+                    // url: 'http://localhost:7071/token',
+
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded', },
+                    // headers: {
+                    //     Authorization: 'Bearer JDJhJDEwJFhPVnM0WjFZdFBLcUt3UVZ5d0c5ai54TEFxWFlSUUxHWk1HTXJaRE5idGw2cFVDMFdldGVxOiQyYSQxMCRYT1ZzNFoxWXRQS3FLd1FWeXdHOWoueExBcVhZUlFMR1pNR01yWkROYnRsNnBVQzBXZXRlcQ=='
+                    // },
+                    auth: {
+                        username: '$2a$10$XOVs4Z1YtPKqKwQVywG9j.xLAqXYRQLGZMGMrZDNbtl6pUC0Weteq',
+                        password: '$2a$10$XOVs4Z1YtPKqKwQVywG9j.xLAqXYRQLGZMGMrZDNbtl6pUC0Weteq'
+                    },
+                    data: params 
+                }).then(function (resp) {
+                        //console.log('success', resp.data, history)
+                        //const cookies = new Cookies()
+                        //cookies.set('token', resp.data.expires_in, { path: '/' })
+                        //console.log(resp.data.access_token)
+                        // document.cookie = 'token=' + resp.data.expires_in + ';'
+                        //localStorage.setItem("token", JSON.stringify(resp.data))
+                        // self.setState({ loginSate: 'success' })
+                        //访问权限URL
+                        var oauth_url = "http://localhost:9191/api/swagger-ui.html?access_token=" + resp.data.access_token;
+                        $("#his-oauth").attr("href",oauth_url);
+
+                        //人员机构URL
+                        var omp_url = "http://localhost:6666/api/swagger-ui.html?access_token=" + resp.data.access_token;
+                        $("#his-omp").attr("href",omp_url);
+                        //setTimeout(function () { history.push('/') }, 500)
+                    })
+                    .catch(function () {
+                        // console.log('success',message)
+                       
+                    })
+</script>
+    <style type="text/css">
+
+        html,body{
+            margin: 0 auto;
+            padding:0;
+            text-align: center;
+        }
+        a{
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+        <h1>医极棒医院综合管理平台V1接口</h1>
+        <div id="content"></div>
+        <div>
+            <p>
+                <a id="his-oauth">访问权限模块接口(uaa)</a>
+            </p>
+            <p>
+                <a id="his-omp">人员机构模块接口(his-omp)</a>
+            </p>
+            <p>
+                <a id="his-activiti">工作流模块接口(his-activiti)</a>
+            </p>
+        </div>
+</body>
+
+</html>

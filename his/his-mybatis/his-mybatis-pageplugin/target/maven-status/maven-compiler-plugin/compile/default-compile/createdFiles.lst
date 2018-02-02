@@ -1,0 +1,5 @@
+com\his\mybatis\dialect\Dialect.class
+com\his\mybatis\pagination\PagePlugin.class
+com\his\mybatis\utils\ReflectUtils.class
+com\his\mybatis\dialect\MysqlDialect.class
+com\his\mybatis\pagination\Page.class

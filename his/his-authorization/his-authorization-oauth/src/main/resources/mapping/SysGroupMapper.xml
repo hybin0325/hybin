@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.his.oauth.mapper.SysGroupMapper" >
+  <resultMap id="BaseResultMap" type="com.his.oauth.domain.SysGroup" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="code" property="code" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="INTEGER" />
+    <result column="createTime" property="createTime" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+
+  <resultMap id="BaseResultMapVO" type="com.his.oauth.vo.SysGroupVO" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="code" property="code" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="INTEGER" />
+    <result column="createTime" property="createTime" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id,code as code, name as name, create_time as createTime,description as description,status as status
+  </sql>
+
+  <select id="selectSysGroupByUserId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_group where status = 1
+  </select>
+
+  <select id="selectSysGroupVOById" resultMap="BaseResultMapVO">
+    select
+    <include refid="Base_Column_List" />
+    from sys_group where id = #{id}
+  </select>
+</mapper>

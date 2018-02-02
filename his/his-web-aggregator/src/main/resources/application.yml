@@ -1,0 +1,60 @@
+spring:
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+  application:
+      name: his-web-aggregator
+  resources:
+    chain:
+      strategy:
+        content:
+          enabled: true
+          paths: /**
+    static-locations: classpath:/static/css/,classpath:/static/images/,classpath:/static/js/
+
+#  cloud:
+#    config:
+#      uri: http://${config.host:192.168.1.140}:${config.port:8888}
+
+server:
+  port: 7777
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.host:localhost}:${eureka.port:1111}/eureka/
+
+zuul:
+  routes:
+    uaa:
+      path: /uaa/**
+      sensitiveHeaders:
+      serviceId: auth-server
+    his-omp:
+      path: /his-omp/**
+      sensitiveHeaders:
+      serviceId: his-omp
+    hflow:
+      path: /hflow/**
+      sensitiveHeaders:
+      serviceId: hflow
+    order:
+      path: /order/**
+      sensitiveHeaders:
+      serviceId: order-service
+    aggregator:
+      path: /aggregator/**
+      sensitiveHeaders:
+      serviceId: his-web-aggregator
+  add-proxy-headers: true
+
+security:
+  oauth2:
+    client:
+      access-token-uri: http://localhost:7777/uaa/api/oauth/token
+      user-authorization-uri: http://localhost:7777/uaa/api/oauth/authorize
+      client-id: $10$XOVs4Z1YtPKqKwQVywG9j.xLAqXYRQLGZMGMrZDNbtl6pUC0Weteq
+      client-secret: $10$XOVs4Z1YtPKqKwQVywG9j.xLAqXYRQLGZMGMrZDNbtl6pUC0Weteq
+    resource:
+      user-info-uri: http://localhost:7777/uaa/api/user/info
+      prefer-token-info: false

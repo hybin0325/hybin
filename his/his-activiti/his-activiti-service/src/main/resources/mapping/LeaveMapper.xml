@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.medcrm.yjb.workflow.mapper.LeaveMapper">
+	<!-- 数据库中的字段和实体类中的字段不符，使用此方式映射 -->
+	<resultMap id="BaseResultMap" type="net.medcrm.yjb.workflow.domain.Leave">
+		<id column="ID" property="id" jdbcType="VARCHAR" />
+		<result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+		<result column="START_TIME" property="startTime" />
+		<result column="END_TIME" property="endTime" />
+		<result column="APPLY_TIME" property="applyTime" />
+		<result column="REALITY_START_TIME" property="realityStartTime" />
+		<result column="REALITY_END_TIME" property="realityEndTime" />
+		<result column="REASON" property="reason" jdbcType="VARCHAR" />
+		<result column="LEAVE_TYPE" property="leaveType" jdbcType="VARCHAR" />
+		<result column="PROCESS_INSTANCE_ID" property="processInstanceId"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- 查询单条记录 -->
+	<select id="selectByPrimaryKey" parameterType="String" resultMap="BaseResultMap">
+		select * from hflow_leave where ID = #{id}
+	</select>
+	<!-- 新增 -->
+	<!-- keyProperty="id" useGeneratedKeys="true" 设置主键自生长orcale除外 -->
+	<insert id="save" parameterType="net.medcrm.yjb.workflow.domain.Leave"
+		keyProperty="id" useGeneratedKeys="true">
+		insert into hflow_leave (ID,USER_ID,PROCESS_INSTANCE_ID, START_TIME,END_TIME,
+		APPLY_TIME,REALITY_START_TIME,REALITY_END_TIME,REASON,LEAVE_TYPE)
+		values (
+		#{id},
+		#{userId},
+		#{processInstanceId},
+		#{startTime},
+		#{endTime},
+		#{applyTime},
+		#{realityStartTime},
+		#{realityEndTime},
+		#{reason},
+		#{leaveType}
+		)
+	</insert>
+	
+</mapper>

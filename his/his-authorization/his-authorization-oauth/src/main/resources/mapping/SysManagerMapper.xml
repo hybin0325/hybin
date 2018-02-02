@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.his.oauth.mapper.SysManagerMapper" >
+  <resultMap id="BaseResultMap" type="com.his.oauth.domain.SysManager" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="owerId" property="owerId" jdbcType="INTEGER" />
+    <result column="groupId" property="groupId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="typeId" property="typeId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id,ower_id as owerId, group_id as groupId, name as name,type as type,type_id as typeId
+  </sql>
+
+  <select id="selectSysManagerByUserId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_manager
+  </select>
+
+</mapper>

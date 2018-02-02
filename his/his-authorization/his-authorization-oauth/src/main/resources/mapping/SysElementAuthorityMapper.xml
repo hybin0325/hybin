@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.his.oauth.mapper.SysElementAuthorityMapper" >
+  <resultMap id="BaseResultMap" type="com.his.oauth.vo.SysElementAuthorityVO" >
+
+    <result column="groupId" property="groupId" jdbcType="INTEGER" />
+    <result column="authId" property="authId" jdbcType="INTEGER" />
+    <result column="elementId" property="elementId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+  </sql>
+
+  <select id="selectSysElementAuthorityByElementIdAndGroupId" resultMap="BaseResultMap">
+
+    SELECT gu.group_id as groupId, gu.auth_id as authId,au.element_id as elementId,el.name from sys_group_authority gu
+      LEFT JOIN sys_authority au on(gu.auth_id = au.id)
+      left JOIN sys_element el on(au.element_id = el.id)
+      where gu.group_id = 1 and au.element_id = 1
+  </select>
+
+</mapper>
