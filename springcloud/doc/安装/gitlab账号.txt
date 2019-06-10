@@ -1,0 +1,4 @@
+gitlab  http://14.152.78.36   
+root/nanling098
+
+huangyb/root123456

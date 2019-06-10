@@ -1,0 +1,28 @@
+
+# 百应接口文档 v1.0.0
+
+## 1. 流程
+
+### 1.1 创建任务
+
+![flow](http://14.152.78.36:8070/group1/M00/00/00/CgoAB1zs1AiAeud8AB6HEgQZBm8046.bmp "flow")
+
+### 1.2 导入客户
+
+![flow](http://14.152.78.36:8070/group1/M00/00/00/CgoAB1zs6BmAWEgdABy9Vjqbjc4289.bmp "flow")
+
+### 1.3 操作任务
+
+![flow](http://14.152.78.36:8070/group1/M00/00/00/CgoAB1zs1CeADxa0ABmAKvsaNIM052.bmp "flow")
+
+### 1.4 通话回调
+
+![flow](http://14.152.78.36:8070/group1/M00/00/00/CgoAB1zs6duADFKLABL8wgNyAOw660.bmp "flow")
+
+### 1.5 任务状态回调
+
+![flow](http://14.152.78.36:8070/group1/M00/00/00/CgoAB1zs6hOAMqndABG3mglJ5rU304.bmp "flow")
+
+### 1.6 结果修改回调
+
+![flow](http://14.152.78.36:8070/group1/M00/00/00/CgoAB1zs6jOAIQL8ABBojsVBW-0332.bmp "flow")

@@ -1,0 +1,2 @@
+´ò°ü
+mvn install -Dmaven.test.skip=true

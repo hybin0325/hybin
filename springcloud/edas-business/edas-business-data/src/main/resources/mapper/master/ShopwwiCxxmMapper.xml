@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edas.business.data.dao.master.ShopwwiCxxmMapper">
+  <resultMap id="BaseResultMap" type="com.edas.business.data.entity.ShopwwiCxxm">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result  column="chname" jdbcType="VARCHAR" property="chname" />
+    <result column="fieldtype" jdbcType="INTEGER" property="fieldtype" />
+    <result column="cx_id" jdbcType="INTEGER" property="cxId" />
+    <result column="enname" jdbcType="VARCHAR" property="enname" />
+    <result column="lx" jdbcType="VARCHAR" property="lx" />
+    <result column="primarykey" jdbcType="VARCHAR" property="primarykey" />
+    <result column="virtualkey" jdbcType="VARCHAR" property="virtualkey" />
+    <result column="tbname" jdbcType="VARCHAR" property="tbname" />
+    <result column="virtualexp" jdbcType="VARCHAR" property="virtualexp" />
+    <result column="tbchname" jdbcType="VARCHAR" property="tbchname" />
+    <result column="coltype" jdbcType="VARCHAR" property="coltype" />
+    <result column="colwidth" jdbcType="VARCHAR" property="colwidth" />
+    <result column="combovaluetype" jdbcType="VARCHAR" property="combovaluetype" />
+    <result column="openclassid" jdbcType="VARCHAR" property="openclassid" />
+    <result column="bz" jdbcType="VARCHAR" property="bz" />
+    <result column="opentype" jdbcType="VARCHAR" property="opentype" />
+    <result column="dateformat" jdbcType="VARCHAR" property="dateformat" />
+  </resultMap>
+
+
+</mapper>

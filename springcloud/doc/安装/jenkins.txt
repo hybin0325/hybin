@@ -1,0 +1,11 @@
+jenkinsÆô¶¯
+
+#service jenkins start
+
+ÖØÆô
+
+#service jenkins restart
+Í£Ö¹
+
+#service jenkins stop
+

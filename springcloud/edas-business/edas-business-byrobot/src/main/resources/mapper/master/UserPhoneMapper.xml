@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edas.business.byrobot.dao.master.UserPhoneMapper">
+
+  <resultMap id="BaseResultMap" type="com.edas.business.byrobot.entity.UserPhone">
+    <id column="id" jdbcType="INTEGER" property="id" />    
+    <result column="company_id" jdbcType="INTEGER" property="companyId" />
+    <result column="user_phone_id" jdbcType="INTEGER" property="userPhoneId" />    
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="phone_name" jdbcType="VARCHAR" property="phoneName" />
+    <result column="phone_type" jdbcType="INTEGER" property="phoneType" />
+    <result column="available" jdbcType="BIT" property="available" />
+    <result column="total_concurrency_quota" jdbcType="INTEGER" property="totalConcurrencyQuota" />
+    <result column="used_concurrency_quota" jdbcType="INTEGER" property="usedConcurrencyQuota" />
+    <result column="bill_period" jdbcType="SMALLINT" property="billPeriod" />
+    <result column="validity_begin" jdbcType="TIMESTAMP" property="validityBegin" />
+    <result column="validity_end" jdbcType="TIMESTAMP" property="validityEnd" />
+    <result column="scene_type" jdbcType="SMALLINT" property="sceneType" />
+    <result column="line_amount" jdbcType="DECIMAL" property="lineAmount" />    
+    <result column="bill_mode" jdbcType="INTEGER" property="billMode" />
+    <result column="rate_type" jdbcType="INTEGER" property="rateType" />
+    <result column="weight_type" jdbcType="INTEGER" property="weightType" />
+  </resultMap>
+ 
+	
+</mapper>

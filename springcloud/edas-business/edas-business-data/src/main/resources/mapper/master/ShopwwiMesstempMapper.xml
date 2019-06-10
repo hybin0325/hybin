@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edas.business.data.dao.master.ShopwwiZtMesstempMapper">
+  <resultMap id="BaseResultMap" type="com.edas.business.data.entity.ShopwwiZtMesstemp">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result  column="tem_num" jdbcType="VARCHAR" property="temNum"  />
+    <result column="tem_type" jdbcType="VARCHAR" property="temType" />
+    <result column="tem_name" jdbcType="VARCHAR" property="temName" />
+    <result column="push_chan" jdbcType="VARCHAR" property="pushChan" />
+    <result column="chan_temp" jdbcType="VARCHAR" property="chanTemp" />
+    <result column="temp_data_sou" jdbcType="VARCHAR" property="tempDataSou" />
+    <result column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="userid_up" jdbcType="VARCHAR" property="useridUp" />
+    <result column="username_up" jdbcType="VARCHAR" property="usernameUp" />
+    <result column="dld" jdbcType="VARCHAR" property="dld" />
+    <result column="clique" jdbcType="VARCHAR" property="clique" />
+    <result column="add_date" jdbcType="TIMESTAMP" property="addDate" />
+    <result column="upd_date" jdbcType="TIMESTAMP" property="updDate" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="mess_con" jdbcType="VARCHAR" property="messCon" />
+    <result column="type_message" jdbcType="VARCHAR" property="typeMessage" />
+
+    <result column="tiaozhuan_url" jdbcType="VARCHAR" property="tiaozhuanUrl" />
+  </resultMap>
+
+
+</mapper>

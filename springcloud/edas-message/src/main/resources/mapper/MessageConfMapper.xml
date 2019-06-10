@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.edas.edasmessage.dao.MessageConfMapper">
+	<resultMap id="BaseResultMap"
+		type="com.edas.edasmessage.entity.MessageConf">
+		<result column="id" jdbcType="INTEGER" property="id" />
+		<result column="type_key" jdbcType="VARCHAR" property="typeKey" />
+		<result column="comm_key" jdbcType="VARCHAR" property="commKey" />
+		<result column="dld" jdbcType="VARCHAR" property="dld" />
+		<result column="clique" jdbcType="VARCHAR" property="clique" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, type_key, comm_key, dld, clique
+	</sql>
+
+	<select id="selectByTypeKey" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from shopwwi_message_conf mc where mc.type_key=#{typeKey}
+	</select>
+
+	<select id="selectByCommKey" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from shopwwi_message_conf mc where mc.comm_key=#{commKey}
+	</select>
+
+	<select id="selectByList" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from shopwwi_message_conf mc
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="typeKey!=null and typeKey!=''">
+				AND type_key=#{typeKey}
+			</if>
+			<if test="commKey!=null and commKey!=''">
+				AND comm_key=#{commKey}
+			</if>
+			<if test="dld!=null and dld!=''">
+				AND dld=#{dld}
+			</if>
+			<if test="clique!=null and clique!=''">
+				AND clique=#{clique}
+			</if>
+			<if test="id!=null">
+				AND id=#{id}
+			</if>
+		</trim>
+	</select>
+</mapper>

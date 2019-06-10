@@ -1,0 +1,78 @@
+
+# 百应接口文档 v1.0.0
+
+## 1 规范说明
+
+### 1.1 通信协议
+
+HTTP协议
+
+### 1.2 格式说明
+元素出现要求说明：
+
+符号				|说明
+:----:			|:---
+R				|报文中该元素必须出现（Required）
+O				|报文中该元素可选出现（Optional）
+C				|报文中该元素在一定条件下出现（Conditional）
+
+## 2. 接口定义
+
+### 2.1 根据公司id获取黑名单
+- **接口说明：** 根据公司id获取黑名单
+- **接口地址：** https://{ip}:{port}/blackList/get
+- **请求类型：** get
+
+#### 2.1.1 请求参数
+  
+参数名称						|类型		|出现要求	|描述  
+:----						|:---		|:------	|:---	
+companyId					|string		|R			|公司id
+
+
+
+请求示例：
+
+```
+{
+    https://{ip}:{port}/blackList/get?companyId=1
+}
+
+```
+
+
+#### 2.1.2 返回结果
+
+参数名称						|类型		|出现要求	|描述  
+:----						|:---		|:------	|:---	
+Code						|int		|R			|响应码，代码定义请见“附录A 响应吗说明”
+Msg							|string		|R			|&nbsp;
+Data						|object		|R			|&nbsp;
+&emsp;Company				|Company		|R			|公司
+
+示例：
+
+```
+{
+    "Code":0,
+    "Msg":"success",
+    "Data":{
+        {
+		  "blackListId": 16,//黑名单id
+		  "companyId": 56,//公司id
+		  "id": 1,//主键
+		  "mobile": "18688886666",//手机
+		  "name": "刘德华",//姓名
+		  "remark": "测试"//备注
+    	}
+    }
+}
+```
+![flow](http://14.152.78.36:8070/group1/M00/00/00/CgoAB1zou3-ANPwlAADGSByg4m8497.jpg "flow")
+
+## 3 附录A 响应码说明
+
+响应码	|说明  
+:----	|:---
+0		|处理成功
+-1		|系统异常

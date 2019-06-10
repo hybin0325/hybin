@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.edas.business.byrobot.dao.master.CustomerMapper" >
+
+    <resultMap id="BaseResultMap" type="com.edas.business.byrobot.entity.Customer" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="call_instance_id" property="callInstanceId" jdbcType="BIGINT" />
+        <result column="task_id" property="taskId" jdbcType="INTEGER" />
+        <result column="job_name" property="jobName" jdbcType="VARCHAR" />
+        
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="finish_status" property="finishStatus" jdbcType="INTEGER" />
+        
+        <result column="company_id" property="companyId" jdbcType="INTEGER" />
+        <result column="track_result" property="trackResult" jdbcType="VARCHAR" />       
+                
+    </resultMap>
+
+
+</mapper>

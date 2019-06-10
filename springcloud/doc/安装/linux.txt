@@ -1,0 +1,10 @@
+yum -y install lrzsz
+
+lsof -i:端口号
+
+2、netstat -tunlp|grep 端口号
+
+sudo chmod 777 文件名
+
+
+du -sh *查看磁盘占用情况

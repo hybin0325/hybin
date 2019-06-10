@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.edas.business.byrobot.dao.master.CallDetailMapper" >
+
+    <resultMap id="BaseResultMap" type="com.edas.business.byrobot.entity.CallDetail" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="job_name" property="jobName" jdbcType="VARCHAR" />
+        <result column="call_job_id" property="callJobId" jdbcType="INTEGER" />        
+        <result column="company_id" property="companyId" jdbcType="INTEGER" />
+        <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+        <result column="customer_telephone" property="customerTelephone" jdbcType="VARCHAR" />
+        <result column="customer_id" property="customerId" jdbcType="INTEGER" />
+        <result column="properties" property="properties" jdbcType="VARCHAR" />
+        <result column="force_transfer_customer" property="forceTransferCustomer" jdbcType="SMALLINT" />
+        <result column="call_instance_id" property="callInstanceId" jdbcType="BIGINT" />
+        <result column="scene_def_id" property="sceneDefId" jdbcType="INTEGER" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="finish_status" property="finishStatus" jdbcType="SMALLINT" />
+        <result column="duration" property="duration" jdbcType="INTEGER" />
+        <result column="chat_round" property="chatRound" jdbcType="INTEGER" />
+        <result column="start_time" property="startTime" jdbcType="VARCHAR" />
+        <result column="end_time" property="endTime" jdbcType="VARCHAR" />
+        <result column="caller_phone" property="callerPhone" jdbcType="VARCHAR" />
+        <result column="call_index" property="callIndex" jdbcType="INTEGER" />
+        <result column="luyin_oss_url" property="luyinOssUrl" jdbcType="VARCHAR" />
+        <result column="user_luyin_oss_url" property="userLuyinOssUrl" jdbcType="VARCHAR" />
+        <result column="secondary_call_times" property="secondaryCallTimes" jdbcType="SMALLINT" />
+        <result column="call_type" property="callType" jdbcType="SMALLINT" />
+        <result column="read_status" property="readStatus" jdbcType="SMALLINT" />
+        <result column="robot_def_id" property="robotDefId" jdbcType="INTEGER" />
+        <result column="scene_record_id" property="sceneRecordId" jdbcType="INTEGER" />
+        <result column="hang_up" property="hangUp" jdbcType="SMALLINT" />        
+        <result column="call_user_id" property="callUserId" jdbcType="INTEGER" />
+        <result column="handle_person" property="handlePerson" jdbcType="VARCHAR" />
+        <result column="industry" property="industry" jdbcType="VARCHAR" />
+        <result column="track_result" property="trackResult" jdbcType="VARCHAR" />
+        <result column="bug_type" property="bugType" jdbcType="VARCHAR" />
+        <result column="secondary_call_time" property="secondaryCallTime" jdbcType="TIMESTAMP" />
+        <result column="cost" property="cost" jdbcType="INTEGER" />
+        <result column="callbacked" property="callbacked" jdbcType="INTEGER" />
+        <result column="cs_staff_id" property="csStaffId" jdbcType="INTEGER" />
+        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />        
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, task_name, company_id, name, phone, properties, force_transfer_customer, call_instance_id, 
+        scene_def_id, status, finish_status, duration, chat_round, start_time, end_time, 
+        caller_phone, call_index, luyin_oss_url, user_luyin_oss_url, secondary_call_times, 
+        call_type, read_status, robot_def_id, scene_record_id, hang_up
+    </sql>
+
+</mapper>

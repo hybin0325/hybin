@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edas.business.dingtalk.dao.master.ZtCarcusMapper">
+  <resultMap id="BaseResultMap" type="com.edas.business.dingtalk.entity.ZtCarcus">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result  column="license" jdbcType="VARCHAR" property="license" />
+    <result column="license_data" jdbcType="VARCHAR" property="licenseData" />
+
+  </resultMap>
+
+
+</mapper>

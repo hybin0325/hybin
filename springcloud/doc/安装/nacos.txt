@@ -1,0 +1,6 @@
+https://github.com/alibaba/nacos/releases/download/1.0.0-RC2/nacos-server-1.0.0-RC2.tar.gz
+
+Æô¶¯
+nohup sh startup.sh -m standalone &
+
+nohup sh startup.sh -m standalone &

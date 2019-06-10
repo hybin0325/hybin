@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.edas.business.data.dao.master.ZtConfigkeyMapper">
+	<resultMap id="BaseResultMap"
+		type="com.edas.business.data.entity.ZtConfigkey">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="type" jdbcType="VARCHAR" property="type" />
+		<result column="corpid" jdbcType="VARCHAR" property="corpid" />
+		<result column="secret_key" jdbcType="VARCHAR"
+			property="secretKey" />
+		<result column="application_id" jdbcType="VARCHAR"
+			property="applicationId" />
+		<result column="dld" jdbcType="VARCHAR" property="dld" />
+		<result column="clique" jdbcType="VARCHAR" property="clique" />
+		<result column="user_id" jdbcType="VARCHAR" property="userId" />
+		<result column="user_name" jdbcType="VARCHAR"
+			property="userName" />
+		<result column="create_date" jdbcType="TIMESTAMP"
+			property="createDate" />
+		<result column="update_user_id" jdbcType="VARCHAR"
+			property="updateUserId" />
+		<result column="update_user_name" jdbcType="VARCHAR"
+			property="updateUserName" />
+		<result column="update_date" jdbcType="TIMESTAMP"
+			property="updateDate" />
+		<result column="status" jdbcType="TINYINT" property="status" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, `type`, corpid, secret_key, application_id, dld, clique, user_id,
+		user_name,
+		create_date, update_user_id, update_user_name, update_date, `status`
+	</sql>
+	
+	<select id="selectByList" resultMap="BaseResultMap" parameterType="com.edas.business.data.entity.ZtConfigkey">
+		select
+		<include refid="Base_Column_List" />
+		from shopwwi_zt_configkey mc
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="type!=null and type!=''">
+				AND mc.`type`=#{type}
+			</if>
+			<if test="secretKey!=null and secretKey!=''">
+				AND mc.secret_key=#{secretKey}
+			</if>
+			<if test="dld!=null and dld!=''">
+				AND mc.dld=#{dld}
+			</if>
+			
+			<if test="clique!=null and clique!=''">
+				AND mc.clique=#{clique}
+			</if>
+			
+			<if test="userId!=null and userId!=''">
+				AND mc.user_id=#{userId}
+			</if>
+			<if test="corpid!=null and corpid!=''">
+				AND mc.corpid=#{corpid}
+			</if>
+			<if test="applicationId!=null and applicationId!=''">
+				AND mc.application_id=#{applicationId}
+			</if>
+			<if test="id!=null">
+				AND mc.id=#{id}
+			</if>
+		</trim>
+	</select>
+	
+</mapper>

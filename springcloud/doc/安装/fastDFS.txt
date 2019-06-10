@@ -1,0 +1,7 @@
+相关安装说明参照：http://www.cnblogs.com/guigujun/p/7804688.html
+
+http.tracker_http_port=8000
+
+tracker_server = 14.152.78.36:22122
+
+nginx=8070

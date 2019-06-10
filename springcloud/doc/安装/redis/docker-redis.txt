@@ -1,0 +1,2 @@
+docker pull redis:5.0
+docker run -d --name redis-server -p 6379:6379 redis:5.0 --requirepass "nanling098765" --appendonly yes

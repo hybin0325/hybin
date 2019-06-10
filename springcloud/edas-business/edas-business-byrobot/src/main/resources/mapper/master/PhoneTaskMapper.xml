@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edas.business.byrobot.dao.master.PhoneTaskMapper">
+
+  <resultMap id="BaseResultMap" type="com.edas.business.byrobot.entity.PhoneTask">
+    <id column="id" jdbcType="INTEGER" property="id" />    
+    <result column="company_id" jdbcType="INTEGER" property="companyId" />
+    <result column="task_name" jdbcType="VARCHAR" property="taskName" />
+    <result column="task_id" jdbcType="INTEGER" property="taskId" />
+    <result column="task_type" jdbcType="INTEGER" property="taskType" />
+    <result column="start_date" jdbcType="VARCHAR" property="startDate" />
+    <result column="working_start_time" jdbcType="VARCHAR" property="workingStartTime" />
+    <result column="working_end_time" jdbcType="VARCHAR" property="workingEndTime" />
+    <result column="break_start_time" jdbcType="VARCHAR" property="breakStartTime" />
+    <result column="break_end_time" jdbcType="VARCHAR" property="breakEndTime" />
+    <result column="call_phones" jdbcType="INTEGER" property="callPhones" /> 
+    
+    <result column="scene_def_id" jdbcType="INTEGER" property="sceneDefId" />
+    <result column="robot_def_id" jdbcType="INTEGER" property="robotDefId" />
+    <result column="scene_record_id" jdbcType="INTEGER" property="sceneRecordId" />    
+    <result column="call_type" jdbcType="INTEGER" property="callType" />
+    
+    <result column="concurrency_quota" jdbcType="INTEGER" property="concurrencyQuota" />    
+    <result column="remark" jdbcType="VARCHAR" property="remark" />    
+    <result column="repeat_call" jdbcType="BIT" property="repeatCall" />
+    
+    <result column="default_intention_rule" jdbcType="BIT" property="defaultIntentionRule" />
+    
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  
+	
+</mapper>

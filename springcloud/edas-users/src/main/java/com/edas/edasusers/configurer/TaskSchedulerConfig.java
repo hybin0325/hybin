@@ -1,0 +1,56 @@
+package com.edas.edasusers.configurer;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
+
+import net.javacrumbs.shedlock.core.LockProvider;
+import net.javacrumbs.shedlock.spring.annotation.EnableSchedulerLock;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
+
+
+
+@Configuration
+@EnableScheduling
+@EnableSchedulerLock(defaultLockAtMostFor = "PT30S")
+public class TaskSchedulerConfig {
+	
+	@Value("${spring.redis.host}")
+	private String host;
+	
+	@Value("${spring.redis.port}")
+	private Integer port;
+	
+	@Value("${spring.redis.password}")
+	private String password;
+	
+	@Value("${spring.redis.database}")
+	private String database;
+	
+	@Bean
+	public LockProvider lockProvider() {
+		
+		//JedisPool jedisPool = new JedisPool(host, port);
+		JedisPoolConfig config = new JedisPoolConfig();
+		config.setMaxTotal(200);
+		config.setMaxIdle(50);
+		config.setMinIdle(8);//设置最小空闲数
+		config.setMaxWaitMillis(10000);
+		config.setTestOnBorrow(true);
+		config.setTestOnReturn(true);
+		//Idle时进行连接扫描
+		config.setTestWhileIdle(true);
+		//表示idle object evitor两次扫描之间要sleep的毫秒数
+		config.setTimeBetweenEvictionRunsMillis(30000);
+		//表示idle object evitor每次扫描的最多的对象数
+		config.setNumTestsPerEvictionRun(10);
+		//表示一个对象至少停留在idle状态的最短时间，然后才能被idle object evitor扫描并驱逐；这一项只有在timeBetweenEvictionRunsMillis大于0时才有意义
+		config.setMinEvictableIdleTimeMillis(60000);
+		
+		JedisPool jedisPool = new JedisPool(config, host,port,10000, password);
+		
+		return new net.javacrumbs.shedlock.provider.redis.jedis.JedisLockProvider(jedisPool);
+	}
+}

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edas.edasusers.dao.master.ShopwwiRylistMapper">
+  <resultMap id="BaseResultMap" type="com.edas.edasusers.entity.ShopwwiRylist">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="ryxm" jdbcType="VARCHAR" property="ryxm" />
+    <result column="ryfl" jdbcType="VARCHAR" property="ryfl" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="yxzt" jdbcType="VARCHAR" property="yxzt" />
+    <result column="rywz" jdbcType="VARCHAR" property="rywz" />
+    <result column="dldqx" jdbcType="VARCHAR" property="dldqx" />
+    <result column="xtfl" jdbcType="VARCHAR" property="xtfl" />
+    <result column="isadmin" jdbcType="VARCHAR" property="isadmin" />
+    <result column="fzroleid" jdbcType="VARCHAR" property="fzroleid" />
+    <result column="glfw" jdbcType="VARCHAR" property="glfw" />
+    <result column="zdbmlistid" jdbcType="VARCHAR" property="zdbmlistid" />
+    <result column="fzrole" jdbcType="VARCHAR" property="fzrole" />
+    <result column="zdbmlist" jdbcType="VARCHAR" property="zdbmlist" />
+    <result column="bmbh" jdbcType="VARCHAR" property="bmbh" />
+    <result column="xb" jdbcType="VARCHAR" property="xb" />
+    <result column="csrq" jdbcType="TIMESTAMP" property="csrq" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="lxfs" jdbcType="VARCHAR" property="lxfs" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="userlx" jdbcType="INTEGER" property="userlx" />
+    <result column="emailuser" jdbcType="VARCHAR" property="emailuser" />
+    <result column="emailpass" jdbcType="VARCHAR" property="emailpass" />
+    <result column="parentid" jdbcType="VARCHAR" property="parentid" />
+    <result column="djrq" jdbcType="TIMESTAMP" property="djrq" />
+    <result column="sxrq" jdbcType="TIMESTAMP" property="sxrq" />
+    <result column="mobuserlx" jdbcType="INTEGER" property="mobuserlx" />
+    <result column="mobmac" jdbcType="VARCHAR" property="mobmac" />
+    <result column="ryqx" jdbcType="VARCHAR" property="ryqx" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="sharetel" jdbcType="VARCHAR" property="sharetel" />
+    <result column="shareinfo" jdbcType="VARCHAR" property="shareinfo" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="sharestore" jdbcType="VARCHAR" property="sharestore" />
+    <result column="clique" jdbcType="VARCHAR" property="clique" />
+    <result column="issuper" jdbcType="CHAR" property="issuper" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="landline" jdbcType="VARCHAR" property="landline" />
+    <result column="wechat" jdbcType="VARCHAR" property="wechat" />
+    <result column="intro" jdbcType="VARCHAR" property="intro" />
+    <result column="erweima" jdbcType="VARCHAR" property="erweima" />
+    <result column="like_num" jdbcType="INTEGER" property="likeNum" />
+    <result column="browse_num" jdbcType="INTEGER" property="browseNum" />
+    <result column="info_video" jdbcType="VARCHAR" property="infoVideo" />
+    <result column="info_labels" jdbcType="VARCHAR" property="infoLabels" />
+    <result column="rsaa14" jdbcType="VARCHAR" property="rsaa14" />
+    <result column="rsab02" jdbcType="VARCHAR" property="rsab02" />
+    <result column="video_src" jdbcType="VARCHAR" property="videoSrc" />
+    <result column="video_cover" jdbcType="VARCHAR" property="videoCover" />
+    <result column="poster" jdbcType="VARCHAR" property="poster" />
+    <result column="plugid" jdbcType="VARCHAR" property="plugid" />
+    <result column="default_card" jdbcType="BIT" property="defaultCard" />
+    <result column="info_descpic" jdbcType="LONGVARCHAR" property="infoDescpic" />
+    <result column="info_sign" jdbcType="LONGVARCHAR" property="infoSign" />
+    <result column="business_card" jdbcType="LONGVARCHAR" property="businessCard" />
+  </resultMap>
+
+
+</mapper>

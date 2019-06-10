@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.edas.business.data.dao.master.ZtCarParkCliqueMapMapper">
+	<resultMap id="BaseResultMap"
+		type="com.edas.business.data.entity.ZtCarParkCliqueMap">
+		<id column="id" jdbcType="INTEGER" property="id" />
+
+		<result column="dld" jdbcType="VARCHAR" property="dld" />
+		<result column="clique" jdbcType="VARCHAR" property="clique" />
+		<result column="control_id" jdbcType="VARCHAR" property="controlId" />
+
+	</resultMap>
+	<!--<sql id="Base_Column_List">-->
+		<!--id, dld, clique, control_id-->
+	<!--</sql>-->
+
+	<!--<select id="selectByList" resultMap="BaseResultMap" parameterType="com.edas.business.data.entity.ZtCarParkCliqueMap">-->
+		<!--select-->
+		<!--<include refid="Base_Column_List" />-->
+		<!--from shopwwi_zt_car_park_clique_map mc-->
+		<!--<trim prefix="WHERE" prefixOverrides="AND |OR ">-->
+			<!--<if test="type!=null and type!=''">-->
+				<!--AND mc.`control_id` like  #{type}-->
+			<!--</if>-->
+		<!---->
+		<!--</trim>-->
+	<!--</select>-->
+
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.edas.business.byrobot.dao.master.CallResultMapper" >
+
+    <resultMap id="BaseResultMap" type="com.edas.business.byrobot.entity.CallResult" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="scene_instance_result_id" property="sceneInstanceResultId" jdbcType="INTEGER" />
+        <result column="company_id" property="companyId" jdbcType="INTEGER" />
+        <result column="scene_instance_id" property="sceneInstanceId" jdbcType="BIGINT" />
+        <result column="result_name" property="resultName" jdbcType="VARCHAR" />
+        <result column="result_value" property="resultValue" jdbcType="VARCHAR" />
+        <result column="result_desc" property="resultDesc" jdbcType="VARCHAR" />
+        <result column="analyze_type" property="analyzeType" jdbcType="VARCHAR" />
+        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+        <result column="artificial_result_value" property="artificialResultValue" jdbcType="VARCHAR" />
+        <result column="artificial_changed" property="artificialChanged" jdbcType="INTEGER" />
+        <result column="extra" property="extra" jdbcType="VARCHAR" />
+        <result column="result_value_alias" property="resultValueAlias" jdbcType="VARCHAR" />
+        <result column="result_value_new" property="resultValueNew" jdbcType="VARCHAR" />        
+        <result column="call_job_id" property="callJobId" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, scene_instance_result_id, company_id, scene_instance_id, result_name, result_value, 
+        result_desc, analyze_type, gmt_create, gmt_modified, artificial_result_value, artificial_changed, 
+        extra, result_value_alias, result_value_new
+    </sql>
+
+</mapper>

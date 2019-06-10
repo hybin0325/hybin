@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.edas.business.qywechat.dao.master.ZtMesssendlogMapper">
+	<resultMap id="BaseResultMap"
+		type="com.edas.business.qywechat.entity.ZtMesssendlog">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="mess_cont" jdbcType="VARCHAR" property="messCont" />
+		<result column="mess_rec" jdbcType="VARCHAR" property="messRec" />
+		<result column="mess_deli_time" jdbcType="TIMESTAMP" property="messDeliTime" />
+		<result column="read_date" jdbcType="TIMESTAMP" property="readDate" />
+		<result column="push_chan" jdbcType="VARCHAR" property="pushChan" />
+		<result column="chan_temp" jdbcType="VARCHAR" property="chanTemp" />
+		<result column="mess_class" jdbcType="VARCHAR" property="messClass" />
+		<result column="tem_name" jdbcType="VARCHAR" property="temName" />
+		<result column="temp_data_sou" jdbcType="VARCHAR" property="tempDataSou" />
+		<result column="mess_sour" jdbcType="VARCHAR" property="messSour" />
+		<result column="mess_model" jdbcType="VARCHAR" property="messModel" />
+		<result column="license" jdbcType="VARCHAR" property="license" />
+		<result column="cus_num" jdbcType="VARCHAR" property="cusNum" />
+		<result column="mem_level" jdbcType="VARCHAR" property="memLevel" />
+		<result column="userid" jdbcType="VARCHAR" property="userid" />
+		<result column="username" jdbcType="VARCHAR" property="username" />
+		<result column="userid_up" jdbcType="VARCHAR" property="useridUp" />
+		<result column="username_up" jdbcType="VARCHAR" property="usernameUp" />
+		<result column="dld" jdbcType="VARCHAR" property="dld" />
+		<result column="clique" jdbcType="VARCHAR" property="clique" />
+		<result column="add_date" jdbcType="TIMESTAMP" property="addDate" />
+		<result column="upd_date" jdbcType="TIMESTAMP" property="updDate" />
+
+		<result column="is_read" jdbcType="TINYINT" property="isRead" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, mess_cont, mess_rec, mess_deli_time, push_chan, dld, clique, chan_temp,
+		mess_class,
+		tem_name, temp_data_sou, mess_sour, mess_model, `is_read`, license, frame, cus_num, mem_level
+	</sql>
+
+	<select id="selectByList" resultMap="BaseResultMap" parameterType="com.edas.business.qywechat.entity.ZtMesssendlog">
+		select
+		<include refid="Base_Column_List" />
+		from shopwwi_zt_messsendlog mc
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="messCont!=null and messCont!=''">
+				AND mc.`mess_cont`=#{messCont}
+			</if>
+			<if test="pushChan!=null and pushChan!=''">
+				AND mc.push_chan=#{pushChan}
+			</if>
+			<if test="dld!=null and dld!=''">
+				AND mc.dld=#{dld}
+			</if>
+
+			<if test="clique!=null and clique!=''">
+				AND mc.clique=#{clique}
+			</if>
+
+			<if test="chanTemp!=null and chanTemp!=''">
+				AND mc.chan_temp=#{chanTemp}
+			</if>
+			<if test="messClass!=null and messClass!=''">
+				AND mc.mess_class=#{messClass}
+			</if>
+			<if test="temName!=null and temName!=''">
+				AND mc.tem_name=#{temName}
+			</if>
+			<if test="id!=null">
+				AND mc.id=#{id}
+			</if>
+		</trim>
+	</select>
+
+</mapper>

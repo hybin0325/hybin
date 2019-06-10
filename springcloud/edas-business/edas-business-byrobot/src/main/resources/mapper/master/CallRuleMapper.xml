@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.edas.business.byrobot.dao.master.CallRuleMapper" >
+
+    <resultMap id="BaseResultMap" type="com.edas.business.byrobot.entity.CallRule" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="phone_status" property="phoneStatus" jdbcType="INTEGER" />
+        <result column="times" property="times" jdbcType="INTEGER" />
+        <result column="interval_time" property="intervalTime" jdbcType="INTEGER" />
+        <result column="task_id" property="taskId" jdbcType="INTEGER" />
+        <result column="company_id" property="companyId" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, phone_status, times, interval_time, task_id, company_id
+    </sql>
+
+    
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.edas.business.byrobot.dao.master.CallLogMapper" >
+
+    <resultMap id="BaseResultMap" type="com.edas.business.byrobot.entity.CallLog" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="scene_instance_log_id" property="sceneInstanceLogId" jdbcType="BIGINT" />
+        <result column="scene_instance_id" property="sceneInstanceId" jdbcType="BIGINT" />
+        <result column="robot_def_id" property="robotDefId" jdbcType="INTEGER" />
+        <result column="decision_id" property="decisionId" jdbcType="INTEGER" />
+        <result column="speaker" property="speaker" jdbcType="VARCHAR" />
+        <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="user_mean" property="userMean" jdbcType="VARCHAR" />
+        <result column="user_mean_detail" property="userMeanDetail" jdbcType="VARCHAR" />
+        <result column="ai_unknown" property="aiUnknown" jdbcType="INTEGER" />
+        <result column="answer_status" property="answerStatus" jdbcType="INTEGER" />
+        <result column="study_status" property="studyStatus" jdbcType="INTEGER" />
+        <result column="start_time" property="startTime" jdbcType="INTEGER" />
+        <result column="end_time" property="endTime" jdbcType="INTEGER" />
+        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+        <result column="correction_content" property="correctionContent" jdbcType="VARCHAR" />
+        <result column="luyin_oss_url" property="luyinOssUrl" jdbcType="VARCHAR" />
+        <result column="job_finished" property="jobFinished" jdbcType="BIT" />
+        <result column="sign" property="sign" jdbcType="VARCHAR" />
+        <result column="date_time" property="dateTime" jdbcType="VARCHAR" />
+        <result column="company_id" property="companyId" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, scene_instance_log_id, scene_instance_id, robot_def_id, decision_id, speaker, 
+        content, user_mean, user_mean_detail, ai_unknown, answer_status, study_status, start_time, 
+        end_time, gmt_create, gmt_modified, correction_content, luyin_oss_url, job_finished, 
+        sign, date_time, company_id
+    </sql>
+</mapper>

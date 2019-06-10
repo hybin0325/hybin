@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edas.business.dingtalk.dao.master.ZtMessreciMapper">
+  <resultMap id="BaseResultMap" type="com.edas.business.dingtalk.entity.ZtMessreci">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result  column="messtemp_id" jdbcType="INTEGER" property="messtempId" />
+    <result column="mess_rec" jdbcType="VARCHAR" property="messRec" />
+    <result column="mess_dep" jdbcType="VARCHAR" property="messDep" />
+    <result column="mess_rol" jdbcType="VARCHAR" property="messRol" />
+    <result column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="userid_up" jdbcType="VARCHAR" property="useridUp" />
+    <result column="username_up" jdbcType="VARCHAR" property="usernameUp" />
+    <result column="dld" jdbcType="VARCHAR" property="dld" />
+    <result column="clique" jdbcType="VARCHAR" property="clique" />
+    <result column="add_date" jdbcType="TIMESTAMP" property="addDate" />
+    <result column="upd_date" jdbcType="TIMESTAMP" property="updDate" />
+
+  </resultMap>
+
+
+</mapper>

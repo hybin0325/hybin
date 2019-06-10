@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.edas.edasmessage.dao.CarParkLogMapper">
+	<resultMap id="BaseResultMap"
+		type="com.edas.edasmessage.entity.CarParkLog">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="iden" jdbcType="VARCHAR" property="iden" />
+		<result column="plate_num" jdbcType="VARCHAR"
+			property="plateNum" />
+		<result column="channel_id" jdbcType="BIGINT"
+			property="channelId" />
+		<result column="cname" jdbcType="VARCHAR" property="cname" />
+		<result column="control_id" jdbcType="BIGINT"
+			property="controlId" />
+		<result column="dname" jdbcType="VARCHAR" property="dname" />
+		<result column="auid" jdbcType="BIGINT" property="auid" />
+		<result column="real_name" jdbcType="VARCHAR"
+			property="realName" />
+		<result column="card_id" jdbcType="BIGINT" property="cardId" />
+		<result column="car_type_id" jdbcType="BIGINT"
+			property="carTypeId" />
+		<result column="car_type" jdbcType="VARCHAR" property="carType" />
+		<result column="card_type_id" jdbcType="INTEGER"
+			property="cardTypeId" />
+		<result column="card_type" jdbcType="VARCHAR"
+			property="cardType" />
+		<result column="in_time" jdbcType="TIMESTAMP" property="inTime" />
+		<result column="pic_plate_num" jdbcType="VARCHAR"
+			property="picPlateNum" />
+		<result column="card_no" jdbcType="VARCHAR" property="cardNo" />
+		<result column="out_time" jdbcType="TIMESTAMP"
+			property="outTime" />
+		<result column="cpc_id" jdbcType="BIGINT" property="cpcId" />
+		<result column="cpc_name" jdbcType="VARCHAR" property="cpcName" />
+		<result column="cpc_ip" jdbcType="VARCHAR" property="cpcIp" />
+		<result column="state" jdbcType="INTEGER" property="state" />
+		<result column="create_date" jdbcType="TIMESTAMP"
+			property="createDate" />
+		<result column="clique" jdbcType="VARCHAR" property="clique" />
+		<result column="dld" jdbcType="VARCHAR" property="dld" />
+		
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, iden, plate_num, channel_id, cname, control_id, dname,
+		auid,
+		real_name, card_id,
+		car_type_id, car_type, card_type_id,
+		card_type, in_time, pic_plate_num, card_no,
+		out_time, cpc_id, cpc_name,
+		cpc_ip, `state`, create_date,clique,dld
+	</sql>
+
+
+	<select id="findCarParkLog" resultMap="BaseResultMap"
+		parameterType="com.edas.edasmessage.entity.dto.CarParkLogDTO">
+		select
+		<include refid="Base_Column_List" />
+		from shopwwi_car_park_log cp
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="plateNum!=null">
+				AND cp.plate_num=#{plateNum}
+			</if>
+			<if test="controlId!=null">
+				AND cp.control_id=#{controlId}
+			</if>
+			<if test="inTimeStart!=null and inTimeStart!=''">
+				AND DATE(cp.in_time) &gt;=#{inTimeStart}
+			</if>
+			<if test="inTimeEnd!=null and inTimeEnd!=''">
+				AND DATE(cp.in_time) &lt;=#{inTimeEnd}
+			</if>
+			<if test="outTimeStart!=null and outTimeStart!=''">
+				AND DATE(cp.out_time) &gt;=#{outTimeStart}
+			</if>
+			<if test="outTimeEnd!=null and outTimeEnd!=''">
+				AND DATE(cp.out_time) &lt;=#{outTimeEnd}
+			</if>
+		</trim>
+		ORDER BY cp.create_date
+	</select>
+</mapper>

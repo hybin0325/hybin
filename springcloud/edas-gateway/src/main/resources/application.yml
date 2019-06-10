@@ -1,0 +1,26 @@
+zuul:
+  host:
+    connect-timeout-millis: 20000
+    socket-timeout-millis: 20000
+  ignoredServices: '*'
+  add-proxy-headers: true
+  
+#避免第一次调用失败
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+
+security:
+  oauth2:
+    client:
+      access-token-uri: http://localhost:19012/api-auth/oauth/token
+      user-authorization-uri: http://localhost:19012/api-auth/oauth/authorize
+      client-id: test_client
+      client-secret: test_secret
+    resource:
+      user-info-uri: http://localhost:19012/api-auth/uaa/user
+      prefer-token-info: false

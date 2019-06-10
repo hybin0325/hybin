@@ -1,0 +1,2 @@
+在config目录下创建logstash-test.conf
+回到logstash目录下运行 ./bin/logstash  -f ./config/logstash-test.conf

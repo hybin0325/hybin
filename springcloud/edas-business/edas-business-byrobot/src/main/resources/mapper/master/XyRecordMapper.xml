@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.edas.business.byrobot.dao.master.XyRecordMapper" >
+
+    <resultMap id="BaseResultMap" type="com.edas.business.byrobot.entity.XyRecord" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="line" property="line" jdbcType="INTEGER" />
+        <result column="device_id" property="deviceId" jdbcType="BIGINT" />
+        <result column="date" property="date" jdbcType="TIME" />
+        <result column="caller" property="caller" jdbcType="VARCHAR" />
+        <result column="duration" property="duration" jdbcType="INTEGER" />
+        <result column="record_id" property="recordId" jdbcType="BIGINT" />        
+        <result column="file_name" property="fileName" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, line, device_id, date, caller, duration, record_id
+    </sql>
+
+</mapper>

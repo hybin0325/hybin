@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edas.business.byrobot.dao.master.RobotMapper">
+
+  <resultMap id="BaseResultMap" type="com.edas.business.byrobot.entity.Robot">
+    <id column="id" jdbcType="INTEGER" property="id" />    
+    <result column="company_id" jdbcType="INTEGER" property="companyId" />
+    <result column="robot_def_id" jdbcType="INTEGER" property="robotDefId" />    
+    <result column="robot_name" jdbcType="VARCHAR" property="robotName" />
+    <result column="scene_def_id" jdbcType="INTEGER" property="sceneDefId" />
+    <result column="scene_record_id" jdbcType="INTEGER" property="sceneRecordId" />
+    <result column="scene_record_name" jdbcType="VARCHAR" property="sceneRecordName" />
+    <result column="industry_one_name" jdbcType="VARCHAR" property="industryOneName" />
+    <result column="industry_two_name" jdbcType="VARCHAR" property="industryTwoName" />
+    <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />        
+  </resultMap>
+	
+</mapper>
