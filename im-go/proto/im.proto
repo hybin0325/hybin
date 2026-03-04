@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package im.v1;
+
+option go_package = "github.com/hybin/im-go/internal/protocol/pb;pb";
+
+message Envelope {
+  uint64 seq = 1;
+  int64 timestamp = 2;
+  oneof payload {
+    Auth auth = 10;
+    ChatMessage chat_message = 11;
+    Ack ack = 12;
+    Heartbeat heartbeat = 13;
+    Error error = 14;
+  }
+}
+
+message Auth {
+  string token = 1;
+  string device_id = 2;
+}
+
+message ChatMessage {
+  string message_id = 1;
+  string from_user_id = 2;
+  string to_user_id = 3;
+  string content = 4;
+  int64 send_at = 5;
+}
+
+message Ack {
+  string message_id = 1;
+}
+
+message Heartbeat {
+  int64 client_ts = 1;
+}
+
+message Error {
+  string code = 1;
+  string message = 2;
+}
