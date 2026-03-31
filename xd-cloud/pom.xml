@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.xd</groupId>
-    <artifactId>app-microservices</artifactId>
+    <artifactId>xd-cloud</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>app-microservices</name>
+    <name>xd-cloud</name>
     <description>Spring Boot 2.4 + Spring Cloud + Nacos demo scaffold</description>
 
     <modules>
